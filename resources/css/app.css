@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'typeface-nunito';
+
+
+.font-nunito {
+  font-family: 'Nunito', sans-serif;
+}

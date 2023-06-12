@@ -1,0 +1,21 @@
+{
+    "total": {
+      "total_order": 60,
+      "online": 60,
+      "offline": 40,
+      "ecommerce": 80
+    },
+    "presentase":{
+      "total_order": "12,6 %",
+      "online": "56,8 %",
+      "offline": "23,2 %",
+      "ecommerce":"19,6 %"
+    },
+    "progress":{
+      "total_order": 1,
+      "online": 1,
+      "offline": 1,
+      "ecommerce":0
+    }
+}
+  
