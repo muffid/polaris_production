@@ -19,17 +19,17 @@
                     <div class="bg-white p-4 rounded-full flex items-center justify-center">
                         <img src="{{ asset('img/boss.png') }}" alt="logo" class="w-8 min-w-[1.5rem]">
                     </div>
-                    <p class="text-lg lg:font-semibold">Administrator</p>
+                    <p class=" lg:font-semibold">Administrator</p>
                     <div class="p-4 rounded-full flex flex-row items-center justify-center">
                         <i class="bi bi-caret-right-fill w-6 min-w-[1.5rem] flex flex-row items-center justify-center"></i>
                     </div>
                 </div>
 
-                <div class="flex flex-row items-center justify-between bg-slate-50 rounded-full p-2 gap-x-3 w-[250px] lg:w-[300px] hover:text-blue-800 cursor-pointer  hover:scale-105 transition-transform ease-out">
+                <div  onclick="window.location.href = '{{ route('login_desainer_page') }}'" class="flex flex-row items-center justify-between bg-slate-50 rounded-full p-2 gap-x-3 w-[250px] lg:w-[300px] hover:text-blue-800 cursor-pointer  hover:scale-105 transition-transform ease-out">
                     <div class="bg-white p-4 rounded-full flex items-center justify-center">
                         <img src="{{ asset('img/working.png') }}" alt="logo" class="w-8 min-w-[1.5rem]">
                     </div>
-                    <p class="text-lg lg:font-semibold">Desainer</p>
+                    <p class=" lg:font-semibold">Desainer</p>
                     <div class="p-4 rounded-full flex flex-row items-center justify-center">
                         <i class="bi bi-caret-right-fill w-6 min-w-[1.5rem] flex flex-row items-center justify-center"></i>
                     </div>
@@ -39,7 +39,7 @@
                     <div class="bg-white p-4 rounded-full flex items-center justify-center">
                         <img src="{{ asset('img/operator.png') }}" alt="logo" class="w-8 min-w-[1.5rem]">
                     </div>
-                    <p class="text-lg lg:font-semibold">Admin</p>
+                    <p class=" lg:font-semibold">Admin</p>
                     <div class="p-4 rounded-full flex flex-row items-center justify-center">
                         <i class="bi bi-caret-right-fill w-6 min-w-[1.5rem] flex flex-row items-center justify-center"></i>
                     </div>
@@ -49,7 +49,7 @@
                     <div class="bg-white p-4 rounded-full flex items-center justify-center">
                         <img src="{{ asset('img/settings.png') }}" alt="logo" class="w-8 min-w-[1.5rem]">
                     </div>
-                    <p class="text-lg lg:font-semibold">Operator</p>
+                    <p class=" lg:font-semibold">Operator</p>
                     <div class="p-4 rounded-full flex flex-row items-center justify-center">
                         <i class="bi bi-caret-right-fill w-6 min-w-[1.5rem] flex flex-row items-center justify-center"></i>
                     </div>

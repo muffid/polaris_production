@@ -1,8 +1,9 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\adminController;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class EcommerceAdmController extends Controller
 {
@@ -10,9 +11,9 @@ class EcommerceAdmController extends Controller
         $data = [
             'active' => 'Ecommerce',
             'session' => [
-                    'user' => 'John Saina',
-                    'status' => 'Administrator'
-            ],
+                'status' => session('role'),
+                'username' => session('username'),
+        ],
             'key' => '897878',
         ];
         

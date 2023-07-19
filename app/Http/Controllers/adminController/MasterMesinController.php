@@ -1,8 +1,9 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\adminController;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class MasterMesinController extends Controller
 {
@@ -10,9 +11,9 @@ class MasterMesinController extends Controller
         $data = [
             'active' => 'MasterMesin',
             'session' => [
-                    'user' => 'John Saina',
-                    'status' => 'Administrator',
-            ],
+                'status' => session('role'),
+                'username' => session('username'),
+        ],
             'key' => '897878',
         ];
         return view('admin/masterMesin',$data);

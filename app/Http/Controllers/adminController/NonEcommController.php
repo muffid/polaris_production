@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\adminController;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class NonEcommController extends Controller
 {
@@ -10,9 +12,9 @@ class NonEcommController extends Controller
         $data = [
             'active' => 'NonEcommerce',
             'session' => [
-                    'user' => 'John Saina',
-                    'status' => 'Administrator',
-            ],
+                'status' => session('role'),
+                'username' => session('username'),
+        ],
             'key' => '897878',
         ];
         return view('admin/nonecommerce',$data);

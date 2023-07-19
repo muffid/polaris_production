@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\adminController;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class MonitorController extends Controller
 {
@@ -10,9 +12,9 @@ class MonitorController extends Controller
         $data = [
             'active' => 'Monitor',
             'session' => [
-                    'user' => 'John Saina',
-                    'status' => 'Administrator',
-            ],
+                'status' => session('role'),
+                'username' => session('username'),
+        ],
             'key' => '897878',
         ];
         return view('globals/monitor',$data);

@@ -1,5 +1,5 @@
 <aside id="menu" class="w-72 -ml-72 h-screen overflow-y-scroll overflow-x-auto scrollbar-thin scrollbar-thumb-slate-50  flex flex-col bg-white duration-200  fixed top-0 left-0 gap-y-4 shadow-lg z-20 ">
-    <div onclick="togleMenu()" class=" cursor-pointer w-full flex flex-row justify-end px-4 text-xl gap-x-2 items-center pt-2  text-slate-500 "><i class="bi bi-list"></i></div>
+    <div  class=" w-full flex flex-row justify-end px-4 text-xl gap-x-2 items-center pt-2  text-slate-500 "><i  onclick="togleMenu()" class="bi bi-list  cursor-pointer"></i></div>
     {{-- <div class="flex flex-col items-center justify-center  p-4 md:p-8 ">
          <img src="{{ asset('img/logo.png') }}" alt="logo" class="w-56">
     </div> --}}
@@ -37,10 +37,10 @@
        <div class="flex flex-row items-center justify-start relative ">
             <div class="w-full  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
                 <i class="bi bi-bar-chart-fill"></i>
-                <h1 class="text-sm font-semibold">Rekap Data</h1>
+                <h1 class="text-sm font-semibold">Input Order</h1>
             </div>  
         </div>
-        <div class="flex  flex-row items-center justify-start relative cursor-pointer" onclick="window.location.href = '{{ route('ecommerce_admin') }}'">
+        <div class="flex  flex-row items-center justify-start relative cursor-pointer" onclick="window.location.href = '{{ route('input_ecomm_page') }}'">
             @if($active=='Ecommerce')
                 <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
             @endif
@@ -57,14 +57,7 @@
                 <h1 class=" text-xs ">Non Ecommerce</h1>
             </div>  
         </div>
-        <div class="flex flex-row items-center justify-start relative cursor-pointer"  onclick="window.location.href = '{{ route('bahan_admin') }}'">
-            @if($active=='Bahan')
-                <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
-            @endif
-            <div class="w-full @if($active == 'Bahan') bg-emerald-50 @endif hover:bg-emerald-50 flex py-2 pl-12 lg:pl-[74px]">
-                <h1 class=" text-xs">Bahan & Laminasi</h1>
-            </div>  
-        </div>
+       
         <div class="flex flex-row items-center justify-start relative cursor-pointer  "  onclick="window.location.href = '{{ route('performa') }}'">
             @if($active=='Performa')
             <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>

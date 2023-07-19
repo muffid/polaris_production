@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
     <title>Login</title>
 </head>
@@ -16,11 +15,11 @@
             <div class="w-full max-w-xs">
                 @if(session('Gagal'))
                     <script>
-                       
+                       // Nanti ditampilkan Pop Up Disini
                     </script>
                 @endif
-               <h1 class="mx-auto font-bold text-center text-2xl mb-8">Login Administrator</h1>
-                <form class="bg-white flex flex-col items-center  rounded-xl px-16 pt-6 pb-8 mb-4" method="POST" action="{{ route('login_admin') }}">
+               <h1 class="mx-auto font-bold text-center text-2xl mb-8">Login Desainer</h1>
+                <form class="bg-white flex flex-col items-center  rounded-xl px-16 pt-6 pb-8 mb-4" method="POST" action="{{ route('login_desainer') }}">
                     @csrf
     
                     <div class="mb-4 flex flex-col items-center">
@@ -50,5 +49,4 @@
         </div>
     </div>
 </body>
-
 </html>

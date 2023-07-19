@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckAdmin
+class CheckDesainer
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class CheckAdmin
     {
         // Verifikasi role 'admin' pada session
         $user = $request->session()->get('role');
-        if ( $user === 'Administrator') {
+        if ( $user === 'Desainer') {
             return $next($request);
         }
 

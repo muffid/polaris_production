@@ -16,11 +16,12 @@ class isLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->session()->has('role')) {
-            // Session dengan 'key' tersedia
+       
+        if ($request->session()->get('role')==='Administrator') {
             return redirect()->route('dashboard_admin');
-        } else {
-            // Session dengan 'key' tidak tersedia
+        } else if ($request->session()->get('role')==='Desainer') {
+            return redirect()->route('dashboard_desainer');
+        }else{
             return $next($request);
         }
        

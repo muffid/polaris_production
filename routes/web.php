@@ -1,34 +1,41 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardAdmController;
-use App\Http\Controllers\EcommerceAdmController;
-use App\Http\Controllers\NonEcommController;
-use App\Http\Controllers\BahanController;
-use App\Http\Controllers\MonitorController;
-use App\Http\Controllers\MasterBahanController;
-use App\Http\Controllers\MasterMesinController;
+
+// Admin Controller
+use App\Http\Controllers\adminController\DashboardAdmController;
+use App\Http\Controllers\adminController\EcommerceAdmController;
+use App\Http\Controllers\adminController\NonEcommController;
+use App\Http\Controllers\adminController\BahanController;
+use App\Http\Controllers\adminController\MonitorController;
+use App\Http\Controllers\adminController\MasterBahanController;
+use App\Http\Controllers\adminController\MasterMesinController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\PerformaController;
-use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\adminController\PerformaController;
+use App\Http\Controllers\adminController\LoginAdminController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// Desainer Controller
+use App\Http\Controllers\desainerController\LoginDesainerController;
+use App\Http\Controllers\desainerController\DashboardDesainerController;
+use App\Http\Controllers\desainerController\InputEcommController;
+
 
 Route::get('/', function () {return view('login');})->middleware('isLogin')->name('login');
 Route::get('/logout',[LogoutController::class,'index'])->name('logout');
 
 Route::POST('/login_admin',[LoginController::class,'authenticate'])->name('login_admin');
 Route::get('/loginAdminPage',[LoginAdminController::class,'index'])->middleware('isLogin')->name('login_admin_page');
+
+Route::POST('/login_desainer',[LoginDesainerController::class,'authenticate'])->name('login_desainer');
+Route::get('/desainer_login',function(){return view('desainer/login_desainer');})->middleware('isLogin')->name('login_desainer_page');
+
+
+Route::middleware('desainer')->group(function(){
+    Route::get('/dashborad_desainer',[DashboardDesainerController::class,'index'])->name('dashboard_desainer');
+    Route::get('/input_ecommerce',[InputEcommController::class,'index'])->name('input_ecomm_page');
+
+});
 
 Route::middleware('admin')->group(function(){
     Route::get('/dashborad_adm',[DashboardAdmController::class,'index'])->name('dashboard_admin');
