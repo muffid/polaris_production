@@ -20,8 +20,6 @@ class LoginDesainerController extends Controller
                 "password" => $request->input('password')
             ];
 
-            $client = new Client();
-
             $response = $client->post($url, [
                 'json' => $data
             ]);

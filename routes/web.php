@@ -19,6 +19,7 @@ use App\Http\Controllers\adminController\LoginAdminController;
 use App\Http\Controllers\desainerController\LoginDesainerController;
 use App\Http\Controllers\desainerController\DashboardDesainerController;
 use App\Http\Controllers\desainerController\InputEcommController;
+use App\Http\Controllers\desainerController\PostInputEcomm;
 
 
 Route::get('/', function () {return view('login');})->middleware('isLogin')->name('login');
@@ -28,6 +29,7 @@ Route::POST('/login_admin',[LoginController::class,'authenticate'])->name('login
 Route::get('/loginAdminPage',[LoginAdminController::class,'index'])->middleware('isLogin')->name('login_admin_page');
 
 Route::POST('/login_desainer',[LoginDesainerController::class,'authenticate'])->name('login_desainer');
+Route::POST('/save_ecomm',[PostInputEcomm::class,'store'])->name('save_ecomm');
 Route::get('/desainer_login',function(){return view('desainer/login_desainer');})->middleware('isLogin')->name('login_desainer_page');
 
 
