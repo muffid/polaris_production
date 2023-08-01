@@ -20,7 +20,9 @@ use App\Http\Controllers\desainerController\LoginDesainerController;
 use App\Http\Controllers\desainerController\DashboardDesainerController;
 use App\Http\Controllers\desainerController\InputEcommController;
 use App\Http\Controllers\desainerController\PostInputEcomm;
-
+use App\Http\Controllers\desainerController\prepareEditEcomController;
+use App\Http\Controllers\desainerController\EditEcommController;
+use App\Http\Controllers\desainerController\DeleteOrderEcomController;
 
 Route::get('/', function () {return view('login');})->middleware('isLogin')->name('login');
 Route::get('/logout',[LogoutController::class,'index'])->name('logout');
@@ -30,12 +32,15 @@ Route::get('/loginAdminPage',[LoginAdminController::class,'index'])->middleware(
 
 Route::POST('/login_desainer',[LoginDesainerController::class,'authenticate'])->name('login_desainer');
 Route::POST('/save_ecomm',[PostInputEcomm::class,'store'])->name('save_ecomm');
-Route::get('/desainer_login',function(){return view('desainer/login_desainer');})->middleware('isLogin')->name('login_desainer_page');
+Route::PUT('/edit_ecomm/{id_akun}/{id_ecomm}',[EditEcommController::class,'store'])->name('edit_ecomm');
 
+Route::get('/desainer_login',function(){return view('desainer/login_desainer');})->middleware('isLogin')->name('login_desainer_page');
 
 Route::middleware('desainer')->group(function(){
     Route::get('/dashborad_desainer',[DashboardDesainerController::class,'index'])->name('dashboard_desainer');
     Route::get('/input_ecommerce',[InputEcommController::class,'index'])->name('input_ecomm_page');
+    Route::get('/edit_ecom/{id_akun}/{id_ecom}',[prepareEditEcomController::class,'index'])->name('edit_ecom');
+    Route::get('/delete_order_ecom/{id_ecomm}',[DeleteOrderEcomController::class,'deleteOrderEcom'])->name('delete_order_ecom');
 
 });
 

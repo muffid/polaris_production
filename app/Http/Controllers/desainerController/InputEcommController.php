@@ -5,58 +5,63 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
+use App\Http\Controllers\GetMasterDataController;
 
 class InputEcommController extends Controller
 {
 
-    private function getDataMesin(){
+    private function getOrderUnapprove($id_akun){
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/masterData/mesinCetak";
-            $response = $client->get($url, [
+            $url = "https://padvp2v123.jualdecal.com/ecommerce/orderEcom/unApvDesainerByIdAkun/".$id_akun;
+            $response = $client->get($url,[
                 'headers' => [
                     'auth-token' => session('token'),
-                ],
-            ]);
+                ]
+                ]);
             return ($response->getBody()->getContents());
 
-        } catch (ClientException $e) {
-            
-            $response = $e->getResponse();
-            $statusCode = $response->getStatusCode();
-            return "error fetching data mesin";
-
+        } catch(ClientException $e){
         }
     }
 
-    private function getDataBahan(){
+    private function getOrderApvDsUnapvDistr($id_akun){
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/masterData/bahanCetak";
-            $response = $client->get($url, [
+            $url = "https://padvp2v123.jualdecal.com/ecommerce/orderEcom/apvDesainerByIdEcom/unApvDistribusi/".$id_akun;
+            $response = $client->get($url,[
                 'headers' => [
                     'auth-token' => session('token'),
-                ],
-            ]);
+                ]
+                ]);
             return ($response->getBody()->getContents());
 
-        } catch (ClientException $e) {
-            
-            $response = $e->getResponse();
-            $statusCode = $response->getStatusCode();
-            return "error fetching data mesin";
-
+        } catch(ClientException $e){
         }
     }
 
+  
 
     public function index(){
+    
+        $getData = new GetMasterDataController();
 
-       $mesinCetak = json_decode($this->getDataMesin());
-       $bahanCetak = json_decode($this->getDataBahan());
+       $ekspedisi = json_decode($getData->getDataEkspedisi());
+       $laminasi = json_decode($getData->getDataLaminasi());
+       $akunEcom = json_decode($getData->getDataAkunEcom());
+       $mesinCetak = json_decode($getData->getDataMesin());
+       $bahanCetak = json_decode($getData->getDataBahan());
+       $orderUnapprove = json_decode($this->getOrderUnapprove(session('id')));
+       $orderApprove = json_decode($this->getOrderApvDsUnapvDistr(session('id')));
        
 
         $data = [
+           
+            'ekspedisi' =>$ekspedisi,
+            'laminasi' => $laminasi,
+            'akun_ecom' => $akunEcom,
+            'order_unapprove' => $orderUnapprove,
+            'order_approve' => $orderApprove,
             'mesin_cetak' => $mesinCetak,
             'bahan_cetak' => $bahanCetak,
             'active' => 'Ecommerce',
@@ -64,7 +69,6 @@ class InputEcommController extends Controller
                     'status' => session('role'),
                     'username' => session('username'),
             ]
-          
         ];
         return view('desainer/input_ecomm',$data);
 

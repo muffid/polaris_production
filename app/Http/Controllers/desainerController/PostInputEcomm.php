@@ -48,6 +48,7 @@ class PostInputEcomm extends Controller
         $admAppPrint = "-";
         $statusDistribusi = "-";
         $admAppDistribusi = "-";
+        $return_order = "-";
       
 
         $data = [
@@ -75,11 +76,12 @@ class PostInputEcomm extends Controller
             "status_print" => $statusPrint,
             "admin_apv_print" => $admAppPrint,
             "ststus_distribusi" => $statusDistribusi,
-            "admin_apv_distribusi" => $admAppDistribusi
+            "admin_apv_distribusi" => $admAppDistribusi,
+            "return_order" => $return_order
             
          ];
 
-         
+     
 
         $client = new Client();
         try {
@@ -109,7 +111,8 @@ class PostInputEcomm extends Controller
                "ststus_print" => $statusPrint,
                "admin_apv_print" => $admAppPrint,
                "ststus_distribusi" => $statusDistribusi,
-               "admin_apv_distribusi" => $admAppDistribusi
+               "admin_apv_distribusi" => $admAppDistribusi,
+               "return_order" => $return_order,
             ];
            
            
@@ -122,7 +125,7 @@ class PostInputEcomm extends Controller
             ]);
 
             $statusCode = $response->getStatusCode();
-         
+   
             if ($statusCode === 200) {
                 $request->session()->flash('message', 'success');
                 return redirect()->route('input_ecomm_page');

@@ -15,14 +15,17 @@
     }
 
     function openMenu() {
+       
         menu.classList.remove('-ml-72');
         menu.classList.add('ml-0');
+       
 
     }
 
     function closeMenu() {
         menu.classList.remove('ml-0');
         menu.classList.add('-ml-72');
+     
      
     }
 
