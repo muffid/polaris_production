@@ -13,12 +13,12 @@ class PostInputEcomm extends Controller
     private function generateUniqueRandomString($length = 10) {
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $randomString = '';
-    
+
         $charactersLength = strlen($characters);
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
-    
+
         return $randomString;
     }
 
@@ -49,7 +49,7 @@ class PostInputEcomm extends Controller
         $statusDistribusi = "-";
         $admAppDistribusi = "-";
         $return_order = "-";
-      
+
 
         $data = [
             "id_order_ecomm" => $idEcomm,
@@ -78,10 +78,9 @@ class PostInputEcomm extends Controller
             "ststus_distribusi" => $statusDistribusi,
             "admin_apv_distribusi" => $admAppDistribusi,
             "return_order" => $return_order
-            
+
          ];
 
-     
 
         $client = new Client();
         try {
@@ -90,7 +89,7 @@ class PostInputEcomm extends Controller
                "id_order_ecom" => $idEcomm,
                "id_akun" => session('id'),
                "order_time" => $orderTime,
-               "akun_ecom" => $akunEcomm,
+               "id_akun_ecom" => $akunEcomm,
                "nama_akun_order" => $namaAkunOrder,
                "nama_penerima" => $namaPenerima,
                "nomor_order" => $nomorOrder,
@@ -106,16 +105,11 @@ class PostInputEcomm extends Controller
                "output_file" => $outputFileName,
                "key" => $key,
                "time" => $timeStamps,
-               "ekspedisi" => $ekspedisi,
-               "admin_apv_desainer" => $admApp,
-               "ststus_print" => $statusPrint,
-               "admin_apv_print" => $admAppPrint,
-               "ststus_distribusi" => $statusDistribusi,
-               "admin_apv_distribusi" => $admAppDistribusi,
+               "id_ekspedisi" => $ekspedisi,
                "return_order" => $return_order,
             ];
-           
-           
+
+
 
             $response = $client->post($url, [
                 'json' => $data,
@@ -125,17 +119,17 @@ class PostInputEcomm extends Controller
             ]);
 
             $statusCode = $response->getStatusCode();
-   
+
             if ($statusCode === 200) {
                 $request->session()->flash('message', 'success');
                 return redirect()->route('input_ecomm_page');
-            
+
             } else {
                 $request->session()->flash('message', 'fail');
                 return redirect()->route('input_ecomm_page');
             }
         } catch (ClientException $e) {
-            
+
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
             dd($response);

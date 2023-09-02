@@ -54,7 +54,3 @@ Route::middleware('admin')->group(function(){
     Route::get('/master_bahan',[MasterBahanController::class,'index'])->name('master_bahan');
     Route::get('/master_mesin',[MasterMesinController::class,'index'])->name('master_mesin');
 });
-
-
-
-

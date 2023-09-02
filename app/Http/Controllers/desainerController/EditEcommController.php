@@ -8,7 +8,7 @@ use App\Http\Controllers\GetMasterDataController;
 class EditEcommController extends Controller{
 
     public function store(Request $request, $id_akun, $id_ecomm){
-     
+
         $idAkun = session('id');
         $orderTime = $request->input('tanggal_order');
         $akunEcomm = $request->input('akun');
@@ -26,13 +26,13 @@ class EditEcommController extends Controller{
         $note = $request->input('note');
         $ekspedisi = $request->input('ekspedisi');
 
-        
+
 
        $client = new Client();
-            
-      
+
+
        try {
-        $url = "https://padvp2v123.jualdecal.com/ecommerce/editOrderEcom/unApvDesainerByIdEcom/".$id_ecomm;
+        $url = "https://padvp2v123.jualdecal.com/ecommerce/editOrderEcom/unOkSettingByIdorder/".$id_ecomm;
         $data = [
            "id_order_ecom" => $id_ecomm,
            "id_akun" => session('id'),
@@ -51,11 +51,11 @@ class EditEcommController extends Controller{
            "qty_order" => $jumlah,
            "note" => $note,
            "ekspedisi" => $ekspedisi,
-          
+
         ];
-       
-     
-       
+
+
+
 
         $response = $client->put($url, [
             'json' => $data,
@@ -70,14 +70,14 @@ class EditEcommController extends Controller{
             $request->session()->flash('message', 'success');
             return redirect()->route('input_ecomm_page');
             return $statusCode;
-        
+
         } else {
             $request->session()->flash('message', 'fail');
             return redirect()->route('input_ecomm_page');
             return $statusCode;
         }
     } catch (ClientException $e) {
-        
+
         $response = $e->getResponse();
         $statusCode = $response->getStatusCode();
         dd($response);

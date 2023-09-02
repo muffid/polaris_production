@@ -8,11 +8,12 @@ use App\Http\Controllers\GetMasterDataController;
 class prepareEditEcomController extends Controller
 {
 
-    
+
   public function index($id_akun,$id_ecom){
     $client = new Client();
+    //https://padvp2v123.jualdecal.com/ecommerce/orderEcom/unOkSettingByIdEcom/:idEcom
     try{
-        $url = "https://padvp2v123.jualdecal.com/ecommerce/orderEcom/unApvDesainerByIdEcom/".$id_ecom;
+        $url = "https://padvp2v123.jualdecal.com/ecommerce/orderEcom/unOkSettingByIdEcom/".$id_ecom;
         $response = $client->get($url, [
             'headers' => [
                 'auth-token' => session('token'),
@@ -21,7 +22,7 @@ class prepareEditEcomController extends Controller
 
 
         $orderUnapprove = $response->getBody()->getContents();
- 
+
         $getData = new GetMasterDataController();
 
         $ekspedisi = json_decode($getData->getDataEkspedisi());
@@ -42,21 +43,21 @@ class prepareEditEcomController extends Controller
                     'status' => session('role'),
                     'username' => session('username'),
             ]
-          
+
         ];
 
   ;
         return view('desainer/edit_ecomm',$data);
-      
+
 
     } catch (ClientException $e) {
-        
+
         $response = $e->getResponse();
         $statusCode = $response->getStatusCode();
         return "error fetching data mesin";
 
     }
 
-   
+
   }
 }

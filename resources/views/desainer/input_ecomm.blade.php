@@ -13,6 +13,10 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <link rel="stylesheet" href="{{asset('css/iziToast.min.css')}}">
     <script src="{{asset('js/iziToast.min.js')}}" type="text/javascript"></script>
 
@@ -22,7 +26,7 @@
 
 <body class=" bg-[#E9E9E9] relative font-nunito min-h-screen">
     @if(session('message'))
-        <script> 
+        <script>
             var message =@json(session('message'));
             if(message == 'success'){
                 iziToast.success({
@@ -37,7 +41,7 @@
                     position: 'topRight',
                 });
             }
-          
+
         </script>
     @endif
     <div id="popup" class=" fixed py-4 px-8 w-full h-full hidden flex-col items-center justify-center my-auto mx-auto z-50 right-0 top-0  bg-slate-900/25">
@@ -58,7 +62,7 @@
             </button>
         </div>
     </div>
-   
+
     @include('desainer.globals.sidebar_desainer')
         <main id="main" class=" w-full relative">
             <div class="flex flex-row justify-between w-full">
@@ -90,7 +94,7 @@
                                                     <option value="{{ $akun_ecom[$i]->id_akun_ecom }}" >{{  $akun_ecom[$i]->nama_akun_ecom }}</option>
                                                  @endfor
                                               </select>
-                                        </div>  
+                                        </div>
                                         <div class=" flex flex-row items-center justify-between  gap-x-2 px-4 w-full">
                                             <label for="akun_pengorder" class="text-left w-1/3 block text-sm font-medium text-gray-700">Akun Pengorder</label>
                                             <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="akun_pengorder" type="text"  name="akun_pengorder" required>
@@ -157,7 +161,7 @@
                                             <label for="note" class="w-1/3 text-left block text-sm font-medium text-gray-700">Note</label>
                                             <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="note" type="text" value="-"  name="note">
                                         </div>
-                                      
+
                                     </div>
                                     <div class=" rounded p-4 flex flex-row justify-end items-center mt-4">
                                         <div class="flex items-center justify-between gap-x-3">
@@ -167,16 +171,16 @@
                                             <button class="bg-blue-700 rounded hover:bg-blue-800 text-white  py-2 px-4 text-sm focus:outline-none focus:shadow-outline" type="submit">
                                                 Simpan
                                             </button>
-                                              </form>  
+                                              </form>
                                         </div>
-                                    </div> 
-                                    <div class="flex flex-row items-center gap-x-4">
+                                    </div>
+                                    {{-- <div class="flex flex-row items-center gap-x-4">
                                         <img src="{{ asset('img/performance.png') }}" alt="logo" class=" w-8 ">
                                         <div class="flex flex-col p-2 items-start ">
                                             <h1 class="text-lg font-bold text-emerald-900" title="data yang belum diapprove oleh admin, selama belum di approve anda masih bisa mengedit isi data">Order Belum Diterima Admin</h1>
                                             <p class="text-sm text-slate-400">Order yang belum di approve admin</p>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                    <div class="bg-white rounded-lg p-8 text-sm">
                                         <div class=" overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400">
                                         <table id="example" class="cell-border w-full display nowrap text-left text-xs" style="width:100%">
@@ -189,7 +193,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @for($i=0; $i<sizeof($order_unapprove); $i++)
-                                                        <tr>
+                                                        <tr data-id="tableRow{{$i}}">
                                                             <td>
                                                                 <div class="flex flex-row items-center justify-between gap-x-3">
                                                                     <h1
@@ -199,7 +203,7 @@
                                                                         class="cursor-pointer text-blue-700 hover:underline " title="klik untuk mengkopi text sebagai nama file"><i class="bi bi-clipboard"></i>
                                                                     </h1>
                                                                     <h1 onclick="window.location.href = '{{ route('edit_ecom', ['id_akun' => $order_unapprove[$i]->id_akun,'id_ecom' =>  $order_unapprove[$i]->id_order_ecom]) }}'" class="cursor-pointer text-green-700 hover:underline "><i class="bi bi-pencil-square"></i></h1>
-                                                                    <h1 onclick="showDeleteDialog({{json_encode($order_unapprove[$i]->id_order_ecom)}},{{json_encode($order_unapprove[$i]->nomor_order)}})" class="cursor-pointer text-red-700 hover:underline"><i class="bi bi-trash"></i></h1>
+                                                                    <h1 onclick="showDeleteDialog({{json_encode($order_unapprove[$i]->id_order_ecom)}},{{json_encode($order_unapprove[$i]->nomor_order)}},{{json_encode('tableRow'.$i)}})" class="cursor-pointer text-red-700 hover:underline"><i class="bi bi-trash"></i></h1>
                                                                 </div>
                                                             </td>
                                                             <td>{{$order_unapprove[$i]->order_time}}</td>
@@ -215,58 +219,16 @@
                                                             <td>{{$order_unapprove[$i]->nama_bahan_cetak}}</td>
                                                             <td>{{$order_unapprove[$i]->nama_laminasi}}</td>
                                                             <td>{{$order_unapprove[$i]->nama_mesin_cetak}}</td>
-                                                            <td>{{$order_unapprove[$i]->lebar_bahan}} x {{$order_unapprove[$i]->panjang_bahan}}</td> 
+                                                            <td>{{$order_unapprove[$i]->lebar_bahan}} x {{$order_unapprove[$i]->panjang_bahan}}</td>
                                                         </tr>
                                                     @endfor
                                                 </tfoot>
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="flex flex-row items-center gap-x-4">
-                                        <img src="{{ asset('img/performance.png') }}" alt="logo" class=" w-8 ">
-                                        <div class="flex flex-col p-2 items-start ">
-                                            <h1 class="text-lg font-bold text-emerald-900" title="data yang belum diapprove oleh admin, selama belum di approve anda masih bisa mengedit isi data">Order On Proses</h1>
-                                            <p class="text-sm text-slate-400">Order yang sudah diterima admin dan sedang di proses</p>
-                                        </div>
-                                    </div>
-                                    <div class="bg-white rounded-lg p-8 text-sm">
-                                        <div class=" overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400">
-                                        <table id="onProgress" class="cell-border w-full display nowrap text-left text-xs" style="width:100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th><th>Tanggal Order</th><th>Tanggal Input</th><th>Akun</th><th>Pengorder</th><th>Penerima</th>
-                                                        <th>No Order</th><th>SKU</th><th>Ekspedisi</th><th>Warna</th><th>Jumlah</th><th>Bahan</th>
-                                                        <th>Laminasi</th><th>Mesin</th><th>Dimensi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @for($i=0; $i<sizeof($order_approve); $i++)
-                                                        <tr>
-                                                            <td>
-                                                                {{$i+1}}
-                                                            </td>
-                                                            <td>{{$order_approve[$i]->order_time}}</td>
-                                                            <td>{{$order_approve[$i]->time}}</td>
-                                                            <td>{{$order_approve[$i]->nama_akun_ecom}}</td>
-                                                            <td>{{$order_approve[$i]->nama_akun_order}}</td>
-                                                            <td>{{$order_approve[$i]->nama_penerima}}</td>
-                                                            <td>{{$order_approve[$i]->nomor_order}}</td>
-                                                            <td>{{$order_approve[$i]->sku}}</td>
-                                                            <td>{{$order_approve[$i]->nama_ekspedisi}}</td>
-                                                            <td>{{$order_approve[$i]->warna}}</td>
-                                                            <td>{{$order_approve[$i]->qty_order}}</td>
-                                                            <td>{{$order_approve[$i]->nama_bahan_cetak}}</td>
-                                                            <td>{{$order_approve[$i]->nama_laminasi}}</td>
-                                                            <td>{{$order_approve[$i]->nama_mesin_cetak}}</td>
-                                                            <td>{{$order_approve[$i]->lebar_bahan}} x {{$order_approve[$i]->panjang_bahan}}</td> 
-                                                        </tr>
-                                                    @endfor
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div> 
-                            </div>                  
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                   </div>
@@ -274,73 +236,7 @@
                 </div>
         </main>
 </body>
-<script>
- 
-    function callAjax() {
-        var btnContainer = document.getElementById("button_container");
-        showBtnProcess();
-        var popUp = document.getElementById("popup");
-        btnContainer.classList.add('hidden');
-        var id = idToDelete;
-        fetch('/delete_order_ecom/'+id)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Respon jaringan tidak berhasil');
-                }
-                closeDeleteDialog();
-                location.reload();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
-    var idToDelete = "";
-    function showDeleteDialog(id,nomor){
-        console.log(nomor+" "+id);
-        idToDelete = id;
-        var popUp = document.getElementById("popup");
-        var data_hapus = document.getElementById("data_hapus");
-        popUp.classList.remove('hidden');
-        popUp.classList.add('flex');
-        data_hapus.innerHTML = "nomor order : "+nomor;
-    }
 
-    function closeDeleteDialog(){
-        var popUp = document.getElementById("popup");
-        popUp.classList.remove('flex');
-        popUp.classList.add('hidden');
-    }
-
-    function showBtnProcess(){
-        var btnProcess = document.getElementById("button_process");
-        btnProcess.classList.remove('hidden');
-        btnProcess.classList.add('flex');
-    }
-
-    var tableDataNew = new DataTable('#example');
-    var tableOnProgress = new DataTable('#onProgress');
-
-
-    function copyText(text) {
-        navigator.clipboard.writeText(text)
-            .then(() => {
-            console.log('Teks berhasil di-copy ke clipboard.');
-            iziToast.info({
-                    title: 'Copied',
-                    message: 'Teks Berhasil Di copy',
-                    position: 'topRight',
-                    theme: 'dark',
-                    color: 'black',
-                });
-            })
-            .catch((error) => {
-            console.error('Gagal menyalin teks ke clipboard:', error);
-            }); 
-    }
-
-    function updateTable(){
-        tableDataNew.clear().draw();
-    }
-</script>
 <script src="{{ asset('js/header.js') }}"></script>
+<script src="{{ asset('js/inputEcommPage.js') }}"></script>
 </html>

@@ -1,0 +1,14 @@
+
+
+{
+    "data" : "data sesuai kolom",
+    "status" : {
+        "status_setting" : "",
+        "jam_setting" : "",
+        "jam_selesai_setting" : "",
+        "nama_penyeting" : "",
+        "status_order": "",
+        "status_distribusi" : "",
+        "jam_selesai" : ""
+    }
+}
