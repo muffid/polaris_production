@@ -28,6 +28,8 @@ class EditEcommController extends Controller{
 
 
 
+
+
        $client = new Client();
 
 
@@ -50,7 +52,7 @@ class EditEcommController extends Controller{
            "panjang_bahan" => $panjang,
            "qty_order" => $jumlah,
            "note" => $note,
-           "ekspedisi" => $ekspedisi,
+           "id_ekspedisi" => $ekspedisi,
 
         ];
 

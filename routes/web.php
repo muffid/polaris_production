@@ -23,6 +23,7 @@ use App\Http\Controllers\desainerController\PostInputEcomm;
 use App\Http\Controllers\desainerController\prepareEditEcomController;
 use App\Http\Controllers\desainerController\EditEcommController;
 use App\Http\Controllers\desainerController\DeleteOrderEcomController;
+use App\Http\Controllers\desainerController\DataEcommController;
 
 Route::get('/', function () {return view('login');})->middleware('isLogin')->name('login');
 Route::get('/logout',[LogoutController::class,'index'])->name('logout');
@@ -39,6 +40,7 @@ Route::get('/desainer_login',function(){return view('desainer/login_desainer');}
 Route::middleware('desainer')->group(function(){
     Route::get('/dashborad_desainer',[DashboardDesainerController::class,'index'])->name('dashboard_desainer');
     Route::get('/input_ecommerce',[InputEcommController::class,'index'])->name('input_ecomm_page');
+    Route::get('/data_ecommerce',[DataEcommController::class,'index'])->name('data_ecomm_page');
     Route::get('/edit_ecom/{id_akun}/{id_ecom}',[prepareEditEcomController::class,'index'])->name('edit_ecom');
     Route::get('/delete_order_ecom/{id_ecomm}',[DeleteOrderEcomController::class,'deleteOrderEcom'])->name('delete_order_ecom');
 

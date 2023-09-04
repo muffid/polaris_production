@@ -186,7 +186,7 @@
                                         <table id="example" class="cell-border w-full display nowrap text-left text-xs" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>Aksi</th><th>Tanggal Order</th><th>Tanggal Input</th><th>Akun</th><th>Pengorder</th><th>Penerima</th>
+                                                        <th>Aksi</th><th>No Urut</th><th>Tanggal Order</th><th>Tanggal Input</th><th>Akun</th><th>Pengorder</th><th>Penerima</th>
                                                         <th>No Order</th><th>SKU</th><th>Ekspedisi</th><th>Warna</th><th>Jumlah</th><th>Bahan</th>
                                                         <th>Laminasi</th><th>Mesin</th><th>Dimensi</th>
                                                     </tr>
@@ -206,6 +206,7 @@
                                                                     <h1 onclick="showDeleteDialog({{json_encode($order_unapprove[$i]->id_order_ecom)}},{{json_encode($order_unapprove[$i]->nomor_order)}},{{json_encode('tableRow'.$i)}})" class="cursor-pointer text-red-700 hover:underline"><i class="bi bi-trash"></i></h1>
                                                                 </div>
                                                             </td>
+                                                            <td>{{$order_unapprove[$i]->no_urut}}</td>
                                                             <td>{{$order_unapprove[$i]->order_time}}</td>
                                                             <td>{{$order_unapprove[$i]->time}}</td>
                                                             <td>{{$order_unapprove[$i]->nama_akun_ecom}}</td>
@@ -226,6 +227,8 @@
                                             </table>
                                         </div>
                                     </div>
+
+
 
                                 </div>
                             </div>
