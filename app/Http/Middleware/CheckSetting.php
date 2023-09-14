@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class isLogin
+class CheckSetting
 {
     /**
      * Handle an incoming request.
@@ -16,16 +16,13 @@ class isLogin
      */
     public function handle(Request $request, Closure $next)
     {
-
-        if ($request->session()->get('role')==='Administrator') {
-            return redirect()->route('dashboard_admin');
-        } else if ($request->session()->get('role')==='Desainer') {
-            return redirect()->route('dashboard_desainer');
-        }else if ($request->session()->get('role')==='Setting'){
-            return redirect()->route('dashboard_setting');
-        }else{
+        // Verifikasi role 'setting' pada session
+        $user = $request->session()->get('role');
+        if ( $user === 'Setting') {
             return $next($request);
         }
 
+        // Jika tidak memenuhi verifikasi, arahkan pengguna ke halaman lain
+        return redirect('/');
     }
 }

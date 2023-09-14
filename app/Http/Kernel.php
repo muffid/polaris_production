@@ -21,7 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        
+
     ];
 
     /**
@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\CheckAdmin::class,
         'desainer' => \App\Http\Middleware\CheckDesainer::class,
+        'setting' => \App\Http\Middleware\CheckSetting::class,
         'isLogin' => \App\Http\Middleware\isLogin::class,
     ];
 }

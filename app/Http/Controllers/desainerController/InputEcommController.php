@@ -26,19 +26,43 @@ class InputEcommController extends Controller
 
 
 
+    private function getMaster(){
+        $client = new Client();
+        try{
+            $url = "https://padvp2v123.jualdecal.com/masterdata/AllMasterData";
+            $response = $client->get($url,[
+                'headers' => [
+                    'auth-token' => session('token'),
+                ]
+                ]);
+            return ($response->getBody()->getContents());
+        } catch(ClientException $e){
+
+        }
+    }
     public function index(){
 
-        $getData = new GetMasterDataController();
 
-       $ekspedisi = json_decode($getData->getDataEkspedisi());
-       $laminasi = json_decode($getData->getDataLaminasi());
-       $akunEcom = json_decode($getData->getDataAkunEcom());
-       $mesinCetak = json_decode($getData->getDataMesin());
-       $bahanCetak = json_decode($getData->getDataBahan());
+
+    // $getData = new GetMasterDataController();
+    //    $ekspedisi = json_decode($getData->getDataEkspedisi());
+    //    $laminasi = json_decode($getData->getDataLaminasi());
+    //    $akunEcom = json_decode($getData->getDataAkunEcom());
+    //    $mesinCetak = json_decode($getData->getDataMesin());
+    //    $bahanCetak = json_decode($getData->getDataBahan());
+
+
+        $dataEcomm = json_decode($this->getMaster(),true);
+
+        $ekspedisi = $dataEcomm["ekspedisi"];
+        $laminasi = $dataEcomm["laminasi"];
+        $akunEcom = $dataEcomm["akun_ecom"];
+        $mesinCetak = $dataEcomm["mesin_cetak"];
+        $bahanCetak = $dataEcomm["bahan_cetak"];
+
        $orderUnapprove = json_decode($this->getOrderUnapprove(session('id')));
 
-
-
+    //    dd($orderUnapprove);
         $data = [
 
             'ekspedisi' =>$ekspedisi,

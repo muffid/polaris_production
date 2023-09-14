@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\desainerController;
+namespace App\Http\Controllers\settingController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 
-class LoginDesainerController extends Controller
+class LoginSettingController extends Controller
 {
     public function authenticate(Request $request){
 
@@ -36,7 +36,8 @@ class LoginDesainerController extends Controller
                 $request->session()->put('id',$data->id);
                 $request->session()->put('username',$data->username);
 
-                return redirect()->route('dashboard_desainer');
+                return redirect()->route('dashboard_setting');
+                // return "granted";
 
             } else {
                 return("not admin");
@@ -47,12 +48,12 @@ class LoginDesainerController extends Controller
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 401) {
-                return redirect()->route('login_desainer_page')->with('Gagal','username atau password salah');
+                return redirect()->route('login_setting_page')->with('Gagal','username atau password salah');
             } else {
-                return redirect()->route('login_desainer_page')->with('Gagal','terjadi kesalahan');
+                return redirect()->route('login_setting_page')->with('Gagal','terjadi kesalahan');
             }
         } catch (RequestException $e) {
-            return redirect()->route('login_desainer_page')->with('Gagal','gagal menghubungkan ke server');
+            return redirect()->route('login_setting_page')->with('Gagal','gagal menghubungkan ke server');
         }
     }
 }

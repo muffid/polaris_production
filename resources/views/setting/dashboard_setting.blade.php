@@ -16,7 +16,7 @@
 
 <body class=" bg-slate-50 relative font-nunito ">
 
-    @include('desainer.globals.sidebar_desainer')
+    @include('setting.globals.sidebar_setting')
         <main id="main" class=" w-full">
             <div class="flex flex-row justify-between w-full">
                 <div class="flex flex-col w-full">

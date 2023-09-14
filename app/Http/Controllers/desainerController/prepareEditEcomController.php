@@ -4,10 +4,27 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use App\Http\Controllers\GetMasterDataController;
+use GuzzleHttp\Exception\ConnectException;
 
 class prepareEditEcomController extends Controller
 {
 
+
+
+    private function getMaster(){
+        $client = new Client();
+        try{
+            $url = "https://padvp2v123.jualdecal.com/masterdata/AllMasterData";
+            $response = $client->get($url,[
+                'headers' => [
+                    'auth-token' => session('token'),
+                ]
+                ]);
+            return ($response->getBody()->getContents());
+        } catch(ClientException $e){
+
+        }
+    }
 
   public function index($id_akun,$id_ecom){
     $client = new Client();
@@ -23,13 +40,14 @@ class prepareEditEcomController extends Controller
 
         $orderUnapprove = $response->getBody()->getContents();
 
-        $getData = new GetMasterDataController();
+        $dataEcomm = json_decode($this->getMaster(),true);
 
-        $ekspedisi = json_decode($getData->getDataEkspedisi());
-        $laminasi = json_decode($getData->getDataLaminasi());
-        $akunEcom = json_decode($getData->getDataAkunEcom());
-        $mesinCetak = json_decode($getData->getDataMesin());
-        $bahanCetak = json_decode($getData->getDataBahan());
+        $ekspedisi = $dataEcomm["ekspedisi"];
+        $laminasi = $dataEcomm["laminasi"];
+        $akunEcom = $dataEcomm["akun_ecom"];
+        $mesinCetak = $dataEcomm["mesin_cetak"];
+        $bahanCetak = $dataEcomm["bahan_cetak"];
+
 
         $data = [
             'ekspedisi' =>$ekspedisi,
@@ -46,7 +64,7 @@ class prepareEditEcomController extends Controller
 
         ];
 
-  ;
+        // dd($data['akun_ecom'][0]['nama_akun_ecom']);
         return view('desainer/edit_ecomm',$data);
 
 
@@ -56,6 +74,9 @@ class prepareEditEcomController extends Controller
         $statusCode = $response->getStatusCode();
         return "error fetching data mesin";
 
+    }catch(ConnectException $e){
+
+       return "connection time out. Periksa koneksi anda";
     }
 
 

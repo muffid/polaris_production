@@ -1,18 +1,32 @@
 <?php
-namespace App\Http\Controllers\desainerController;
+namespace App\Http\Controllers\settingController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-use App\Http\Controllers\GetMasterDataController;
 
-class DeleteOrderEcomController extends Controller{
-    public function deleteOrderEcom(Request $request, $id_ecomm){
+class EcommHandleSetting extends Controller
+{
+    public function index(){
 
-        //https://padvp2v123.jualdecal.com/ecommerce/deleteOrderEcom/unOkSettingByIdorder/:idEcom
+
+        $data = [
+
+            'active' => 'Handle_Ecomm',
+            'session' => [
+                    'status' => session('role'),
+                    'username' => session('username'),
+            ]
+
+        ];
+        return view('setting/handle_ecom_setting',$data);
+    }
+
+
+    public function handleSetting($id_ecomm){
 
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/ecommerce/deleteOrderEcom/unOkSettingByIdorder/".$id_ecomm;
+            $url = "https://padvp2v123.jualdecal.com/ecommerce/settingOk/".$id_ecomm."/".session('id');
             $response = $client->delete($url, [
 
                 'headers' => [
@@ -23,11 +37,13 @@ class DeleteOrderEcomController extends Controller{
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-
+                $request->session()->flash('message', 'success');
+                return redirect()->route('handle_ecomm');
 
 
             } else {
-
+                $request->session()->flash('message', 'fail');
+                return redirect()->route('handle_ecomm');
 
             }
         } catch (ClientException $e) {
@@ -46,5 +62,6 @@ class DeleteOrderEcomController extends Controller{
             dd($statusCode);
         }
     }
-}
 
+
+}

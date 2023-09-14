@@ -13,27 +13,40 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
 
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <link rel="stylesheet" href="{{asset('css/iziToast.min.css')}}">
     <script src="{{asset('js/iziToast.min.js')}}" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
     <title>Polaris Adv - Dashboard</title>
+
+
 </head>
 
 <body class=" bg-[#E9E9E9] relative font-nunito min-h-screen">
     @if(session('message'))
         <script>
             var message =@json(session('message'));
+            var textToCopy =@json(session('copy'));
             if(message == 'success'){
-                iziToast.success({
-                    title: 'Saved',
-                    message: 'Data berhasil disimpan',
-                    position: 'topRight',
-                });
+                Swal.fire({
+                    title: 'Berhasil, silahkan copy nama file ',
+                    confirmButtonText: 'Copy Nama File',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigator.clipboard.writeText(textToCopy)
+                        .then(() => {
+                            console.log('Teks berhasil di-copy ke clipboard.');
+                            Swal.fire('copied!', '', 'success')
+                        })
+                        .catch((error) => {
+                            console.error('Gagal menyalin teks ke clipboard:', error);
+                        });
+                    }
+                })
             }else{
                 iziToast.error({
                     title: 'Failed',
@@ -41,7 +54,6 @@
                     position: 'topRight',
                 });
             }
-
         </script>
     @endif
     <div id="popup" class=" fixed py-4 px-8 w-full h-full hidden flex-col items-center justify-center my-auto mx-auto z-50 right-0 top-0  bg-slate-900/25">
@@ -63,6 +75,7 @@
         </div>
     </div>
 
+
     @include('desainer.globals.sidebar_desainer')
         <main id="main" class=" w-full relative">
             <div class="flex flex-row justify-between w-full">
@@ -82,18 +95,34 @@
                                     </div>
                                     <form action="save_ecomm" method="POST">
                                     @csrf
-                                    <div class="grid grid-cols-2 p-8 text-sm gap-y-4 items-start w-full bg-white rounded-lg">
-                                        <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
+                                    <div class="grid grid-cols-1 lg:grid-cols-2 p-8 text-sm gap-y-4 items-start w-full bg-white rounded-lg">
+                                        <div class=" flex flex-row items-center justify-between gap-x-2 px-4 w-full">
                                             <label for="tanggal_order" class="text-left block text-sm w-1/3 font-medium text-gray-700">Tanggal Order</label>
-                                            <input class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="tanggal_order" type="text"  name="tanggal_order" required>
+                                            <div class="relative w-full">
+                                                <div class="absolute inset-y-0 right-4 pl-3 flex items-center pointer-events-none">
+                                                    <i class="bi bi-calendar3 text-slate-400"></i>
+                                                </div>
+                                                <div class="absolute inset-y-0 right-10 pl-3 flex items-center pointer-events-none">
+                                                    <i class="bi bi-caret-down-fill text-xs text-slate-400"></i>
+                                                </div>
+                                                <input placeholder="pilih waktu" class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="tanggal_order" type="text"  name="tanggal_order" required>
+                                            </div>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between  text-sm  gap-x-2 px-4 w-full">
                                             <label for="akun" class="text-left block font-medium text-gray-700 w-1/3">Akun</label>
-                                            <select class=" w-full cursor-pointerappearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="akun" name="akun">
+                                            <div class="relative w-full">
+                                                <div class="absolute inset-y-0 right-4 pl-3 flex items-center pointer-events-none">
+                                                    <i class="bi bi-shop text-slate-400"></i>
+                                                </div>
+                                                <div class="absolute inset-y-0 right-10 pl-3 flex items-center pointer-events-none">
+                                                    <i class="bi bi-caret-down-fill text-xs text-slate-400"></i>
+                                                </div>
+                                            <select class=" w-full cursor-pointer appearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="akun" name="akun">
                                                 @for($i=0; $i<sizeof($akun_ecom); $i++)
-                                                    <option value="{{ $akun_ecom[$i]->id_akun_ecom }}" >{{  $akun_ecom[$i]->nama_akun_ecom }}</option>
+                                                    <option value="{{ $akun_ecom[$i]['id_akun_ecom'] }}" >{{  $akun_ecom[$i]['nama_akun_ecom'] }}</option>
                                                  @endfor
                                               </select>
+                                            </div>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between  gap-x-2 px-4 w-full">
                                             <label for="akun_pengorder" class="text-left w-1/3 block text-sm font-medium text-gray-700">Akun Pengorder</label>
@@ -113,11 +142,19 @@
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="ekspedisi" class="w-1/3 text-left block text-sm font-medium text-gray-700">Ekspedisi</label>
-                                            <select class=" w-full cursor-pointerappearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="ekspedisi" name="ekspedisi">
+                                            <div class="relative w-full">
+                                                <div class="absolute inset-y-0 right-4 pl-3 flex items-center pointer-events-none">
+                                                    <i class="bi bi-truck text-slate-400 text-base"></i>
+                                                </div>
+                                                <div class="absolute inset-y-0 right-10 pl-3 flex items-center pointer-events-none">
+                                                    <i class="bi bi-caret-down-fill text-xs text-slate-400"></i>
+                                                </div>
+                                            <select class=" w-full cursor-pointer appearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="ekspedisi" name="ekspedisi">
                                                 @for($i=0; $i<sizeof($ekspedisi); $i++)
-                                                    <option value="{{ $ekspedisi[$i]->id_ekspedisi }}" >{{  $ekspedisi[$i]->nama_ekspedisi }}</option>
+                                                    <option value="{{ $ekspedisi[$i]['id_ekspedisi'] }}" >{{  $ekspedisi[$i]['nama_ekspedisi'] }}</option>
                                                  @endfor
                                               </select>
+                                            </div>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="warna" class="w-1/3 text-left block text-sm font-medium text-gray-700">Warna</label>
@@ -129,58 +166,82 @@
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="bahan" class="w-1/3 text-left block text-sm font-medium text-gray-700">Bahan</label>
-                                            <select class=" w-full cursor-pointerappearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="bahan" name="bahan">
-                                                @for($i=0; $i<sizeof($bahan_cetak); $i++)
-                                                <option value="{{ $bahan_cetak[$i]->id_bahan_cetak }}"  @if($bahan_cetak[$i]->nama_bahan_cetak=="China") selected @endif>{{  $bahan_cetak[$i]->nama_bahan_cetak }}</option>
-                                           @endfor
-                                            </select>
+                                            <div class="relative w-full">
+                                                <div class="absolute inset-y-0 right-4 pl-3 flex items-center pointer-events-none">
+                                                    <i class="bi bi-file-richtext text-slate-400 text-base"></i>
+                                                </div>
+                                                <div class="absolute inset-y-0 right-10 pl-3 flex items-center pointer-events-none">
+                                                    <i class="bi bi-caret-down-fill text-xs text-slate-400"></i>
+                                                </div>
+                                                <select onchange="onChangeBahanCetak()" id="bahan_cetak" class=" w-full cursor-pointer appearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="bahan" name="bahan">
+                                                    @for($i=0; $i<sizeof($bahan_cetak); $i++)
+                                                        <option data-lebar="{{ $bahan_cetak[$i]['lebar_bahan']}}" value="{{ $bahan_cetak[$i]['id_bahan_cetak'] }}"  @if($bahan_cetak[$i]['nama_bahan_cetak']=="China") selected @endif>{{  $bahan_cetak[$i]['nama_bahan_cetak'] }}</option>
+                                                    @endfor
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="laminasi" class="w-1/3 text-left block text-sm font-medium text-gray-700">Laminasi</label>
-                                            <select class=" w-full cursor-pointerappearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="laminasi" name="laminasi">
-                                                @for($i=0; $i<sizeof($laminasi); $i++)
-                                                <option value="{{ $laminasi[$i]->id_laminasi }}" >{{  $laminasi[$i]->nama_laminasi }}</option>
-                                             @endfor
+                                            <div class="relative w-full">
+                                                <div class="absolute inset-y-0 right-4 pl-3 flex items-center pointer-events-none">
+                                                    <i class="bi bi-file-earmark text-slate-400 text-base"></i>
+                                                </div>
+                                                <div class="absolute inset-y-0 right-10 pl-3 flex items-center pointer-events-none">
+                                                    <i class="bi bi-caret-down-fill text-xs text-slate-400"></i>
+                                                </div>
+                                            <select class=" w-full cursor-pointer appearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="laminasi" name="laminasi">
+                                                    @for($i=0; $i<sizeof($laminasi); $i++)
+                                                        <option value="{{ $laminasi[$i]['id_laminasi'] }}" >{{  $laminasi[$i]['nama_laminasi'] }}</option>
+                                                    @endfor
                                               </select>
+                                            </div>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="mesin" class="w-1/3 text-left block text-sm font-medium text-gray-700">Mesin</label>
-                                            <select class=" w-full cursor-pointerappearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="mesin" name="mesin">
+                                            <div class="relative w-full">
+                                                <div class="absolute inset-y-0 right-4 pl-3 flex items-center pointer-events-none">
+                                                    <i class="bi bi-printer text-slate-400 text-base"></i>
+                                                </div>
+                                                <div class="absolute inset-y-0 right-10 pl-3 flex items-center pointer-events-none">
+                                                    <i class="bi bi-caret-down-fill text-xs text-slate-400"></i>
+                                                </div>
+                                            <select class=" w-full cursor-pointer appearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="mesin" name="mesin">
                                                @for($i=0; $i<sizeof($mesin_cetak); $i++)
-                                                    <option value="{{ $mesin_cetak[$i]->id_mesin_cetak }}" @if($mesin_cetak[$i]->nama_mesin_cetak=="Mimaki") selected @endif >{{  $mesin_cetak[$i]->nama_mesin_cetak }}</option>
+                                                    <option value="{{ $mesin_cetak[$i]['id_mesin_cetak'] }}" @if($mesin_cetak[$i]['nama_mesin_cetak']=="Mimaki") selected @endif >{{  $mesin_cetak[$i]['nama_mesin_cetak'] }}</option>
                                                @endfor
                                             </select>
+                                            </div>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
-                                            <label for="panjang" class="w-1/3 text-left block text-sm font-medium text-gray-700">Panjang (cm)</label>
-                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="panjang" type="text"  name="panjang" required>
+                                            <label for="panjang" class="w-2/3 text-left block text-sm font-medium text-gray-700">Panjang (cm)</label>
+                                            <input class="w-2/3 appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="panjang" type="number"  name="panjang" required>
                                             <label for="lebar" class="w-1/3 text-left block text-sm font-medium text-gray-700 ml-4">lebar (cm)</label>
-                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="lebar" type="text"  name="lebar" required>
+                                            <input readonly id="lebar_bahan" class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="lebar" type="text"  name="lebar" required>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="note" class="w-1/3 text-left block text-sm font-medium text-gray-700">Note</label>
                                             <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="note" type="text" value="-"  name="note">
                                         </div>
-
                                     </div>
                                     <div class=" rounded p-4 flex flex-row justify-end items-center mt-4">
                                         <div class="flex items-center justify-between gap-x-3">
-                                            <button onclick="updateTable()" class="bg-orange-500 rounded hover:bg-orange-600 text-white  py-2 px-4 text-sm focus:outline-none focus:shadow-outline" type="button">
-                                                Kembali
-                                            </button>
+                                            {{-- <button onclick="updateTable()" class="bg-orange-500 rounded hover:bg-orange-600 text-white  py-2 px-4 text-sm focus:outline-none focus:shadow-outline" type="button">
+                                                <i class="bi bi-caret-left-fill"></i><span> Kembali</span>
+                                            </button> --}}
                                             <button class="bg-blue-700 rounded hover:bg-blue-800 text-white  py-2 px-4 text-sm focus:outline-none focus:shadow-outline" type="submit">
-                                                Simpan
+                                                <i class="bi bi-box-arrow-down"></i><span> Simpan</span>
                                             </button>
                                               </form>
                                         </div>
                                     </div>
-                                    {{-- <div class="flex flex-row items-center gap-x-4">
+
+                                    <div class="flex flex-row items-center gap-x-4 mt-2">
                                         <img src="{{ asset('img/performance.png') }}" alt="logo" class=" w-8 ">
                                         <div class="flex flex-col p-2 items-start ">
-                                            <h1 class="text-lg font-bold text-emerald-900" title="data yang belum diapprove oleh admin, selama belum di approve anda masih bisa mengedit isi data">Order Belum Diterima Admin</h1>
-                                            <p class="text-sm text-slate-400">Order yang belum di approve admin</p>
+                                            <h1 class="text-lg font-bold text-emerald-900">Order Ecom Belum Disetting</h1>
+                                            <p class="text-sm text-slate-400">Order Ecom Baru Baru Ini</p>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                    <div class="bg-white rounded-lg p-8 text-sm">
                                         <div class=" overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400">
                                         <table id="example" class="cell-border w-full display nowrap text-left text-xs" style="width:100%">
@@ -197,9 +258,9 @@
                                                             <td>
                                                                 <div class="flex flex-row items-center justify-between gap-x-3">
                                                                     <h1
-                                                                        onclick="copyText(({{json_encode($order_unapprove[$i]->nama_akun_ecom.'-'.
+                                                                        onclick="copyText(({{json_encode($order_unapprove[$i]->no_urut.'-'.$order_unapprove[$i]->nama_akun_ecom.'-'.
                                                                         $order_unapprove[$i]->nama_akun_order.'-'.$order_unapprove[$i]->nama_penerima.'-'.
-                                                                        $order_unapprove[$i]->sku.'-'.$order_unapprove[$i]->warna.'-'.$order_unapprove[$i]->nama_ekspedisi.'-'. $order_unapprove[$i]->order_time)}}))"
+                                                                        $order_unapprove[$i]->sku.'-'.$order_unapprove[$i]->warna.$order_unapprove[$i]->panjang_bahan.'-'.$order_unapprove[$i]->nama_ekspedisi.'-'. $order_unapprove[$i]->order_time)}}))"
                                                                         class="cursor-pointer text-blue-700 hover:underline " title="klik untuk mengkopi text sebagai nama file"><i class="bi bi-clipboard"></i>
                                                                     </h1>
                                                                     <h1 onclick="window.location.href = '{{ route('edit_ecom', ['id_akun' => $order_unapprove[$i]->id_akun,'id_ecom' =>  $order_unapprove[$i]->id_order_ecom]) }}'" class="cursor-pointer text-green-700 hover:underline "><i class="bi bi-pencil-square"></i></h1>
@@ -220,7 +281,7 @@
                                                             <td>{{$order_unapprove[$i]->nama_bahan_cetak}}</td>
                                                             <td>{{$order_unapprove[$i]->nama_laminasi}}</td>
                                                             <td>{{$order_unapprove[$i]->nama_mesin_cetak}}</td>
-                                                            <td>{{$order_unapprove[$i]->lebar_bahan}} x {{$order_unapprove[$i]->panjang_bahan}}</td>
+                                                            <td>{{$order_unapprove[$i]->panjang_bahan}} x {{$order_unapprove[$i]->lebar_bahan}}</td>
                                                         </tr>
                                                     @endfor
                                                 </tfoot>

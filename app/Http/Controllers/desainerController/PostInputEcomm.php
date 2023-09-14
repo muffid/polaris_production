@@ -81,6 +81,8 @@ class PostInputEcomm extends Controller
 
          ];
 
+        //  dd($timeStamps);
+
 
         $client = new Client();
         try {
@@ -109,8 +111,6 @@ class PostInputEcomm extends Controller
                "return_order" => $return_order,
             ];
 
-
-
             $response = $client->post($url, [
                 'json' => $data,
                 'headers' => [
@@ -120,12 +120,22 @@ class PostInputEcomm extends Controller
 
             $statusCode = $response->getStatusCode();
 
+
             if ($statusCode === 200) {
-                $request->session()->flash('message', 'success');
+                $singleData = json_decode($this->getDataEcomById($idEcomm));
+
+                $textToCopy = $singleData[0]->no_urut.'-'.$singleData[0]->nama_akun_ecom.'-'.
+                                $singleData[0]->nama_akun_order.'-'.$singleData[0]->nama_penerima.'-'.
+                                $singleData[0]->sku.'-'.
+                                $singleData[0]->warna.'-'.$singleData[0]->panjang_bahan.'-'.
+                                $singleData[0]->nama_ekspedisi.'-'.$singleData[0]->order_time;
+
+                session()->flash('message', 'success');
+                session()->flash('copy',$textToCopy );
                 return redirect()->route('input_ecomm_page');
 
             } else {
-                $request->session()->flash('message', 'fail');
+               session()->flash('message', 'fail');
                 return redirect()->route('input_ecomm_page');
             }
         } catch (ClientException $e) {
@@ -142,6 +152,23 @@ class PostInputEcomm extends Controller
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
             dd($statusCode);
+        }
+    }
+
+    private function getDataEcomById($idEcom){
+
+        $client = new Client();
+        try{
+            $url = "https://padvp2v123.jualdecal.com/ecommerce/orderEcom/unOkSettingByIdEcom/".$idEcom;
+            $response = $client->get($url,[
+                'headers' => [
+                    'auth-token' => session('token'),
+                ]
+                ]);
+            return $response->getBody()->getContents();
+            // return "not";
+        } catch(ClientException $e){
+
         }
     }
 }
