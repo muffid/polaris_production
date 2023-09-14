@@ -23,11 +23,13 @@ class DeleteOrderEcomController extends Controller{
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-
+                $request->session()->flash('message', 'success');
+                return redirect()->route('input_ecomm_page');
 
 
             } else {
-
+                $request->session()->flash('message', 'fail');
+                return redirect()->route('input_ecomm_page');
 
             }
         } catch (ClientException $e) {
@@ -45,6 +47,6 @@ class DeleteOrderEcomController extends Controller{
             $statusCode = $response->getStatusCode();
             dd($statusCode);
         }
-    }
-}
+        }
+        }
 
