@@ -24,16 +24,18 @@
 
     </div>
     <div class="w-full flex h-full flex-col py-4 gap-y-2">
-       <div class="flex flex-row items-center justify-start relative cursor-pointer">
-            @if($active=='Dashboard')
-                <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
-            @else
-            @endif
-            <div class="w-full @if($active == 'Dashboard') bg-slate-100 @endif flex flex-row hover:bg-slate-100 items-center justify-start py-2 pl-6 lg:pl-14 gap-x-2" onclick="window.location.href = '{{ route('dashboard_admin') }}'">
-                <i class="bi bi-house-door-fill"></i>
-                <h1 class="text-sm font-semibold">Dashboard</h1>
+        <a href="dashboard_admin">
+            <div class="flex flex-row items-center justify-start relative cursor-pointer">
+                    @if($active=='Dashboard')
+                        <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
+                    @else
+                    @endif
+                    <div class="w-full @if($active == 'Dashboard') bg-slate-100 @endif flex flex-row hover:bg-slate-100 items-center justify-start py-2 pl-6 lg:pl-14 gap-x-2" onclick="window.location.href = '{{ route('dashboard_admin') }}'">
+                        <i class="bi bi-house-door-fill"></i>
+                        <h1 class="text-sm font-semibold">Dashboard</h1>
+                    </div>
             </div>
-       </div>
+        </a>
        <div class="flex flex-row items-center justify-start relative ">
             <div class="w-full  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
                 <i class="bi bi-clipboard-data"></i>
@@ -50,29 +52,33 @@
                 </div>
             </div>
         </a>
-        <div class="flex flex-row items-center justify-start relative cursor-pointer" onclick="window.location.href = '{{ route('nonecommerce_admin') }}'">
-            @if($active=='NonEcommerce')
-                <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
-            @endif
+        <a href="nonecommerce_admin">
+            <div class="flex flex-row items-center justify-start relative cursor-pointer" onclick="window.location.href = '{{ route('nonecommerce_admin') }}'">
+                @if($active=='NonEcommerce')
+                    <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
+                @endif
 
-            <div class="w-full @if($active == 'NonEcommerce') bg-slate-100 @endif hover:bg-slate-100 flex py-2 pl-12 lg:pl-[74px]">
-                <h1 class=" text-xs ">Input Non Ecommerce</h1>
+                <div class="w-full @if($active == 'NonEcommerce') bg-slate-100 @endif hover:bg-slate-100 flex py-2 pl-12 lg:pl-[74px]">
+                    <h1 class=" text-xs ">Input Non Ecommerce</h1>
+                </div>
             </div>
-        </div>
+        </a>
        <div class="flex flex-row items-center justify-start relative ">
             <div class="w-full  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
                 <i class="bi bi-database-check"></i>
                 <h1 class="text-sm font-semibold">Data Order Anda</h1>
             </div>
         </div>
-        <div class="flex  flex-row items-center justify-start relative cursor-pointer" onclick="window.location.href = '{{ route('data_ecomm_page') }}'">
-            @if($active=='Ecommerce_Data')
-                <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
-            @endif
-            <div class="w-full  @if($active == 'Ecommerce_Data') bg-slate-100 @endif hover:bg-slate-100 flex py-2 pl-12 lg:pl-[74px]">
-                <h1 class=" text-xs">Data Ecommerce</h1>
+        <a href="data_ecomm_page">
+            <div class="flex  flex-row items-center justify-start relative cursor-pointer" onclick="window.location.href = '{{ route('data_ecomm_page') }}'">
+                @if($active=='Ecommerce_Data')
+                    <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
+                @endif
+                <div class="w-full  @if($active == 'Ecommerce_Data') bg-slate-100 @endif hover:bg-slate-100 flex py-2 pl-12 lg:pl-[74px]">
+                    <h1 class=" text-xs">Data Ecommerce</h1>
+                </div>
             </div>
-        </div>
+        </a>
         <div class="flex flex-row items-center justify-start relative cursor-pointer" onclick="window.location.href = '{{ route('nonecommerce_admin') }}'">
             @if($active=='NonEcommerce_Data')
                 <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>

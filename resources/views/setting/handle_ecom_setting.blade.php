@@ -12,12 +12,51 @@
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="{{asset('css/iziToast.min.css')}}">
+    <script src="{{asset('js/iziToast.min.js')}}" type="text/javascript"></script>
 
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
     <title>Polaris Adv - Dashboard</title>
+    <style>
+        #data_ecomm {
+            border: none !important;
+        }
+        .spinner-3 {
+            width: 50px;
+            padding: 6px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #25b09b;
+            --_m:
+                conic-gradient(#0000 10%,#000),
+                linear-gradient(#000 0 0) content-box;
+            -webkit-mask: var(--_m);
+                    mask: var(--_m);
+            -webkit-mask-composite: source-out;
+                    mask-composite: subtract;
+            animation: s3 1s infinite linear;
+        }
+        .spinner-4 {
+            width: 20px;
+            padding: 2px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #25b09b;
+            --_m:
+                conic-gradient(#0000 10%,#000),
+                linear-gradient(#000 0 0) content-box;
+            -webkit-mask: var(--_m);
+                    mask: var(--_m);
+            -webkit-mask-composite: source-out;
+                    mask-composite: subtract;
+            animation: s3 1s infinite linear;
+        }
+        @keyframes s3 {to{transform: rotate(1turn)}}
+    </style>
+       <script src="{{asset('js/moment.min.js')}}" type="text/javascript"></script>
 </head>
 
-<body class=" bg-slate-50 relative font-nunito ">
+<body class=" bg-slate-100 relative font-nunito ">
 
     @include('setting.globals.sidebar_setting')
         <main id="main" class=" w-full">
@@ -40,16 +79,15 @@
                         </div>
                         <div class="flex items-center justify-between bg-white rounded p-4">
                             <div id="loader" class="flex flex-col items-center justify-center w-full gap-y-4">
-                                <svg class="w-10 h-10 animate-spin  right-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-                                    <path d="M12 6V2M12 22v-4M4.929 4.929l2.122 2.121M16.95 16.95l2.122 2.121M2 12h4M18 12h4M4.929 19.071l2.122-2.121M16.95 7.05l2.122-2.121" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                  </svg>
-                                loading data...
+
+                                  <div class="spinner-3"></div>
+                                  <h1 class="font-semibold text-teal-600">Loading Data</h1>
                             </div>
                             <div id="table_data_ecomm" class="hidden w-full overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400 text-xs">
-                                <table id="data_ecomm" class="cell-border w-full display nowrap text-left text-xs" style="width:100%">
+                                <table id="data_ecomm" class="cell-border w-full display nowrap text-left text-[0.8rem]" style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Aksi</th><th>No Urut</th><th>Tanggal Order</th><th>Tanggal Input</th>
+                                                <th>Aksi</th><th>No Urut</th><th>Tanggal Order</th><th>Keterangan Order</th>
                                                 <th>Nama File</th>
                                             </tr>
                                         </thead>
@@ -71,8 +109,9 @@
 
 
         </main>
-</body>
-<script src="{{ asset('js/header.js') }}"></script>
-<script src="{{ asset('js/handle_ecomm_setting.js') }}"></script>
+    </body>
+
+    <script src="{{ asset('js/header.js') }}"></script>
+    <script src="{{ asset('js/handle_ecomm_setting.js') }}"></script>
 
 </html>

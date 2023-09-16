@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'desainer' => \App\Http\Middleware\CheckDesainer::class,
         'setting' => \App\Http\Middleware\CheckSetting::class,
         'isLogin' => \App\Http\Middleware\isLogin::class,
+        'isAuthenticate' =>\App\Http\Middleware\isAuthenticate::class,
     ];
 }

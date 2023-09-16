@@ -23,13 +23,13 @@ class DeleteOrderEcomController extends Controller{
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-                $request->session()->flash('message', 'success');
-                return redirect()->route('input_ecomm_page');
+                $response = ['message' => 'ok'];
+                return response()->json($response);
 
 
             } else {
-                $request->session()->flash('message', 'fail');
-                return redirect()->route('input_ecomm_page');
+                $response = ['message' => 'fail'];
+                return response()->json($response);
 
             }
         } catch (ClientException $e) {

@@ -19,9 +19,27 @@
 
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
     <title>Polaris Adv - Dashboard</title>
+    <style>
+        .spinner-3 {
+        width: 50px;
+        padding: 8px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: #25b09b;
+        --_m:
+            conic-gradient(#0000 10%,#000),
+            linear-gradient(#000 0 0) content-box;
+        -webkit-mask: var(--_m);
+                mask: var(--_m);
+        -webkit-mask-composite: source-out;
+                mask-composite: subtract;
+        animation: s3 1s infinite linear;
+        }
+        @keyframes s3 {to{transform: rotate(1turn)}}
+    </style>
 </head>
 
-<body class=" bg-[#E9E9E9] relative font-nunito min-h-screen">
+<body class=" bg-slate-100 relative font-nunito min-h-screen">
 
     @include('desainer.globals.sidebar_desainer')
         <main id="main" class=" w-full relative">
@@ -48,15 +66,16 @@
                                         </div>
                                     </div>
 
-                                    <div class="bg-white rounded-lg p-8 text-sm flex flex-col">
+                                    <div class="bg-white/70 rounded-lg p-8 text-sm flex flex-col">
                                         <div id="loader" class="hidden flex-col items-center gap-y-4">
-                                            <svg class="w-10 h-10 animate-spin  right-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                                            {{-- <svg class="w-10 h-10 animate-spin  right-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
                                                 <path d="M12 6V2M12 22v-4M4.929 4.929l2.122 2.121M16.95 16.95l2.122 2.121M2 12h4M18 12h4M4.929 19.071l2.122-2.121M16.95 7.05l2.122-2.121" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                              </svg>
-                                            loading data...
+                                              </svg> --}}
+                                              <div class="spinner-3"></div>
+                                              <h1 class="font-semibold text-teal-600">Loading Data</h1>
                                         </div>
                                         <div id="table_data" class=" overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400">
-                                        <table id="data_ecomm" class="cell-border w-full display nowrap text-left text-xs" style="width:100%">
+                                        <table id="data_ecomm" class="cell-border w-full display nowrap text-left text-[0.8rem]" style="width:100%">
                                                 <thead>
                                                     <tr>
                                                         <th>setting</th><th>No Urut</th><th>Tanggal Order</th><th>Tanggal Input</th>

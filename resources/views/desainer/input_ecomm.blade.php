@@ -26,7 +26,7 @@
 
 </head>
 
-<body class=" bg-[#E9E9E9] relative font-nunito min-h-screen">
+<body class=" bg-slate-100 relative font-nunito min-h-screen">
     @if(session('message'))
         <script>
             var message =@json(session('message'));
@@ -244,7 +244,7 @@
                                     </div>
                                    <div class="bg-white rounded-lg p-8 text-sm">
                                         <div class=" overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400">
-                                        <table id="example" class="cell-border w-full display nowrap text-left text-xs" style="width:100%">
+                                        <table id="example" class="cell-border w-full display nowrap text-left text-[0.8rem]" style="width:100%">
                                                 <thead>
                                                     <tr>
                                                         <th>Aksi</th><th>No Urut</th><th>Tanggal Order</th><th>Tanggal Input</th><th>Akun</th><th>Pengorder</th><th>Penerima</th>

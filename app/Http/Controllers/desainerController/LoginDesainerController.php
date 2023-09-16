@@ -27,11 +27,13 @@ class LoginDesainerController extends Controller
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
+
+
                 $responseHeader = $response->getHeaders();
                 $responseBody = $response->getBody()->getContents();
                 $data = json_decode($responseBody);
-                $token = $responseHeader['auth-token'][0];
-                $request->session()->put('token', $token);
+                // $token = $responseHeader['auth-token'][0];
+                $request->session()->put('token', $data->token);
                 $request->session()->put('role',$data->status);
                 $request->session()->put('id',$data->id);
                 $request->session()->put('username',$data->username);

@@ -27,9 +27,13 @@ $(window).on("load", function() {
         btnContainer.classList.remove('flex');
         btnContainer.classList.add('hidden');
         var id = idToDelete;
-        fetch('/delete_order_ecom/'+id)
-            .then(response => {
-                if (!response.ok) {
+        $.ajax({
+            url:'delete_order_ecom/'+id,
+            type: 'GET',
+            dataType: 'json',
+            success:function(response){
+
+                if (!response.message == 'ok') {
                     throw new Error('Respon jaringan tidak berhasil');
                 }else{
                     btnContainer.classList.remove('hidden');
@@ -45,10 +49,9 @@ $(window).on("load", function() {
                         color: 'dark',
                     });
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+                console.log(response.message);
+            }
+        });
     }
     var idToDelete = "";
     var idRowToDelete = "";

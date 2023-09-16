@@ -37,14 +37,11 @@ class EcommHandleSetting extends Controller
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
-                $request->session()->flash('message', 'success');
-                return redirect()->route('handle_ecomm');
-
-
+                $response = ['message' => 'ok'];
+                return response()->json($response);
             } else {
-                $request->session()->flash('message', 'fail');
-                return redirect()->route('handle_ecomm');
-
+                $response = ['message' => 'fail'];
+                return response()->json($response);
             }
         } catch (ClientException $e) {
 

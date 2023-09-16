@@ -54,18 +54,17 @@ Route::POST('/save_ecomm',[PostInputEcomm::class,'store'])->name('save_ecomm');
 //form
 Route::PUT('/edit_ecomm/{id_akun}/{id_ecomm}',[EditEcommController::class,'store'])->name('edit_ecomm');
 
+Route::get('/monitor',[MonitorController::class,'index'])->middleware('isAuthenticate')->name('monitor');
+
 Route::middleware('desainer')->group(function(){
     Route::get('/dashborad_desainer',[DashboardDesainerController::class,'index'])->name('dashboard_desainer');
     Route::get('/input_ecommerce',[InputEcommController::class,'index'])->name('input_ecomm_page');
-    Route::get('/data_ecommerce',[DataEcommController::class,'index'])->name('data_ecomm_page');
+    Route::get('/data_ecomm_page',[DataEcommController::class,'index'])->name('data_ecomm_page');
     Route::get('/edit_ecom/{id_akun}/{id_ecom}',[prepareEditEcomController::class,'index'])->name('edit_ecom');
-
     //ajax
     Route::get('/delete_order_ecom/{id_ecomm}',[DeleteOrderEcomController::class,'deleteOrderEcom'])->name('delete_order_ecom');
-
     //ajax
     Route::get('/get_ecomm_by_date/{id_akun}/{date}',[DataEcommController::class,'getDataEcommByDate'])->name('get_ecomm_by_date');
-
 });
 
 Route::middleware('admin')->group(function(){
@@ -74,7 +73,6 @@ Route::middleware('admin')->group(function(){
     Route::get('/performa',[PerformaController::class,'index'])->name('performa');
     Route::get('/non_ecommerce',[NonEcommController::class,'index'])->name('nonecommerce_admin');
     Route::get('/bahan',[BahanController::class,'index'])->name('bahan_admin');
-    Route::get('/monitor',[MonitorController::class,'index'])->name('monitor');
     Route::get('/master_bahan',[MasterBahanController::class,'index'])->name('master_bahan');
     Route::get('/master_mesin',[MasterMesinController::class,'index'])->name('master_mesin');
 });
@@ -82,7 +80,8 @@ Route::middleware('admin')->group(function(){
 Route::middleware('setting')->group(function(){
     Route::get('/dashboard_setting',[DashboardSettingController::class,'index'])->name('dashboard_setting');
     Route::get('/handle_ecomm',[EcommHandleSetting::class,'index'])->name('handle_ecomm');
-
     //ajax
     Route::get('/get_ecomm_unapprove',[DataEcommSettingController::class,'getAllEcommUnapprove'])->name('get_ecomm_unpprove');
+    //ajax
+    Route::get('/handle_setting/{id_ecomm}',[EcommHandleSetting::class,'handleSetting'])->name('handle_setting');
 });

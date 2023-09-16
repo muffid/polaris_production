@@ -14,7 +14,7 @@
     <title>Polaris Adv - Dashboard</title>
 </head>
 
-<body class=" bg-slate-50 relative font-nunito ">
+<body class=" bg-slate-100 relative font-nunito ">
 
     @include('desainer.globals.sidebar_desainer')
         <main id="main" class=" w-full">
