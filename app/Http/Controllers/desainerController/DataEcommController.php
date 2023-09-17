@@ -29,7 +29,7 @@ class DataEcommController extends Controller
     private function getDataEcommBulanIni(){
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/ecommerce/orderEcomAllByBulanIni/".session('id');
+            $url = env('BASE_URL_API')."ecommerce/orderEcomAllByBulanIni/".session('id');
             $response = $client->get($url,[
                 'headers' => [
                     'auth-token' => session('token'),
@@ -45,7 +45,7 @@ class DataEcommController extends Controller
 
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/ecommerce/orderEcomAllByBulanIniFE/".session('id')."/".$date;
+            $url = env('BASE_URL_API')."ecommerce/orderEcomAllByBulanIniFE/".session('id')."/".$date;
             $response = $client->get($url,[
                 'headers' => [
                     'auth-token' => session('token'),

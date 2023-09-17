@@ -26,7 +26,7 @@ class DataEcommSettingController extends Controller
     public function getAllEcommUnapprove(){
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/ecommerce/orderEcomAllBelumSetting";
+            $url = env('BASE_URL_API')."ecommerce/orderEcomAllBelumSetting";
             $response = $client->get($url,[
                 'headers' => [
                     'auth-token' => session('token'),
@@ -37,9 +37,12 @@ class DataEcommSettingController extends Controller
            $result = [
             "data" => $res
         ];
+        // dd($res);
            return response()->json($res);
 
         } catch(ClientException $e){
+            $result=["message"=>"fail"];
+            return response()->json($result);
         }
 
         // $data = [

@@ -12,7 +12,7 @@ class DeleteOrderEcomController extends Controller{
 
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/ecommerce/deleteOrderEcom/unOkSettingByIdorder/".$id_ecomm;
+            $url = env('BASE_URL_API')."ecommerce/deleteOrderEcom/unOkSettingByIdorder/".$id_ecomm;
             $response = $client->delete($url, [
 
                 'headers' => [

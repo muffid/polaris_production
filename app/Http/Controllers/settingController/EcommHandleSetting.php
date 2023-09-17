@@ -26,7 +26,7 @@ class EcommHandleSetting extends Controller
 
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/ecommerce/settingOk/".$id_ecomm."/".session('id');
+            $url = env('BASE_URL_API')."ecommerce/settingOk/".$id_ecomm."/".session('id');
             $response = $client->delete($url, [
 
                 'headers' => [

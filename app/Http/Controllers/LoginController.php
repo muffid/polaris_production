@@ -27,7 +27,8 @@ class LoginController extends Controller{
     // dd($request->input('username')." ".$request->input('password'));
 
     try {
-        $url = "https://padvp2v123.jualdecal.com/api/login";
+        $url = env('BASE_URL_API')."api/login";
+        // dd($url);
         $data = [
             "username" => $request->input('username'),
             "password" => $request->input('password')

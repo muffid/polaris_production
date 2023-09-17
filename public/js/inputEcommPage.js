@@ -32,6 +32,7 @@ $(window).on("load", function() {
             type: 'GET',
             dataType: 'json',
             success:function(response){
+                console.log(response);
 
                 if (!response.message == 'ok') {
                     throw new Error('Respon jaringan tidak berhasil');

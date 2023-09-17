@@ -14,7 +14,7 @@ class prepareEditEcomController extends Controller
     private function getMaster(){
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/masterdata/AllMasterData";
+            $url = env('BASE_URL_API')."masterdata/AllMasterData";
             $response = $client->get($url,[
                 'headers' => [
                     'auth-token' => session('token'),
@@ -30,7 +30,7 @@ class prepareEditEcomController extends Controller
     $client = new Client();
     //https://padvp2v123.jualdecal.com/ecommerce/orderEcom/unOkSettingByIdEcom/:idEcom
     try{
-        $url = "https://padvp2v123.jualdecal.com/ecommerce/orderEcom/unOkSettingByIdEcom/".$id_ecom;
+        $url = env('BASE_URL_API')."ecommerce/orderEcom/unOkSettingByIdEcom/".$id_ecom;
         $response = $client->get($url, [
             'headers' => [
                 'auth-token' => session('token'),

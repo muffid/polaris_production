@@ -86,7 +86,7 @@ class PostInputEcomm extends Controller
 
         $client = new Client();
         try {
-            $url = "https://padvp2v123.jualdecal.com/ecommerce/newEcom";
+            $url = env('BASE_URL_API')."ecommerce/newEcom";
             $data = [
                "id_order_ecom" => $idEcomm,
                "id_akun" => session('id'),
@@ -159,7 +159,7 @@ class PostInputEcomm extends Controller
 
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/ecommerce/orderEcom/unOkSettingByIdEcom/".$idEcom;
+            $url = env('BASE_URL_API')."ecommerce/orderEcom/unOkSettingByIdEcom/".$idEcom;
             $response = $client->get($url,[
                 'headers' => [
                     'auth-token' => session('token'),

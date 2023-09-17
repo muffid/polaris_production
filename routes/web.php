@@ -30,6 +30,8 @@ use App\Http\Controllers\settingController\LoginSettingController;
 use App\Http\Controllers\settingController\DashboardSettingController;
 use App\Http\Controllers\settingController\EcommHandleSetting;
 use App\Http\Controllers\settingController\DataEcommSettingController;
+use App\Http\Controllers\settingController\OnProsesSettingController;
+
 
 Route::get('/', function () {return view('login');})->middleware('isLogin')->name('login');
 Route::get('/logout',[LogoutController::class,'index'])->name('logout');
@@ -68,11 +70,11 @@ Route::middleware('desainer')->group(function(){
 });
 
 Route::middleware('admin')->group(function(){
-    Route::get('/dashborad_adm',[DashboardAdmController::class,'index'])->name('dashboard_admin');
-    Route::get('/ecommerce',[EcommerceAdmController::class,'index'])->name('ecommerce_admin');
+    Route::get('/dashboard_admin',[DashboardAdmController::class,'index'])->name('dashboard_admin');
+    Route::get('/ecommerce_admin',[EcommerceAdmController::class,'index'])->name('ecommerce_admin');
     Route::get('/performa',[PerformaController::class,'index'])->name('performa');
-    Route::get('/non_ecommerce',[NonEcommController::class,'index'])->name('nonecommerce_admin');
-    Route::get('/bahan',[BahanController::class,'index'])->name('bahan_admin');
+    Route::get('/nonecommerce_admin',[NonEcommController::class,'index'])->name('nonecommerce_admin');
+    Route::get('/bahan_admin',[BahanController::class,'index'])->name('bahan_admin');
     Route::get('/master_bahan',[MasterBahanController::class,'index'])->name('master_bahan');
     Route::get('/master_mesin',[MasterMesinController::class,'index'])->name('master_mesin');
 });
@@ -84,4 +86,6 @@ Route::middleware('setting')->group(function(){
     Route::get('/get_ecomm_unapprove',[DataEcommSettingController::class,'getAllEcommUnapprove'])->name('get_ecomm_unpprove');
     //ajax
     Route::get('/handle_setting/{id_ecomm}',[EcommHandleSetting::class,'handleSetting'])->name('handle_setting');
+
+    Route::get('/on_proses_setting',[OnProsesSettingController::class,'index'])->name('on_proses_setting');
 });

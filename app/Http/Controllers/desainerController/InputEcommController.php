@@ -13,7 +13,7 @@ class InputEcommController extends Controller
     private function getOrderUnapprove($id_akun){
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/ecommerce/orderEcomAllByIdAkun/".$id_akun;
+            $url = env('BASE_URL_API')."ecommerce/orderEcomAllByIdAkun/".$id_akun;
             $response = $client->get($url,[
                 'headers' => [
                     'auth-token' => session('token'),
@@ -29,7 +29,7 @@ class InputEcommController extends Controller
     private function getMaster(){
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/masterdata/AllMasterData";
+            $url = env('BASE_URL_API')."masterdata/AllMasterData";
             $response = $client->get($url,[
                 'headers' => [
                     'auth-token' => session('token'),

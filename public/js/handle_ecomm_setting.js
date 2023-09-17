@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     callAjaxDataEcomm();
-    setInterval(callAjaxDataEcomm, 60000);
+    setInterval(callAjaxDataEcomm, 120000);
 });
 
 var tableDataEcom = new DataTable('#data_ecomm',{
@@ -18,6 +18,7 @@ function callAjaxDataEcomm(){
         type: 'GET',
         dataType: 'json',
         success:function(response){
+            console.log(response);
             tableDataEcom.clear().draw();
             loader.removeClass("flex");
             loader.addClass("hidden");
@@ -65,7 +66,6 @@ function callAjaxDataEcomm(){
                         timeStamp = "lebih dari 3H yang lalu"
                 }
 
-
                 fileName = jsonData[i]['no_urut']+'-'+ jsonData[i]['nama_akun_ecom']+'-'+ jsonData[i]['nama_akun_order']+
                             '-'+ jsonData[i]['nama_penerima']+'-'+ jsonData[i]['sku']+'-'+jsonData[i]['warna']+'-'+jsonData[i]['panjang_bahan']+
                             '-'+jsonData[i]['nama_ekspedisi']+'-'+jsonData[i]['order_time'];
@@ -92,9 +92,19 @@ function handleSetting(id_ecomm){
         btn.remove()
         var container = $('.container_'+id_ecomm)
         container.append(divElement)
-        setTimeout(function() {
-            handleResponse(id_ecomm);
-        }, 4000);
+
+        // setTimeout(function() {
+        //     handleResponse(id_ecomm);
+        // }, 4000);
+
+        // $.ajax({
+        //     url:'get_ecomm_unapprove',
+        //     type: 'GET',
+        //     dataType: 'json',
+        //     success:function(response){
+
+        //     }
+        // });
 
 }
 

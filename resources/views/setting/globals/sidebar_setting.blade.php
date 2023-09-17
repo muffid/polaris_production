@@ -57,16 +57,18 @@
                 <h1 class=" text-xs ">Non Ecommerce</h1>
             </div>
         </div>
-        <div class="flex flex-row items-center justify-start relative cursor-pointer">
-            @if($active=='OnProsesSetting')
-                <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
-            @endif
 
-            <div class="w-full @if($active == 'OnProsesSetting') bg-slate-100 @endif hover:bg-slate-100 flex py-2 pl-12 lg:pl-[74px]">
-                <h1 class=" text-xs ">On Proses</h1>
+        <a href="on_proses_setting">
+            <div class="flex flex-row items-center justify-start relative cursor-pointer">
+                @if($active=='OnProsesSetting')
+                    <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
+                @endif
+
+                <div class="w-full @if($active == 'OnProsesSetting') bg-slate-100 @endif hover:bg-slate-100 flex py-2 pl-12 lg:pl-[74px]">
+                    <h1 class=" text-xs ">On Proses</h1>
+                </div>
             </div>
-        </div>
-
+        </a>
 
 
 

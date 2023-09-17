@@ -8,12 +8,12 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 
 class GetMasterDataController extends Controller{
-  
+
 
     public function getDataMesin(){
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/masterData/mesinCetak";
+            $url = env('BASE_URL_API')."masterData/mesinCetak";
             $response = $client->get($url, [
                 'headers' => [
                     'auth-token' => session('token'),
@@ -22,7 +22,7 @@ class GetMasterDataController extends Controller{
             return ($response->getBody()->getContents());
 
         } catch (ClientException $e) {
-            
+
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
             return "error fetching data mesin";
@@ -33,7 +33,7 @@ class GetMasterDataController extends Controller{
     public function getDataBahan(){
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/masterData/bahanCetak";
+            $url = env('BASE_URL_API')."masterData/bahanCetak";
             $response = $client->get($url, [
                 'headers' => [
                     'auth-token' => session('token'),
@@ -42,7 +42,7 @@ class GetMasterDataController extends Controller{
             return ($response->getBody()->getContents());
 
         } catch (ClientException $e) {
-            
+
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
             return "error fetching data mesin";
@@ -53,7 +53,7 @@ class GetMasterDataController extends Controller{
     public function getDataAkunEcom(){
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/masterData/akun_ecom";
+            $url = env('BASE_URL_API')."masterData/akun_ecom";
             $response = $client->get($url, [
                 'headers' => [
                     'auth-token' => session('token'),
@@ -62,7 +62,7 @@ class GetMasterDataController extends Controller{
             return ($response->getBody()->getContents());
 
         } catch (ClientException $e) {
-            
+
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
             return "error fetching data mesin";
@@ -73,7 +73,7 @@ class GetMasterDataController extends Controller{
     public function getDataEkspedisi(){
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/masterData/ekspedisi";
+            $url = env('BASE_URL_API')."masterData/ekspedisi";
             $response = $client->get($url, [
                 'headers' => [
                     'auth-token' => session('token'),
@@ -82,7 +82,7 @@ class GetMasterDataController extends Controller{
             return ($response->getBody()->getContents());
 
         } catch (ClientException $e) {
-            
+
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
             return "error fetching data mesin";
@@ -93,7 +93,7 @@ class GetMasterDataController extends Controller{
     public function getDataLaminasi(){
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/masterData/laminasi";
+            $url = env('BASE_URL_API')."masterData/laminasi";
             $response = $client->get($url, [
                 'headers' => [
                     'auth-token' => session('token'),
@@ -102,7 +102,7 @@ class GetMasterDataController extends Controller{
             return ($response->getBody()->getContents());
 
         } catch (ClientException $e) {
-            
+
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
             return "error fetching data mesin";

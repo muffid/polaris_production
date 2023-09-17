@@ -34,7 +34,7 @@ class EditEcommController extends Controller{
 
 
        try {
-        $url = "https://padvp2v123.jualdecal.com/ecommerce/editOrderEcom/unOkSettingByIdorder/".$id_ecomm;
+        $url = env('BASE_URL_API')."ecommerce/editOrderEcom/unOkSettingByIdorder/".$id_ecomm;
         $data = [
            "id_order_ecom" => $id_ecomm,
            "id_akun" => session('id'),
@@ -109,7 +109,7 @@ class EditEcommController extends Controller{
 
         $client = new Client();
         try{
-            $url = "https://padvp2v123.jualdecal.com/ecommerce/orderEcom/unOkSettingByIdEcom/".$idEcom;
+            $url = env('BASE_URL_API')."ecommerce/orderEcom/unOkSettingByIdEcom/".$idEcom;
             $response = $client->get($url,[
                 'headers' => [
                     'auth-token' => session('token'),

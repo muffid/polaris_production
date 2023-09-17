@@ -14,7 +14,7 @@ class LoginDesainerController extends Controller
 
         $client = new Client();
         try {
-            $url = "https://padvp2v123.jualdecal.com/api/login";
+            $url = env('BASE_URL_API')."api/login";
             $data = [
                 "username" => $request->input('username'),
                 "password" => $request->input('password')
@@ -33,6 +33,7 @@ class LoginDesainerController extends Controller
                 $responseBody = $response->getBody()->getContents();
                 $data = json_decode($responseBody);
                 // $token = $responseHeader['auth-token'][0];
+
                 $request->session()->put('token', $data->token);
                 $request->session()->put('role',$data->status);
                 $request->session()->put('id',$data->id);
