@@ -27,7 +27,7 @@ class EcommHandleSetting extends Controller
         $client = new Client();
         try{
             $url = env('BASE_URL_API')."ecommerce/settingOk/".$id_ecomm."/".session('id');
-            $response = $client->delete($url, [
+            $response = $client->put($url, [
 
                 'headers' => [
                     'auth-token' => session('token'),
@@ -39,7 +39,10 @@ class EcommHandleSetting extends Controller
             if ($statusCode === 200) {
                 $response = ['message' => 'ok'];
                 return response()->json($response);
-            } else {
+            } else if($statusCode === 220) {
+                $response = ['message' => 'booked'];
+                return response()->json($response);
+            }else{
                 $response = ['message' => 'fail'];
                 return response()->json($response);
             }

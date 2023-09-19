@@ -87,7 +87,7 @@
                             <div class="flex flex-col p-6 text-center w-full gap-y-4 mt-14">
                                 <div class="flex flex-col  text-center w-full gap-y-4">
                                     <div class="flex flex-row items-center gap-x-4 mt-2">
-                                        <img src="{{ asset('img/performance.png') }}" alt="logo" class=" w-8 ">
+                                        <img src="{{ asset('img/online-shop.png') }}" alt="logo" class=" w-8 ">
                                         <div class="flex flex-col p-2 items-start ">
                                             <h1 class="text-lg font-bold text-emerald-900">Input Order Ecommerce</h1>
                                             <p class="text-sm text-slate-400">Masukan Data Order </p>
@@ -236,7 +236,7 @@
                                     </div>
 
                                     <div class="flex flex-row items-center gap-x-4 mt-2">
-                                        <img src="{{ asset('img/performance.png') }}" alt="logo" class=" w-8 ">
+                                        <img src="{{ asset('img/evaluation.png') }}" alt="logo" class=" w-8 ">
                                         <div class="flex flex-col p-2 items-start ">
                                             <h1 class="text-lg font-bold text-emerald-900">Order Ecom Belum Disetting</h1>
                                             <p class="text-sm text-slate-400">Order Ecom Baru Baru Ini</p>
@@ -268,8 +268,8 @@
                                                                 </div>
                                                             </td>
                                                             <td>{{$order_unapprove[$i]->no_urut}}</td>
-                                                            <td>{{$order_unapprove[$i]->order_time}}</td>
-                                                            <td>{{$order_unapprove[$i]->time}}</td>
+                                                            <td>{{$order_unapprove[$i]->tanggal_order_formatted}}</td>
+                                                            <td>{{$order_unapprove[$i]->tanggal_input_formatted}}</td>
                                                             <td>{{$order_unapprove[$i]->nama_akun_ecom}}</td>
                                                             <td>{{$order_unapprove[$i]->nama_akun_order}}</td>
                                                             <td>{{$order_unapprove[$i]->nama_penerima}}</td>

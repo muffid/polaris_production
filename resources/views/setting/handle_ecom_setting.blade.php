@@ -110,8 +110,8 @@
 
         </main>
     </body>
-
-    <script src="{{ asset('js/header.js') }}"></script>
     <script src="{{ asset('js/handle_ecomm_setting.js') }}"></script>
+    <script src="{{ asset('js/header.js') }}"></script>
+
 
 </html>

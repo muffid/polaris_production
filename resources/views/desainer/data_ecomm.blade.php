@@ -52,7 +52,7 @@
                             <div class="flex flex-col p-6 text-center w-full gap-y-4 mt-14">
                                 <div class="flex flex-col  text-center w-full gap-y-4">
                                     <div class="flex flex-row items-center gap-x-4 mt-2">
-                                        <img src="{{ asset('img/performance.png') }}" alt="logo" class=" w-8 ">
+                                        <img src="{{ asset('img/online-shop.png') }}" alt="logo" class=" w-8 ">
                                         <div class="flex flex-col p-2 items-start ">
                                             <h1 class="text-lg font-bold text-emerald-900">Data Order Ecommerce</h1>
                                             <p class="text-sm text-slate-400">Data inputan anda </p>
@@ -78,7 +78,7 @@
                                         <table id="data_ecomm" class="cell-border w-full display nowrap text-left text-[0.8rem]" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>setting</th><th>No Urut</th><th>Tanggal Order</th><th>Tanggal Input</th>
+                                                        <th>Status Setting</th><th>No Urut</th><th>Tanggal Order</th><th>Tanggal Input</th>
                                                         <th>Akun</th><th>Pengorder</th><th>Penerima</th>
                                                         <th>No Order</th><th>SKU</th><th>Ekspedisi</th><th>Warna</th><th>Jumlah</th><th>Bahan</th>
                                                         <th>Laminasi</th><th>Mesin</th><th>Dimensi</th>
@@ -88,13 +88,14 @@
                                                     @for($i=0; $i<sizeof($data_ecomm); $i++)
                                                     <tr data-id="tableRow{{$i}}" class="">
                                                         <td class="p-1">
-                                                            <div class="rounded-full py-1 px-2 {{$data_ecomm[$i]->status == 'Belum' ? ' bg-orange-200 text-orange-700' : ($data_ecomm[$i]->status == 'Proses' ? ' bg-blue-200 text-blue-900' : 'bg-green-200 text-green-900') }}">
-                                                            {{$data_ecomm[$i]->status}}
+                                                            <div class="rounded-full py-1 px-2 {{$data_ecomm[$i]->status == 'Belum Setting' ? '  text-orange-700' : ($data_ecomm[$i]->status == 'Proses Setting' ? '  text-blue-900' : ' text-green-900') }}">
+                                                                {!!$data_ecomm[$i]->status == 'Belum Setting' ? '<i class="bi bi-exclamation-circle"></i>'  : ($data_ecomm[$i]->status == 'Proses Setting' ? '<i class="bi bi-hourglass-split"></i>' : ' text-green-900') !!}
+                                                                {{$data_ecomm[$i]->status}}
                                                             </div>
                                                         </td>
                                                         <td>{{$data_ecomm[$i]->no_urut}}</td>
-                                                        <td>{{$data_ecomm[$i]->order_time}}</td>
-                                                        <td>{{$data_ecomm[$i]->time}}</td>
+                                                        <td>{{$data_ecomm[$i]->tanggal_order_formatted}}</td>
+                                                        <td>{{$data_ecomm[$i]->tanggal_input_formatted}}</td>
                                                         <td>{{$data_ecomm[$i]->nama_akun_ecom}}</td>
                                                         <td>{{$data_ecomm[$i]->nama_akun_order}}</td>
                                                         <td>{{$data_ecomm[$i]->nama_penerima}}</td>

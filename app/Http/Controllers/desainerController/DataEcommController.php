@@ -12,6 +12,7 @@ class DataEcommController extends Controller
     public function index(){
 
         $data_ecomm = json_decode($this->getDataEcommBulanIni());
+
         $data = [
             'data_ecomm' => $data_ecomm,
             'active' => 'Ecommerce_Data',

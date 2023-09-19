@@ -1,14 +1,19 @@
+var tableDataEcom = new DataTable('#data_ecomm',{
+    "ordering" :false,
+});
+
 
 document.addEventListener("DOMContentLoaded", function () {
-    callAjaxDataEcomm();
-    setInterval(callAjaxDataEcomm, 120000);
+
+      callAjaxDataEcomm();
+
 });
 
-var tableDataEcom = new DataTable('#data_ecomm',{
-"ordering" :false,
-});
+setInterval(callAjaxDataEcomm,60000);
+
 
 function callAjaxDataEcomm(){
+
     var loader = $("#loader");
     var table = $("#table_data_ecomm");
     var fileName = '';
@@ -93,24 +98,47 @@ function handleSetting(id_ecomm){
         var container = $('.container_'+id_ecomm)
         container.append(divElement)
 
-        // setTimeout(function() {
-        //     handleResponse(id_ecomm);
-        // }, 4000);
 
-        // $.ajax({
-        //     url:'get_ecomm_unapprove',
-        //     type: 'GET',
-        //     dataType: 'json',
-        //     success:function(response){
+        $.ajax({
+            url:'handle_setting/'+id_ecomm,
+            type: 'GET',
+            dataType: 'json',
+            success:function(response){
+                if(response.message === "ok"){
+                    updateTable(id_ecomm);
+                    iziToast.success({
+                        title: 'Berhasil',
+                        message: 'Tugas ditambahkan',
+                        position: 'topRight',
+                        theme: 'light',
+                        color: 'dark',
+                    });
+                }else if(response.message === "booked"){
+                    updateTable(id_ecomm);
+                    iziToast.warning({
+                        title: 'Invalid',
+                        message: 'Tugas sudah disetting ',
+                        position: 'topRight',
+                        theme: 'light',
+                        color: 'dark',
+                    });
+                }else{
+                    iziToast.error({
+                        title: 'Gagal',
+                        message: 'Terjadi Kesalahan',
+                        position: 'topRight',
+                        theme: 'light',
+                        color: 'dark',
+                    });
+                }
 
-        //     }
-        // });
+            }
+        });
 
 }
 
-function handleResponse(className){
+function updateTable(className){
 
-    console.log(className);
     tableDataEcom.rows().every(function() {
         var row = this.node();
         var tdWithToDelete = $(row).find('td:has(div.container_'+className+')');
@@ -119,11 +147,5 @@ function handleResponse(className){
         }
     });
     tableDataEcom.draw();
-    iziToast.success({
-        title: 'Berhasil',
-        message: 'Tugas ditambahkan',
-        position: 'topRight',
-        theme: 'light',
-        color: 'dark',
-    });
+
 }
