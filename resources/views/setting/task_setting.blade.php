@@ -41,22 +41,22 @@
                         </div>
                         <div class="flex w-full items-center justify-between bg-white rounded p-4">
 
-                            <div id="loader" class="hidden flex-col items-center justify-center w-full gap-y-4">
-
+                            <div id="loader" class="flex flex-col items-center justify-center w-full gap-y-4">
                                 <div class="spinner-3"></div>
                                 <h1 class="font-semibold text-teal-600">Loading Data</h1>
-                          </div>
-                          <div id="table_data_ecomm" class="hidden w-full overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400 text-xs py-4">
-                            <table id="table_task_ecomm" class="cell-border w-full display nowrap text-left text-[0.8rem]" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Aksi</th><th>No Urut</th><th>Tanggal Order</th><th>Keterangan Order</th>
-                                            <th>Nama File</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            </div>
 
-                                    </tbody>
+                            <div id="table_data_ecomm" class="hidden w-full overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400 text-xs py-4">
+                                <table id="table_task_ecomm" class="cell-border w-full display nowrap text-left text-[0.8rem]" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Aksi</th><th>No Urut</th><th>Tanggal Order</th><th>Keterangan Order</th>
+                                                <th>Nama File</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
                                 </table>
                             </div>
                         </div>
@@ -141,7 +141,7 @@
                             '-'+jsonData[i]['nama_ekspedisi']+'-'+jsonData[i]['order_time'];
 
                 tableDataEcom.row.add([
-                    '<div  class="container_'+ jsonData[i].id_order_ecom+' flex items-center justify-center gap-x-2"><div class="'+ jsonData[i].id_order_ecom+' flex items-center justify-center  rounded-sm px-2 py-2 bg-blue-200 text-blue-700 text-sm cursor-pointer text-center" onclick=handleFinnishSetting("'+ jsonData[i].id_order_ecom+'")>tandai selesai</div><div class="'+ jsonData[i].id_order_ecom+' flex items-center justify-center  rounded-sm px-2 py-2 bg-orange-200 text-orange-700 text-sm cursor-pointer text-center" onclick=handleFinnishSetting("'+ jsonData[i].id_order_ecom+'")>batalkan</div></div>',
+                    '<div  class="container_'+ jsonData[i].id_order_ecom+' flex items-center justify-center gap-x-2"><div class="'+ jsonData[i].id_order_ecom+' flex items-center justify-center  rounded-sm px-2 py-2 bg-blue-200 text-blue-700 text-sm cursor-pointer text-center" onclick=handleFinnishSetting("'+ jsonData[i].id_order_ecom+'")>tandai selesai</div><div class="'+ jsonData[i].id_order_ecom+' flex items-center justify-center  rounded-sm px-2 py-2 bg-orange-200 text-orange-700 text-sm cursor-pointer text-center" onclick=handleCancelSetting("'+ jsonData[i].id_order_ecom+'")>batalkan</div></div>',
                     jsonData[i].no_urut,
                     jsonData[i].order_time,
                     timeStamp,
@@ -154,5 +154,65 @@
 
         }
 
+        function handleCancelSetting(id_ecomm){
+            var btn = $('.'+id_ecomm);
+            var divElement = $('<div>', {
+                class: 'spinner-4',
+            });
+            btn.remove()
+            var container = $('.container_'+id_ecomm)
+            container.append(divElement)
+
+
+            $.ajax({
+                url:'cancel_setting/'+id_ecomm,
+                type: 'GET',
+                dataType: 'json',
+                success:function(response){
+                    if(response.message === "ok"){
+                        updateTable(id_ecomm);
+                        iziToast.success({
+                            title: 'Berhasil',
+                            message: 'Tugas ditambahkan',
+                            position: 'topRight',
+                            theme: 'light',
+                            color: 'dark',
+                        });
+                    }else if(response.message === "booked"){
+                        updateTable(id_ecomm);
+                        iziToast.warning({
+                            title: 'Invalid',
+                            message: 'Tugas sudah disetting ',
+                            position: 'topRight',
+                            theme: 'light',
+                            color: 'dark',
+                        });
+                    }else{
+                        iziToast.error({
+                            title: 'Gagal',
+                            message: 'Terjadi Kesalahan',
+                            position: 'topRight',
+                            theme: 'light',
+                            color: 'dark',
+                        });
+                    }
+
+                }
+            });
+        }
+
+
+        function updateTable(className){
+
+            tableDataEcom.rows().every(function() {
+                var row = this.node();
+                var tdWithToDelete = $(row).find('td:has(div.container_'+className+')');
+                if (tdWithToDelete.length > 0) {
+                    this.remove();
+                }
+            });
+             tableDataEcom.draw();
+
+        }
     </script>
 </html>

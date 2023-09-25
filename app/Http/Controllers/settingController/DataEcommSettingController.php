@@ -44,12 +44,6 @@ class DataEcommSettingController extends Controller
             $result=["message"=>"fail"];
             return response()->json($result);
         }
-
-        // $data = [
-        //     "id_akun" => $id_akun,
-        //     "id_ecomm" => $date,
-        // ];
-        // return response()->json($data);
     }
 
     public function getEcommOnProses($id_akun){
@@ -70,6 +64,47 @@ class DataEcommSettingController extends Controller
          ];
          // dd($res);
             return response()->json($res);
+        } catch (ClientException $e) {
+
+            $response = $e->getResponse();
+            $statusCode = $response->getStatusCode();
+            dd($response);
+            if ($statusCode === 401) {
+                return $e;
+            } else {
+                return $e;
+            }
+        } catch (RequestException $e) {
+            $response = $e->getResponse();
+            $statusCode = $response->getStatusCode();
+            dd($statusCode);
+        }
+    }
+
+    public function cancelSetting($id_ecomm){
+
+        $client = new Client();
+        try{
+            $url = env('BASE_URL_API')."ecommerce/batalSettingProses/".$id_ecomm."/".session('id');
+            $response = $client->put($url, [
+
+                'headers' => [
+                    'auth-token' => session('token'),
+                ],
+            ]);
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode === 200) {
+                $response = ['message' => 'ok'];
+                return response()->json($response);
+            } else if($statusCode === 220) {
+                $response = ['message' => 'booked'];
+                return response()->json($response);
+            }else{
+                $response = ['message' => 'fail'];
+                return response()->json($response);
+            }
         } catch (ClientException $e) {
 
             $response = $e->getResponse();

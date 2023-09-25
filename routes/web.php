@@ -86,9 +86,10 @@ Route::middleware('setting')->group(function(){
     Route::get('/get_ecomm_unapprove',[DataEcommSettingController::class,'getAllEcommUnapprove'])->name('get_ecomm_unapprove');
     //ajax
     Route::get('/handle_setting/{id_ecomm}',[EcommHandleSetting::class,'handleSetting'])->name('handle_setting');
-
     //ajax
     Route::get('/get_ecomm_on_proses/{id_akun}',[DataEcommSettingController::class,'getEcommOnProses'])->name('get_ecomm_on_proses');
+    //ajax
+    Route::get('/cancel_setting/{id_ecomm}',[DataEcommSettingController::class,'cancelSetting'])->name('cancel_setting');
 
     Route::get('/on_proses_setting',[OnProsesSettingController::class,'index'])->name('on_proses_setting');
 });
