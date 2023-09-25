@@ -52,6 +52,41 @@ class DataEcommSettingController extends Controller
         // return response()->json($data);
     }
 
+    public function getEcommOnProses($id_akun){
+        $client = new Client();
+        try{
+            $url = env('BASE_URL_API')."ecommerce/AllProsesSetting/".session('id');
+            $response = $client->get($url, [
+
+                'headers' => [
+                    'auth-token' => session('token'),
+                ],
+            ]);
+
+            $res = $response->getBody()->getContents();
+
+            $result = [
+             "data" => $res
+         ];
+         // dd($res);
+            return response()->json($res);
+        } catch (ClientException $e) {
+
+            $response = $e->getResponse();
+            $statusCode = $response->getStatusCode();
+            dd($response);
+            if ($statusCode === 401) {
+                return $e;
+            } else {
+                return $e;
+            }
+        } catch (RequestException $e) {
+            $response = $e->getResponse();
+            $statusCode = $response->getStatusCode();
+            dd($statusCode);
+        }
+    }
+
 
 
 }

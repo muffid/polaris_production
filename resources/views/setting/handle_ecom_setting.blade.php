@@ -5,54 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ asset('css/utils.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="{{asset('css/iziToast.min.css')}}">
     <script src="{{asset('js/iziToast.min.js')}}" type="text/javascript"></script>
-
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
     <title>Polaris Adv - Dashboard</title>
-    <style>
-        #data_ecomm {
-            border: none !important;
-        }
-        .spinner-3 {
-            width: 50px;
-            padding: 6px;
-            aspect-ratio: 1;
-            border-radius: 50%;
-            background: #25b09b;
-            --_m:
-                conic-gradient(#0000 10%,#000),
-                linear-gradient(#000 0 0) content-box;
-            -webkit-mask: var(--_m);
-                    mask: var(--_m);
-            -webkit-mask-composite: source-out;
-                    mask-composite: subtract;
-            animation: s3 1s infinite linear;
-        }
-        .spinner-4 {
-            width: 20px;
-            padding: 2px;
-            aspect-ratio: 1;
-            border-radius: 50%;
-            background: #25b09b;
-            --_m:
-                conic-gradient(#0000 10%,#000),
-                linear-gradient(#000 0 0) content-box;
-            -webkit-mask: var(--_m);
-                    mask: var(--_m);
-            -webkit-mask-composite: source-out;
-                    mask-composite: subtract;
-            animation: s3 1s infinite linear;
-        }
-        @keyframes s3 {to{transform: rotate(1turn)}}
-    </style>
        <script src="{{asset('js/moment.min.js')}}" type="text/javascript"></script>
 </head>
 
@@ -110,8 +73,8 @@
 
         </main>
     </body>
-    <script src="{{ asset('js/handle_ecomm_setting.js') }}"></script>
     <script src="{{ asset('js/header.js') }}"></script>
+    <script src="{{ asset('js/handle_ecomm_setting.js') }}"></script>
 
 
 </html>

@@ -83,9 +83,14 @@ Route::middleware('setting')->group(function(){
     Route::get('/dashboard_setting',[DashboardSettingController::class,'index'])->name('dashboard_setting');
     Route::get('/handle_ecomm',[EcommHandleSetting::class,'index'])->name('handle_ecomm');
     //ajax
-    Route::get('/get_ecomm_unapprove',[DataEcommSettingController::class,'getAllEcommUnapprove'])->name('get_ecomm_unpprove');
+    Route::get('/get_ecomm_unapprove',[DataEcommSettingController::class,'getAllEcommUnapprove'])->name('get_ecomm_unapprove');
     //ajax
     Route::get('/handle_setting/{id_ecomm}',[EcommHandleSetting::class,'handleSetting'])->name('handle_setting');
 
+    //ajax
+    Route::get('/get_ecomm_on_proses/{id_akun}',[DataEcommSettingController::class,'getEcommOnProses'])->name('get_ecomm_on_proses');
+
     Route::get('/on_proses_setting',[OnProsesSettingController::class,'index'])->name('on_proses_setting');
 });
+
+

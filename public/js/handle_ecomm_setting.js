@@ -1,5 +1,6 @@
 var tableDataEcom = new DataTable('#data_ecomm',{
     "ordering" :false,
+
 });
 
 
@@ -23,13 +24,13 @@ function callAjaxDataEcomm(){
         type: 'GET',
         dataType: 'json',
         success:function(response){
-            console.log(response);
+            // console.log(response);
             tableDataEcom.clear().draw();
             loader.removeClass("flex");
             loader.addClass("hidden");
             table.removeClass("hidden");
             var jsonData = JSON.parse(response);
-            console.log(jsonData);
+            // console.log(jsonData);
             var timeStamp = "beberaapa saat yang lalu";
 
             for (var i = 0; i < jsonData.length; i++) {
@@ -76,7 +77,7 @@ function callAjaxDataEcomm(){
                             '-'+jsonData[i]['nama_ekspedisi']+'-'+jsonData[i]['order_time'];
 
                 tableDataEcom.row.add([
-                   '<div  class="container_'+ jsonData[i].id_order_ecom+' flex items-center justify-center"><div class="'+ jsonData[i].id_order_ecom+' flex items-center justify-center w-20 rounded-sm px-2 py-2 bg-green-200 text-green-700 text-[1.1rem] cursor-pointer text-center" onclick=handleSetting("'+ jsonData[i].id_order_ecom+'")>Kerjakan</div></div>',
+                   '<div  class="container_'+ jsonData[i].id_order_ecom+' flex items-center justify-center"><div class="'+ jsonData[i].id_order_ecom+' flex items-center justify-center w-20 rounded-sm px-2 py-2 bg-green-200 text-green-700 text-sm cursor-pointer text-center" onclick=handleSetting("'+ jsonData[i].id_order_ecom+'")>Kerjakan</div></div>',
                     jsonData[i].no_urut,
                     jsonData[i].order_time,
                     timeStamp,

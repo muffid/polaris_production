@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ asset('css/utils.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -16,46 +17,9 @@
     <script src="{{asset('js/iziToast.min.js')}}" type="text/javascript"></script>
 
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
-    <title>Polaris Adv - Dashboard</title>
+    <title>Polaris Adv - On Proses Setting</title>
 
     <script src="{{asset('js/moment.min.js')}}" type="text/javascript"></script>
-
-    <style>
-        #data_ecomm {
-            border: none !important;
-        }
-        .spinner-3 {
-            width: 50px;
-            padding: 6px;
-            aspect-ratio: 1;
-            border-radius: 50%;
-            background: #25b09b;
-            --_m:
-                conic-gradient(#0000 10%,#000),
-                linear-gradient(#000 0 0) content-box;
-            -webkit-mask: var(--_m);
-                    mask: var(--_m);
-            -webkit-mask-composite: source-out;
-                    mask-composite: subtract;
-            animation: s3 1s infinite linear;
-        }
-        .spinner-4 {
-            width: 20px;
-            padding: 2px;
-            aspect-ratio: 1;
-            border-radius: 50%;
-            background: #25b09b;
-            --_m:
-                conic-gradient(#0000 10%,#000),
-                linear-gradient(#000 0 0) content-box;
-            -webkit-mask: var(--_m);
-                    mask: var(--_m);
-            -webkit-mask-composite: source-out;
-                    mask-composite: subtract;
-            animation: s3 1s infinite linear;
-        }
-        @keyframes s3 {to{transform: rotate(1turn)}}
-    </style>
 </head>
 
 <body class=" bg-slate-100 relative font-nunito ">
@@ -82,19 +46,19 @@
                                 <div class="spinner-3"></div>
                                 <h1 class="font-semibold text-teal-600">Loading Data</h1>
                           </div>
-                          <div id="table_task_container" class=" w-full overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400 text-xs">
-                              <table id="table_task_ecomm" class="cell-border w-full display nowrap text-left text-[0.8rem]" style="width:100%">
-                                      <thead>
-                                          <tr>
-                                              <th>Aksi</th><th>No Urut</th><th>Durasi</th>
-                                              <th>Nama File</th>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
+                          <div id="table_data_ecomm" class="hidden w-full overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400 text-xs py-4">
+                            <table id="table_task_ecomm" class="cell-border w-full display nowrap text-left text-[0.8rem]" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Aksi</th><th>No Urut</th><th>Tanggal Order</th><th>Keterangan Order</th>
+                                            <th>Nama File</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                      </tbody>
-                                  </table>
-                              </div>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -103,5 +67,92 @@
     </body>
 
     <script src="{{ asset('js/header.js') }}"></script>
-    <script src="{{ asset('js/task_setting.js') }}"></script>
+    {{-- <script src="{{ asset('js/task_setting.js') }}"></script> --}}
+    <script>
+        var tableDataEcom = new DataTable('#table_task_ecomm',{
+        });
+
+        setTimeout(function() {
+            callAjaxDataEcomm('{{session("id")}}');
+        }, 1000);
+
+        function callAjaxDataEcomm(id_akun){
+
+        var loader = $("#loader");
+        var table = $("#table_data_ecomm");
+        var fileName = '';
+
+        $.ajax({
+            url:"{{ route('get_ecomm_on_proses', [':parameter1']) }}"
+            .replace(':parameter1',id_akun),
+            type: 'GET',
+            dataType: 'json',
+            success:function(response){
+            // console.log(response);
+            tableDataEcom.clear().draw();
+            loader.removeClass("flex");
+            loader.addClass("hidden");
+            table.removeClass("hidden");
+            var jsonData = JSON.parse(response);
+            // console.log(jsonData);
+            var timeStamp = "beberaapa saat yang lalu";
+
+            for (var i = 0; i < jsonData.length; i++) {
+
+                let inputString = "'"+jsonData[i].order_time+"'";
+                let dateTime = moment(inputString, "YYYY-MM-DD HH:mm");
+                let formattedDateTime = dateTime.format("YYYY-MM-DD HH:mm");
+
+                let now = moment();
+                let minutesDiff = now.diff(dateTime, 'minutes');
+                // console.log(minutesDiff);
+
+                if(minutesDiff == 0 ){
+                        timeStamp = "beberapa detik yang lalu";
+                }
+
+                if(minutesDiff < 60 && minutesDiff > 0){
+                        timeStamp = minutesDiff+"m yang lalu";
+                }
+
+                if(minutesDiff >= 60 && minutesDiff < 1440 ){
+
+                    let hour = Math.round(minutesDiff/60)
+                    timeStamp = hour+"j yang lalu"
+                }
+
+                if(minutesDiff >= 1440 && minutesDiff < 2880){
+                        timeStamp = "1H yang lalu"
+                }
+
+                if(minutesDiff >=2880 && minutesDiff < 4320){
+                        timeStamp = "2H yang lalu"
+                }
+
+                if(minutesDiff >=4320 && minutesDiff < 5760){
+                        timeStamp = "3H yang lalu"
+                }
+                if(minutesDiff >=7200){
+                        timeStamp = "lebih dari 3H yang lalu"
+                }
+
+                fileName = jsonData[i]['no_urut']+'-'+ jsonData[i]['nama_akun_ecom']+'-'+ jsonData[i]['nama_akun_order']+
+                            '-'+ jsonData[i]['nama_penerima']+'-'+ jsonData[i]['sku']+'-'+jsonData[i]['warna']+'-'+jsonData[i]['panjang_bahan']+
+                            '-'+jsonData[i]['nama_ekspedisi']+'-'+jsonData[i]['order_time'];
+
+                tableDataEcom.row.add([
+                    '<div  class="container_'+ jsonData[i].id_order_ecom+' flex items-center justify-center gap-x-2"><div class="'+ jsonData[i].id_order_ecom+' flex items-center justify-center  rounded-sm px-2 py-2 bg-blue-200 text-blue-700 text-sm cursor-pointer text-center" onclick=handleFinnishSetting("'+ jsonData[i].id_order_ecom+'")>tandai selesai</div><div class="'+ jsonData[i].id_order_ecom+' flex items-center justify-center  rounded-sm px-2 py-2 bg-orange-200 text-orange-700 text-sm cursor-pointer text-center" onclick=handleFinnishSetting("'+ jsonData[i].id_order_ecom+'")>batalkan</div></div>',
+                    jsonData[i].no_urut,
+                    jsonData[i].order_time,
+                    timeStamp,
+                    fileName,
+                    ]).draw();
+            }
+            }
+        });
+
+
+        }
+
+    </script>
 </html>
