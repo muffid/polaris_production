@@ -1,19 +1,20 @@
+console.log("yes");
 var tableDataEcom = new DataTable('#table_task_ecomm',{
     "pageLength":100,
 });
 
 setTimeout(function() {
-    callAjaxDataEcomm('{{session("id")}}');
+    callAjaxDataEcomm();
 }, 1000);
 
-function callAjaxDataEcomm(id_akun){
+function callAjaxDataEcomm(){
 
 var loader = $("#loader");
 var table = $("#table_data_ecomm");
 var fileName = '';
 
 $.ajax({
-    url:"get_ecomm_on_proses/"+id_akun,
+    url:"get_finished_setting_today",
     type: 'GET',
     dataType: 'json',
     success:function(response){
@@ -70,10 +71,10 @@ $.ajax({
                     '-'+jsonData[i]['nama_ekspedisi']+'-'+jsonData[i]['order_time'];
 
         tableDataEcom.row.add([
-            '<div class="container_'+ jsonData[i].id_order_ecom+' flex items-center  gap-x-2"><div class="'+ jsonData[i].id_order_ecom+' flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-blue-200 text-blue-700 text-sm cursor-pointer text-center" onclick=handleSelesaiSetting("'+ jsonData[i].id_order_ecom+'")>tandai selesai <i class="bi bi-check-all"></i></div><div class="'+ jsonData[i].id_order_ecom+' flex items-center justify-center gap-x-1  rounded-sm px-2 py-2 bg-orange-200 text-orange-700 text-sm cursor-pointer text-center" onclick=handleCancelSetting("'+ jsonData[i].id_order_ecom+'")>batalkan <i class="bi bi-arrow-return-right"></i></div></div>',
-            jsonData[i].no_urut,
-            jsonData[i].order_time,
-            timeStamp,
+            'selesai',
+
+            jsonData[i].tanggal_order_formatted,
+            jsonData[i].tanggal_input_formatted,
             fileName,
             ]).draw();
     }

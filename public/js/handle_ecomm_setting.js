@@ -1,5 +1,6 @@
 var tableDataEcom = new DataTable('#data_ecomm',{
     "ordering" :false,
+    "pageLength":100,
 
 });
 
@@ -77,7 +78,7 @@ function callAjaxDataEcomm(){
                             '-'+jsonData[i]['nama_ekspedisi']+'-'+jsonData[i]['order_time'];
 
                 tableDataEcom.row.add([
-                   '<div  class="container_'+ jsonData[i].id_order_ecom+' flex items-center justify-center"><div class="'+ jsonData[i].id_order_ecom+' flex items-center justify-center w-20 rounded-sm px-2 py-2 bg-green-200 text-green-700 text-sm cursor-pointer text-center" onclick=handleSetting("'+ jsonData[i].id_order_ecom+'")>Kerjakan</div></div>',
+                   '<div  class="container_'+ jsonData[i].id_order_ecom+' flex items-center justify-center"><div class="'+ jsonData[i].id_order_ecom+' flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-green-200 text-green-700 text-sm cursor-pointer text-center" onclick=handleSetting("'+ jsonData[i].id_order_ecom+'")>Kerjakan <i class="bi bi-rocket-takeoff"></i></div></div>',
                     jsonData[i].no_urut,
                     jsonData[i].order_time,
                     timeStamp,

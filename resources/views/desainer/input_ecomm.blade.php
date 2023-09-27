@@ -87,6 +87,14 @@
                         @include('template/header')
                             <div class="flex flex-col p-6 text-center w-full gap-y-4 mt-14">
                                 <div class="flex flex-col  text-center w-full gap-y-4">
+                                    <div class="w-full my-4 flex flex-row items-center border-b text-sm">
+                                        <a href="#" class="px-4 py-3 border-b-2  border-blue-700 bg-white rounded-t-xl">
+                                            Ecommerce
+                                        </a>
+                                        <a href="#" class="px-4 py-3 ">
+                                            Non Ecommerce
+                                        </a>
+                                   </div>
                                     <div class="flex flex-row items-center gap-x-4 mt-2">
                                         <img src="{{ asset('img/online-shop.png') }}" alt="logo" class=" w-8 ">
                                         <div class="flex flex-col p-2 items-start ">
@@ -244,8 +252,8 @@
                                         </div>
                                     </div>
                                    <div class="bg-white rounded-lg p-8 text-sm">
-                                        <div class=" overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400">
-                                        <table id="example" class="cell-border w-full display nowrap text-left text-[0.8rem]" style="width:100%">
+                                        <div class=" overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400 py-4">
+                                        <table id="example" class="cell-border w-full display nowrap text-left text-sm" style="width:100%">
                                                 <thead>
                                                     <tr>
                                                         <th>Aksi</th><th>No Urut</th><th>Tanggal Order</th><th>Tanggal Input</th><th>Akun</th><th>Pengorder</th><th>Penerima</th>

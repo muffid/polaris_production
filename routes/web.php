@@ -31,6 +31,7 @@ use App\Http\Controllers\settingController\DashboardSettingController;
 use App\Http\Controllers\settingController\EcommHandleSetting;
 use App\Http\Controllers\settingController\DataEcommSettingController;
 use App\Http\Controllers\settingController\OnProsesSettingController;
+use App\Http\Controllers\settingController\FinnishedSettingController;
 
 
 Route::get('/', function () {return view('login');})->middleware('isLogin')->name('login');
@@ -82,6 +83,7 @@ Route::middleware('admin')->group(function(){
 Route::middleware('setting')->group(function(){
     Route::get('/dashboard_setting',[DashboardSettingController::class,'index'])->name('dashboard_setting');
     Route::get('/handle_ecomm',[EcommHandleSetting::class,'index'])->name('handle_ecomm');
+
     //ajax
     Route::get('/get_ecomm_unapprove',[DataEcommSettingController::class,'getAllEcommUnapprove'])->name('get_ecomm_unapprove');
     //ajax
@@ -90,8 +92,15 @@ Route::middleware('setting')->group(function(){
     Route::get('/get_ecomm_on_proses/{id_akun}',[DataEcommSettingController::class,'getEcommOnProses'])->name('get_ecomm_on_proses');
     //ajax
     Route::get('/cancel_setting/{id_ecomm}',[DataEcommSettingController::class,'cancelSetting'])->name('cancel_setting');
+    //ajax
+    Route::get('/finnish_order/{id_ecomm}',[DataEcommSettingController::class,'finnishSetting'])->name('finnish_order');
+    //ajax
+    Route::get('/get_finished_setting_today',[DataEcommSettingController::class,'getFinishedSettingToday'])->name('get_finished_setting_today');
 
     Route::get('/on_proses_setting',[OnProsesSettingController::class,'index'])->name('on_proses_setting');
+    Route::get('/finished_setting',[FinnishedSettingController::class,'index'])->name('finished_setting');
+
+
 });
 
 

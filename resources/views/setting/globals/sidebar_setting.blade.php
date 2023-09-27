@@ -45,18 +45,10 @@
                 <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
             @endif
             <div class="w-full  @if($active == 'Handle_Ecomm') bg-slate-100 @endif hover:bg-slate-100 flex py-2 pl-12 lg:pl-[74px]">
-                <h1 class=" text-xs">Ecommerce</h1>
+                <div class=" text-xs flex flex-row items-center gap-x-2"> <img src="{{ asset('img/online-shop.png') }}" alt="logo" class=" w-4 "> Setting Masuk</div>
             </div>
         </div>
-        <div class="flex flex-row items-center justify-start relative cursor-pointer" onclick="window.location.href = '{{ route('nonecommerce_admin') }}'">
-            @if($active=='NonEcommerce')
-                <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
-            @endif
 
-            <div class="w-full @if($active == 'NonEcommerce') bg-slate-100 @endif hover:bg-slate-100 flex py-2 pl-12 lg:pl-[74px]">
-                <h1 class=" text-xs ">Non Ecommerce</h1>
-            </div>
-        </div>
 
         <a href="on_proses_setting">
             <div class="flex flex-row items-center justify-start relative cursor-pointer">
@@ -65,7 +57,19 @@
                 @endif
 
                 <div class="w-full @if($active == 'OnProsesSetting') bg-slate-100 @endif hover:bg-slate-100 flex py-2 pl-12 lg:pl-[74px]">
-                    <h1 class=" text-xs ">On Proses</h1>
+                    <div class=" text-xs flex flex-row items-center gap-x-2 ">  <img src="{{ asset('img/hourglass.png') }}" alt="logo" class=" w-4 ">Setting On Proses</div>
+                </div>
+            </div>
+        </a>
+
+        <a href="finished_setting">
+            <div class="flex flex-row items-center justify-start relative cursor-pointer">
+                @if($active=='FinnishSetting')
+                    <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
+                @endif
+
+                <div class="w-full @if($active == 'FinnishSetting') bg-slate-100 @endif hover:bg-slate-100 flex py-2 pl-12 lg:pl-[74px]">
+                    <div class=" text-xs flex flex-row items-center gap-x-2 ">  <img src="{{ asset('img/check.png') }}" alt="logo" class=" w-4 "> Setting Selesai</div>
                 </div>
             </div>
         </a>

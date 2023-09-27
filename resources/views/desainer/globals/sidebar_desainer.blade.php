@@ -36,13 +36,34 @@
                     </div>
             </div>
         </a>
-       <div class="flex flex-row items-center justify-start relative ">
-            <div class="w-full  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
-                <i class="bi bi-clipboard-data"></i>
-                <h1 class="text-sm font-semibold">Input Order</h1>
-            </div>
-        </div>
         <a href="input_ecommerce">
+            <div class="flex flex-row items-center justify-start relative cursor-pointer ">
+                @if($active=='Ecommerce')
+                <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
+            @else
+            @endif
+                <div class="w-full @if($active == 'Ecommerce') bg-slate-100 @endif hover:bg-slate-100  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
+                    <i class="bi bi-file-earmark-ruled-fill"></i>
+                    <h1 class="text-sm font-semibold">Input Order</h1>
+                </div>
+            </div>
+        </a>
+
+        <a href="data_ecomm_page">
+            <div class="flex flex-row items-center justify-start relative cursor-pointer ">
+                @if($active=='Ecommerce_Data')
+                <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
+            @else
+            @endif
+                <div class="w-full @if($active == 'Ecommerce_Data') bg-slate-100 @endif hover:bg-slate-100  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
+                    <i class="bi bi-file-spreadsheet-fill"></i>
+                    <h1 class="text-sm font-semibold">Data Order</h1>
+                </div>
+            </div>
+        </a>
+
+
+        {{-- <a href="input_ecommerce">
             <div class="flex  flex-row items-center justify-start relative cursor-pointer">
                 @if($active=='Ecommerce')
                     <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
@@ -52,23 +73,7 @@
                 </div>
             </div>
         </a>
-        <a href="nonecommerce_admin">
-            <div class="flex flex-row items-center justify-start relative cursor-pointer">
-                @if($active=='NonEcommerce')
-                    <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
-                @endif
 
-                <div class="w-full @if($active == 'NonEcommerce') bg-slate-100 @endif hover:bg-slate-100 flex py-2 pl-12 lg:pl-[74px]">
-                    <h1 class=" text-xs ">Input Non Ecommerce</h1>
-                </div>
-            </div>
-        </a>
-       <div class="flex flex-row items-center justify-start relative ">
-            <div class="w-full  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
-                <i class="bi bi-database-check"></i>
-                <h1 class="text-sm font-semibold">Data Order Anda</h1>
-            </div>
-        </div>
         <a href="data_ecomm_page">
             <div class="flex  flex-row items-center justify-start relative cursor-pointer">
                 @if($active=='Ecommerce_Data')
@@ -78,18 +83,8 @@
                     <h1 class=" text-xs">Data Ecommerce</h1>
                 </div>
             </div>
-        </a>
-        <a href="#">
-            <div class="flex flex-row items-center justify-start relative cursor-pointer">
-                @if($active=='NonEcommerce_Data')
-                    <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
-                @endif
+        </a> --}}
 
-                <div class="w-full @if($active == 'NonEcommerce_Data') bg-slate-100 @endif hover:bg-slate-100 flex py-2 pl-12 lg:pl-[74px]">
-                    <h1 class=" text-xs ">Data Non Ecommerce</h1>
-                </div>
-            </div>
-        </a>
 
         <a href="monitor">
             <div class="flex flex-row items-center justify-start relative cursor-pointer ">

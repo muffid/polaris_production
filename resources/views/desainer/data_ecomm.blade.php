@@ -74,8 +74,16 @@
                                               <div class="spinner-3"></div>
                                               <h1 class="font-semibold text-teal-600">Loading Data</h1>
                                         </div>
-                                        <div id="table_data" class=" overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400">
-                                        <table id="data_ecomm" class="cell-border w-full display nowrap text-left text-[0.8rem]" style="width:100%">
+                                        <div id="table_data" class=" overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400 py-4">
+                                            <div class="w-full my-4 flex flex-row items-center border-b">
+                                                <a href="#" class="px-4 py-3 border-b-2  border-blue-700 bg-blue-50 rounded-t-xl">
+                                                    Ecommerce
+                                                </a>
+                                                <a href="#" class="px-4 py-3 ">
+                                                    Non Ecommerce
+                                                </a>
+                                           </div>
+                                        <table id="data_ecomm" class="cell-border w-full display nowrap text-left text-[0.8rem] py-4" style="width:100%">
                                                 <thead>
                                                     <tr>
                                                         <th>Status Setting</th><th>No Urut</th><th>Tanggal Order</th><th>Tanggal Input</th>
@@ -89,7 +97,7 @@
                                                     <tr data-id="tableRow{{$i}}" class="">
                                                         <td class="p-1">
                                                             <div class="rounded-full py-1 px-2 {{$data_ecomm[$i]->status == 'Belum Setting' ? '  text-orange-700' : ($data_ecomm[$i]->status == 'Proses Setting' ? '  text-blue-900' : ' text-green-900') }}">
-                                                                {!!$data_ecomm[$i]->status == 'Belum Setting' ? '<i class="bi bi-exclamation-circle"></i>'  : ($data_ecomm[$i]->status == 'Proses Setting' ? '<i class="bi bi-hourglass-split"></i>' : ' text-green-900') !!}
+                                                                {!!$data_ecomm[$i]->status == 'Belum Setting' ? '<i class="bi bi-exclamation-circle"></i>'  : ($data_ecomm[$i]->status == 'Proses Setting' ? '<i class="bi bi-hourglass-split"></i>' : '<i class="bi bi-check-all"></i>') !!}
                                                                 {{$data_ecomm[$i]->status}}
                                                             </div>
                                                         </td>
