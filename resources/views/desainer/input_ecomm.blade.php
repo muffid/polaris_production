@@ -264,7 +264,7 @@
                                                     <tr>
                                                         <th>Aksi</th><th>No Urut</th><th>Tanggal Order</th><th>Tanggal Input</th><th>Akun</th><th>Pengorder</th><th>Penerima</th>
                                                         <th>No Order</th><th>SKU</th><th>Ekspedisi</th><th>Warna</th><th>Jumlah</th><th>Bahan</th>
-                                                        <th>Laminasi</th><th>Mesin</th><th>Dimensi</th>
+                                                        <th>Laminasi</th><th>Mesin</th><th>No Resi</th><th>Dimensi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -296,6 +296,7 @@
                                                             <td>{{$order_unapprove[$i]->nama_bahan_cetak}}</td>
                                                             <td>{{$order_unapprove[$i]->nama_laminasi}}</td>
                                                             <td>{{$order_unapprove[$i]->nama_mesin_cetak}}</td>
+                                                            <td>{{$order_unapprove[$i]->resi}}</td>
                                                             <td>{{$order_unapprove[$i]->panjang_bahan}} x {{$order_unapprove[$i]->lebar_bahan}}</td>
                                                         </tr>
                                                     @endfor

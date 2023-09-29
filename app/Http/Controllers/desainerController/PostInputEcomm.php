@@ -49,37 +49,8 @@ class PostInputEcomm extends Controller
         $statusDistribusi = "-";
         $admAppDistribusi = "-";
         $return_order = "-";
+        $resi = $request->input('resi');
 
-
-        $data = [
-            "id_order_ecomm" => $idEcomm,
-            "id_akun" => $idAkun,
-            "order_time" => $orderTime,
-            "akun_ecom" => $akunEcomm,
-            "nama_akun_order" => $namaAkunOrder,
-            "nama_penerima" => $namaPenerima,
-            "nomor_order" => $nomorOrder,
-            "sku" => $sku,
-            "warna" => $warna,
-            "id_bahan_cetak" => $idBahanCetak,
-            "id_mesin_cetak" => $idMesinCetak,
-            "id_laminasi" => $idLaminasi,
-            "lebar_bahan" => $lebar,
-            "panjang_bahan" => $panjang,
-            "qty_order" => $jumlah,
-            "note" => $note,
-            "output_file" => $outputFileName,
-            "key" => $key,
-            "time" => $timeStamps,
-            "ekspedisi" => $ekspedisi,
-            "admin_apv_edsainer" => $admApp,
-            "status_print" => $statusPrint,
-            "admin_apv_print" => $admAppPrint,
-            "ststus_distribusi" => $statusDistribusi,
-            "admin_apv_distribusi" => $admAppDistribusi,
-            "return_order" => $return_order
-
-         ];
 
         //  dd($timeStamps);
 
@@ -109,6 +80,7 @@ class PostInputEcomm extends Controller
                "time" => $timeStamps,
                "id_ekspedisi" => $ekspedisi,
                "return_order" => $return_order,
+               "resi" => $resi,
             ];
 
             $response = $client->post($url, [
