@@ -222,10 +222,16 @@
                                             </div>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
-                                            <label for="panjang" class="w-2/3 text-left block text-sm font-medium text-gray-700">Panjang (cm)</label>
-                                            <input class="w-2/3 appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="panjang" type="number"  name="panjang" required>
-                                            <label for="lebar" class="w-1/3 text-left block text-sm font-medium text-gray-700 ml-4">lebar (cm)</label>
+                                            <label for="panjang" class="w-1/3 text-left block text-sm font-medium text-gray-700">Panjang (cm)</label>
+                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="panjang" type="number"  name="panjang" required>
+                                        </div>
+                                        <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
+                                            <label for="lebar" class="w-1/3 text-left block text-sm font-medium text-gray-700 ">lebar (cm)</label>
                                             <input readonly id="lebar_bahan" class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="lebar" type="text"  name="lebar" required>
+                                        </div>
+                                        <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
+                                            <label for="resi" class="w-1/3 text-left block text-sm font-medium text-gray-700">Resi</label>
+                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="resi" type="text"  name="resi" required>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="note" class="w-1/3 text-left block text-sm font-medium text-gray-700">Note</label>

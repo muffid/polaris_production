@@ -24,7 +24,7 @@
 
     </div>
     <div class="w-full flex h-full flex-col py-4 gap-y-2">
-        <a href="dashboard_admin">
+        <a href="{{route('dashboard_desainer')}}">
             <div class="flex flex-row items-center justify-start relative cursor-pointer">
                     @if($active=='Dashboard')
                         <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
@@ -36,7 +36,7 @@
                     </div>
             </div>
         </a>
-        <a href="input_ecommerce">
+        <a href="{{route('input_ecomm_page')}}">
             <div class="flex flex-row items-center justify-start relative cursor-pointer ">
                 @if($active=='Ecommerce')
                 <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
@@ -49,7 +49,7 @@
             </div>
         </a>
 
-        <a href="data_ecomm_page">
+        <a href="{{route('data_ecomm_page')}}">
             <div class="flex flex-row items-center justify-start relative cursor-pointer ">
                 @if($active=='Ecommerce_Data')
                 <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
@@ -73,7 +73,6 @@
                 </div>
             </div>
         </a>
-
         <a href="data_ecomm_page">
             <div class="flex  flex-row items-center justify-start relative cursor-pointer">
                 @if($active=='Ecommerce_Data')
