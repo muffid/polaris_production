@@ -5,45 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ asset('css/utils.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
     {{-- DATATABLE --}}
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-
-
+    <script src="{{asset('js/moment.min.js')}}" type="text/javascript"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-
+    <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
     <style>
         .dataTables_length{
-            visibility: hidden;
-        }
-
-        .dataTables_filter{
-            visibility: hidden;
-        }
-        .dataTables_info{
-            visibility: hidden;
-        }
-        #example_paginate{
-            visibility: hidden;
-        }
-        #nonEcom_paginate{
-            visibility: hidden;
+                visibility: hidden;
         }
     </style>
-
-    {{-- HIGHCHART --}}
-   <!-- Highcharts Core -->
-
-
-
-    <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
     <title>Polaris Adv - Dashboard</title>
 </head>
 
-<body class=" bg-slate-50 flex flex-row font-nunito">
+<body class=" bg-slate-50 flex flex-row">
     @if($session['status']==='Administrator')
         @include('admin/globals/sidebar')
     @elseif($session['status']==='Desainer')
@@ -51,216 +30,68 @@
     @elseif($session['status']==='Setting')
         @include('setting/globals/sidebar_setting')
     @endif
-        <main id="main" class=" w-full">
-          <div class="flex flex-col gap-y-2">
-            {{-- main --}}
-            <div class="flex flex-col items-start justify-start">
-                {{-- performa --}}
-                <div class="flex flex-col items-start gap-y-2 w-full">
-                    @include('template.header')
-                    <div class="flex flex-row items-center gap-x-4 px-6 mt-24 ">
-                        <img src="{{ asset('img/online-shop.png') }}" alt="logo" class=" w-8 ">
-                        <div class="flex flex-col items-start p-2 ">
-                            <h1 class="text-lg font-bold text-emerald-900">Monitor Order Ecommerce</h1>
-                            <p class="text-sm text-slate-400">Order ecommerce yang belum selesai cetak</p>
+    <main id="main" class=" w-full">
+        <div class="flex flex-row justify-between w-full">
+            <div class="flex flex-col w-full">
+                {{-- main --}}
+                <div class="flex flex-col items-start justify-start">
+
+                    @include('template/header')
+
+                </div>
+
+                <div class="mt-24 flex flex-col w-full px-8 gap-x-4">
+                    <div class="flex flex-row items-center gap-x-4 mt-2">
+                       <img src="{{ asset('img/online-shop.png') }}" alt="logo" class=" w-8 ">
+                        <div class="flex flex-col p-2 items-start ">
+                            <h1 class="text-lg font-bold text-emerald-900">Order Ecommerce Masuk</h1>
+                            <p class="text-sm text-slate-400">Mulai Kerjakan Setting Order</p>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-y-1 w-full">
-                        <div class="flex flex-col items-start gap-y-2 md:px-6 py-2 ">
-                            <div class="flex flex-col p-4 bg-white w-full border md:rounded-lg overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400">
+                    <div class="flex items-center justify-between bg-white rounded p-4">
+                        <div id="loader" class="flex flex-col items-center justify-center w-full gap-y-4">
 
-                                <div id="tableCom" class="display nowrap" style="width:100%">
-                                  <table id="example" class=" display nowrap text-xs" style="width:100%">
-                                              <thead>
-                                                <tr>
-                                                  <th>No</th>
-                                                  <th>Waktu Order</th>
-                                                  <th>Akun</th>
-                                                  <th>Akun Order</th>
-                                                  <th>Penerima</th>
-                                                  <th>Nomor Order</th>
-                                                  <th>SKU</th>
-                                                  <th>Ekspedisi</th>
-                                                  <th>Warna</th>
-                                                  <th>Jumlah</th>
-                                                  <th>Status</th>
-                                                  <th>Print Oleh</th>
-                                                  <th>Print Selesai</th>
-                                                  <th>Distribusi</th>
-                                                  <th>Return</th>
-                                              </tr>
-
-                                          </thead>
-                                          <tbody>
-                                            <tr>
-                                              <td>1</td>
-                                              <td>12:45:34 23-05-2023</td>
-                                              <td>XYZ</td>
-                                              <td>John Statham</td>
-                                              <td>Mike Portnoy</td>
-                                              <td>7567456</td>
-                                              <td>8756894</td>
-                                              <td>JNE</td>
-                                              <td>GREEN-SOHO</td>
-                                              <td>1</td>
-                                              <td>On Printing</td>
-                                              <td>Garen</td>
-                                              <td>13:45:20 23-05-2023</td>
-                                              <td>Terdistribusi</td>
-                                              <td>No</td>
-                                            </tr>
-
-                                              </tbody>
-                                          </table>
-                              </div>
-                            </div>
+                              <div class="spinner-3"></div>
+                              <h1 class="font-semibold text-teal-600">Loading Data</h1>
                         </div>
+                        <div id="table_data_monitor" class="py-4 hidden  w-full overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400 text-sm">
+                           <div class="w-full my-4 flex flex-row items-center border-b">
+                                <a href="#" class="px-4 py-3 border-b-2  border-blue-700 bg-blue-50 rounded-t-xl">
+                                    Ecommerce
+                                </a>
+                                <a href="#" class="px-4 py-3 ">
+                                    Non Ecommerce
+                                </a>
+                           </div>
+                            <table id="data_monitor" class="cell-border w-full nowrap text-left mt-4 " style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th><th>Waktu Order</th><th>Nama File</th><th>Diinput Oleh</th><th>Status</th><th>Disetting Oleh</th>
 
-
-
-
-
-
-                    </div>
-
-
-                    <div class="flex flex-row items-center gap-x-4 px-6 ">
-                        <img src="{{ asset('img/online-shop.png') }}" alt="logo" class=" w-8 ">
-                        <div class="flex flex-col items-start p-2 ">
-                            <h1 class="text-lg font-bold text-emerald-900">Monior Order Non Ecommerce</h1>
-                            <p class="text-sm text-slate-400">Order Non Ecommerce yang belum selesai cetak</p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-y-1 w-full">
-                        <div class="flex flex-col items-start gap-y-2 md:px-6 py-2 ">
-                            <div class="flex flex-col p-4 bg-white w-full border md:rounded-lg overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400">
-
-                                <div id="tableCom" class="display nowrap" style="width:100%">
-                                    <table id="nonEcom" class=" display nowrap text-xs" style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Diinput Oleh</th>
-                                                <th>Nama Konsumen</th>
-                                                <th>Konsumen</th>
-                                                <th>Nama File</th>
-                                                <th>Bahan</th>
-                                                <th>Laminasi</th>
-                                                <th>Mesin</th>
-                                                <th>Jumlah</th>
-                                                <th>Lebar</th>
-                                                <th>Panjang</th>
-                                                <th>Distribusi</th>
-                                                <th>Tambahan</th>
-                                                <th>Status</th>
-                                                <th>Print Oleh</th>
-                                                <th>Print Selesai</th>
-                                                <th>Waktu Produksi</th>
-                                                <th>Catatan</th>
-                                                <th>Return</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td >1</td>
-                                                <td>Vladimir</td>
-                                                <td>Sulnain</td>
-                                                <td>ONLINE</td>
-                                                <td> (SUPRIADI) - ORAJET - SUPERGLOSY - EPSON (CETAK RGB)</td>
-                                                <td>Quantac</td>
-                                                <td>LAMINASI DOFF 100MC</td>
-                                                <td>EPSON</td>
-                                                <td>1</td>
-                                                <td>120</td>
-                                                <td>61</td>
-                                                <td>KURIR</td>
-                                                <td>Plastik</td>
-                                                <td>Diambil</td>
-                                                <td>Jean</td>
-                                                <td>2011-04-25</td>
-                                                <td>3 jam 45 mnt</td>
-                                                <td>Diambil</td>
-                                                <td>No</td>
-                                            </tr>
-                                            <tr>
-                                              <td >2</td>
-                                              <td>Vladimir</td>
-                                              <td>Gusmat</td>
-                                              <td>OFFLINE</td>
-                                              <td> (SUPRIADI) - ORAJET - SUPERGLOSY - EPSON (CETAK RGB)</td>
-                                              <td>Quantac</td>
-                                              <td>LAMINASI DOFF 100MC</td>
-                                              <td>EPSON</td>
-                                              <td>1</td>
-                                              <td>120</td>
-                                              <td>61</td>
-                                              <td>KURIR</td>
-                                              <td>Plastik</td>
-                                              <td>Diambil</td>
-                                              <td>Jean</td>
-                                              <td>2011-04-25</td>
-                                              <td>3 jam 45 mnt</td>
-                                              <td>Diambil</td>
-                                              <td>No</td>
-                                          </tr>
-                                          <tr>
-                                            <td >3</td>
-                                            <td>Vladimir</td>
-                                            <td>Snejder</td>
-                                            <td>OFFLINE</td>
-                                            <td> (SUPRIADI) - ORAJET - SUPERGLOSY - EPSON (CETAK RGB)</td>
-                                            <td>Quantac</td>
-                                            <td>LAMINASI DOFF 100MC</td>
-                                            <td>EPSON</td>
-                                            <td>1</td>
-                                            <td>120</td>
-                                            <td>61</td>
-                                            <td>KURIR</td>
-                                            <td>Plastik</td>
-                                            <td>Diambil</td>
-                                            <td>Jean</td>
-                                            <td>2011-04-25</td>
-                                            <td>3 jam 45 mnt</td>
-                                            <td>Diambil</td>
-                                            <td>No</td>
                                         </tr>
-                                        </tbody>
-                                    </table>
-                              </div>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-
-
-
-
-
 
                     </div>
+                </div>
+            </div>
+                {{-- <div class="lg:flex flex-col h-auto w-1/4 border-l hidden " >
 
-                </div>
-                </div>
-          </div>
-        </main>
+                </div> --}}
+              </div>
+       {{-- di sini nanti footer --}}
+            </div>
+
+
+    </main>
 </body>
-<script>
 
-
-      $(document).ready(function () {
-        $('#example').DataTable({
-            "pageLength": 25,
-
-        });
-
-        $('#nonEcom').DataTable({
-            "pageLength": 25,
-
-        });
-});
-
-
-
-</script>
 <script src="{{ asset('js/header.js') }}"></script>
+<script src="{{ asset('js/monitor.js') }}"></script>
 
 
 </html>

@@ -59,6 +59,9 @@ Route::PUT('/edit_ecomm/{id_akun}/{id_ecomm}',[EditEcommController::class,'store
 
 Route::get('/monitor',[MonitorController::class,'index'])->middleware('isAuthenticate')->name('monitor');
 
+//ajax
+Route::get('/get_monitor_data',[MonitorController::class,'getMonitorData'])->middleware('isAuthenticate')->name('get_monitor_data');
+
 Route::middleware('desainer')->group(function(){
     Route::get('/dashborad_desainer',[DashboardDesainerController::class,'index'])->name('dashboard_desainer');
     Route::get('/input_ecommerce',[InputEcommController::class,'index'])->name('input_ecomm_page');
