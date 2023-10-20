@@ -175,6 +175,40 @@ class DataEcommSettingController extends Controller
 
     }
 
+    //http://localhost:3000/ecommerce/AllSelesaiSetting/1s/2023-10-20
+    public function getFinishedSettingByDate($date){
+        $client = new Client();
+        try{
+            $url = env('BASE_URL_API')."ecommerce/AllSelesaiSetting/".session('id')."/".$date;
+            $response = $client->get($url, [
+                'headers' => [
+                    'auth-token' => session('token'),
+                ],
+            ]);
+
+            $res = $response->getBody()->getContents();
+
+            $result = [
+             "data" => $res
+         ];
+            return response()->json($res);
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+            $statusCode = $response->getStatusCode();
+            dd($response);
+            if ($statusCode === 401) {
+                return $e;
+            } else {
+                return $e;
+            }
+        } catch (RequestException $e) {
+            $response = $e->getResponse();
+            $statusCode = $response->getStatusCode();
+            dd($statusCode);
+        }
+
+    }
+
     public function test(){
         return "hell yeah";
     }

@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-row items-center justify-between bg-slate-50 rounded-full p-2 gap-x-3 w-[250px] lg:w-[300px] cursor-pointer hover:text-blue-800 hover:scale-105 transition-transform ease-out">
+                <div onclick="window.location.href = '{{ route('login_operator_page') }}'" class="flex flex-row items-center justify-between bg-slate-50 rounded-full p-2 gap-x-3 w-[250px] lg:w-[300px] cursor-pointer hover:text-blue-800 hover:scale-105 transition-transform ease-out">
                     <div class="bg-white p-4 rounded-full flex items-center justify-center">
                         <img src="{{ asset('img/settings.png') }}" alt="logo" class="w-8 min-w-[1.5rem]">
                     </div>

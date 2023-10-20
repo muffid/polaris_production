@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\CheckAdmin::class,
         'desainer' => \App\Http\Middleware\CheckDesainer::class,
         'setting' => \App\Http\Middleware\CheckSetting::class,
+        'operator' =>\App\Http\Middleware\CheckOperator::class,
         'isLogin' => \App\Http\Middleware\isLogin::class,
         'isAuthenticate' =>\App\Http\Middleware\isAuthenticate::class,
     ];

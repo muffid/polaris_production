@@ -19,6 +19,9 @@
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
     <title>Polaris Adv - On Proses Setting</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <script src="{{asset('js/moment.min.js')}}" type="text/javascript"></script>
 </head>
 
@@ -31,12 +34,18 @@
                     <div class="flex flex-col items-start justify-start">
                         @include('template/header')
                     </div>
-                    <div class="mt-24 flex flex-col w-full px-8 gap-x-4">
+                    <div class="mt-24 flex flex-col w-full px-8 gap-y-4">
                         <div class="flex flex-row items-center gap-x-4 mt-2">
                             <img src="{{ asset('img/check.png') }}" alt="logo" class=" w-8 ">
                             <div class="flex flex-col p-2 items-start ">
                                 <h1 class="text-lg font-bold text-emerald-900">Order Ecommerce Selesai Setting</h1>
-                                <p class="text-sm text-slate-400">Order Ecommerce yang sudah anda kerjakan </p>
+                                <p class="text-sm text-slate-400">Order Ecommerce yang sudah anda kerjakan. </p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col p-8 text-sm gap-y-4 items-start w-full bg-white rounded-lg">
+                            <div class="flex flex-row gap-3 items-center">
+                                <input placeholder="tentukan hari" class="appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="tanggal_setting" type="text"  name="tanggal_order" required>
+                                <button onclick="callAjaxDataEcommByDate()" class="px-3 py-2 bg-blue-700 text-white rounded"><i class="bi bi-search"></i> Tampilkan</button>
                             </div>
                         </div>
                         <div class="flex w-full items-center justify-between bg-white rounded p-4">
@@ -55,6 +64,7 @@
                                         Non Ecommerce
                                     </a>
                                </div>
+
                                 <table id="table_task_ecomm" class="cell-border w-full display nowrap text-left " style="width:100%">
                                         <thead>
                                             <tr>

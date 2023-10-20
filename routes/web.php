@@ -33,6 +33,11 @@ use App\Http\Controllers\settingController\DataEcommSettingController;
 use App\Http\Controllers\settingController\OnProsesSettingController;
 use App\Http\Controllers\settingController\FinnishedSettingController;
 
+//OperatorController
+use App\Http\Controllers\operatorController\LoginOperatorController;
+use App\Http\Controllers\operatorController\DashboardOperatorController;
+use App\Http\Controllers\operatorController\ScanOrderOperatorController;
+
 
 Route::get('/', function () {return view('login');})->middleware('isLogin')->name('login');
 Route::get('/logout',[LogoutController::class,'index'])->name('logout');
@@ -41,15 +46,13 @@ Route::get('/logout',[LogoutController::class,'index'])->name('logout');
 Route::get('/loginAdminPage',[LoginAdminController::class,'index'])->middleware('isLogin')->name('login_admin_page');
 Route::get('/desainer_login',function(){return view('desainer/login_desainer');})->middleware('isLogin')->name('login_desainer_page');
 Route::get('/setting_login',function(){return view('setting/login_setting');})->middleware('isLogin')->name('login_setting_page');
+Route::get('/operator_login',function(){return view('operator/login_operator');})->middleware('isLogin')->name('login_operator_page');
 
-//form
+//form login
 Route::POST('/login_admin',[LoginController::class,'authenticate'])->name('login_admin');
-
-//form
 Route::POST('/login_desainer',[LoginDesainerController::class,'authenticate'])->name('login_desainer');
-
-//form
 Route::POST('/login_setting',[LoginSettingController::class,'authenticate'])->name('login_setting');
+Route::POST('/login_operator',[LoginOperatorController::class,'authenticate'])->name('login_operator');
 
 //form
 Route::POST('/save_ecomm',[PostInputEcomm::class,'store'])->name('save_ecomm');
@@ -99,11 +102,15 @@ Route::middleware('setting')->group(function(){
     Route::get('/finnish_order/{id_ecomm}',[DataEcommSettingController::class,'finnishSetting'])->name('finnish_order');
     //ajax
     Route::get('/get_finished_setting_today',[DataEcommSettingController::class,'getFinishedSettingToday'])->name('get_finished_setting_today');
-
+    //ajax
+    Route::get('/get_finished_setting_by_date/{date}',[DataEcommSettingController::class,'getFinishedSettingByDate'])->name('get_finished_setting_by_date');
     Route::get('/on_proses_setting',[OnProsesSettingController::class,'index'])->name('on_proses_setting');
     Route::get('/finished_setting',[FinnishedSettingController::class,'index'])->name('finished_setting');
+});
 
-
+Route::middleware('operator')->group(function(){
+    Route::get('/dashboard_operator',[DashboardOperatorController::class,'index'])->name('dashboard_operator');
+    Route::get('/scan_order_operator',[ScanOrderOperatorController::class,'index'])->name('scan_order_operator');
 });
 
 

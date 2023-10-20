@@ -1,7 +1,6 @@
 var tableDataMonitor = new DataTable('#data_monitor',{
     "ordering" :false,
     "pageLength":100,
-
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -31,13 +30,19 @@ function callAjaxDataEcomm(){
         let jsonData = JSON.parse(response)
         let timeOrder = ''
         let timeInput = ''
+        let timeMulaiSetting=''
+        let timeSelesaiSetting = ''
         let penyetigColumn = ''
+        let ketWaktuSetting = ''
         let timeStamp = "beberaapa saat yang lalu"
         let DesainerColumn = ''
         let statusColumn = ''
         for (var i = 0; i < jsonData.length; i++) {
+            penyetigColumn=''
             timeOrder = "'"+jsonData[i].order_time+"'"
             timeInput = "'"+jsonData[i].time+"'"
+            timeMulaiSetting = "'"+jsonData[i].mulai_setting+"'"
+            timeSelesaiSetting = "'"+jsonData[i].selesai_setting+"'"
             statusColumn = ''
             fileName = jsonData[i]['no_urut']+'-'+ jsonData[i]['nama_akun_ecom']+'-'+ jsonData[i]['nama_akun_order']+
                         '-'+ jsonData[i]['nama_penerima']+'-'+ jsonData[i]['sku']+'-'+jsonData[i]['warna']+'-'+jsonData[i]['panjang_bahan']+
@@ -46,46 +51,55 @@ function callAjaxDataEcomm(){
             if(!(jsonData[i]['note'] == '-')){
                 fileName = fileName+(' ('+jsonData[i]['note']+')')
             }
-            DesainerColumn = '<div class ="flex flex-col  gap-y-1"><h1 class="font-bold text-green-800">'+jsonData[i].nama_desainer+'</h1><h1 class="text-xs">'+
-                           countTimeElapsed(timeInput)+'</h1></div>'
 
-            if(jsonData[i].status == "Belum Setting"){
-                statusColumn = '<h1 class="text-red-700 p-1 bg-red-200 text-center rounded-full">Belum Setting</h1>'
-            }
             if(jsonData[i].status == "Proses Setting"){
-                statusColumn = '<h1 class="text-yellow-700 p-1 bg-yellow-200 text-center rounded-full">Proses Setting</h1>'
+                ketWaktuSetting = 'disetting '+countTimeElapsed(timeMulaiSetting)
+            }
+            if(jsonData[i].status == "Belum Setting"){
+                ketWaktuSetting = ''
             }
             if(jsonData[i].status == "Setting Selesai"){
-                statusColumn = '<h1 class="text-emerald-700 p-1 bg-emerald-200 text-center rounded-full">Setting Selesai</h1>'
+                ketWaktuSetting = 'diselesaikan '+countTimeElapsed(timeSelesaiSetting)
+            }
+
+
+            DesainerColumn = '<div class="flex flex-row items-center gap-x-2"><i class="bi bi-person-circle text-slate-600 text-xl"></i><div class ="flex flex-col  gap-y-1"><h1 class="font-bold text-green-800">'+jsonData[i].nama_desainer+'</h1><h1 class="text-xs text-slate-500">'+
+                           countTimeElapsed(timeInput)+'</h1></div></div>'
+            if(!(jsonData[i].status == "Belum Setting")){
+                penyetigColumn = '<div class="flex flex-row items-center gap-x-2"><i class="bi bi-person-circle text-slate-600 text-xl"></i><div class ="flex flex-col  gap-y-1"><h1 class="font-bold text-green-800">'+jsonData[i].nama_penyetting+'</h1><h1 class="text-xs text-slate-500">'+
+                ketWaktuSetting+'</h1></div></div>'
+            }
+
+            if(jsonData[i].status == "Belum Setting"){
+                statusColumn = '<h1 class="text-red-700 py-1 px-2 bg-red-200 text-center rounded-full">Belum Setting</h1>'
+            }
+            if(jsonData[i].status == "Proses Setting"){
+                statusColumn = '<h1 class="text-yellow-700 py-1 px-2 bg-yellow-200 text-center rounded-full">Proses Setting</h1>'
+            }
+            if(jsonData[i].status == "Setting Selesai"){
+                statusColumn = '<h1 class="text-emerald-700 py-1 px-2 bg-emerald-200 text-center rounded-full">Setting Selesai</h1>'
             }
 
             tableDataMonitor.row.add([
                 i+1,
-                countTimeElapsed(timeOrder),
+                '<h1 class="text-xs text-slate-700">'+countTimeElapsed(timeOrder)+'</h1>',
                 fileName,
                 DesainerColumn,
                 statusColumn,
-                jsonData[i].nama_penyetting,
+                penyetigColumn
             ]).draw()
 
         }
 
-        // tableDataMonitor.rows().every(function() {
-        //     var data = this.data();
-        //     console.log(data[4]);
-        //     if (data[4].includes('Belum Setting')) {
-        //         $(this.node()).find('td').addClass('bg-red-100');
+        tableDataMonitor.rows().every(function() {
+            var data = this.data();
+            console.log(data[4]);
+            if (data[2].includes('urgent')) {
+                $(this.node()).find('td').addClass('bg-yellow-300');
 
-        //     }
-        //     if (data[4].includes('Proses Setting')) {
-        //         $(this.node()).find('td').addClass('bg-yellow-100');
+            }
 
-        //     }
-        //     if (data[4].includes('Setting Selesai')) {
-        //         $(this.node()).find('td').addClass('bg-green-100');
-
-        //     }
-        // });
+        });
       }
     });
 }

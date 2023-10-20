@@ -18,6 +18,7 @@
         .dataTables_length{
                 visibility: hidden;
         }
+
     </style>
     <title>Polaris Adv - Dashboard</title>
 </head>
@@ -29,6 +30,8 @@
         @include('desainer/globals/sidebar_desainer')
     @elseif($session['status']==='Setting')
         @include('setting/globals/sidebar_setting')
+    @elseif($session['status']==='Operator')
+        @include('operator/globals/sidebar_operator')
     @endif
     <main id="main" class=" w-full">
         <div class="flex flex-row justify-between w-full">
@@ -67,7 +70,6 @@
                                     <thead>
                                         <tr>
                                             <th>No</th><th>Waktu Order</th><th>Nama File</th><th>Diinput Oleh</th><th>Status</th><th>Disetting Oleh</th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -79,14 +81,8 @@
                     </div>
                 </div>
             </div>
-                {{-- <div class="lg:flex flex-col h-auto w-1/4 border-l hidden " >
-
-                </div> --}}
-              </div>
-       {{-- di sini nanti footer --}}
-            </div>
-
-
+        </div>
+    </div>
     </main>
 </body>
 
