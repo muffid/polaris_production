@@ -7,6 +7,7 @@ flatpickr("#tanggal_order", {
 
 var tableDataEcom = new DataTable('#data_ecomm',{
     "pageLength":50,
+
 });
 
 function callAjaxDataEcomm(id_akun){

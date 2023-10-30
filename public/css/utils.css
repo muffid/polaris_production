@@ -1,7 +1,7 @@
      /* warna scrollbar */
      ::-webkit-scrollbar {
-        width: 1px;
-        height: 10px;
+        width: 5px;
+        height: 5px;
       }
 
       /* warna track */

@@ -69,7 +69,7 @@ function callAjaxDataEcomm(){
                 if(minutesDiff >=4320 && minutesDiff < 5760){
                         timeStamp = "3H yang lalu"
                 }
-                if(minutesDiff >=7200){
+                if(minutesDiff >=5760){
                         timeStamp = "lebih dari 3H yang lalu"
                 }
 

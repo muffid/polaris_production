@@ -175,7 +175,7 @@ class DataEcommSettingController extends Controller
 
     }
 
-    //http://localhost:3000/ecommerce/AllSelesaiSetting/1s/2023-10-20
+
     public function getFinishedSettingByDate($date){
         $client = new Client();
         try{

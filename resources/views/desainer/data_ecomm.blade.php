@@ -88,7 +88,7 @@
                                                     <tr>
                                                         <th>Status Setting</th><th>No Urut</th><th>Tanggal Order</th><th>Tanggal Input</th>
                                                         <th>Akun</th><th>Pengorder</th><th>Penerima</th>
-                                                        <th>No Order</th><th>SKU</th><th>Ekspedisi</th><th>Warna</th><th>Jumlah</th><th>Bahan</th>
+                                                        <th>No Order</th><th>SKU</th><th>Ekspedisi</th><th>No Resi</th><th>Warna</th><th>Jumlah</th><th>Bahan</th>
                                                         <th>Laminasi</th><th>Mesin</th><th>Dimensi</th>
                                                     </tr>
                                                 </thead>
@@ -110,6 +110,7 @@
                                                         <td>{{$data_ecomm[$i]->nomor_order}}</td>
                                                         <td>{{$data_ecomm[$i]->sku}}</td>
                                                         <td>{{$data_ecomm[$i]->nama_ekspedisi}}</td>
+                                                        <td>{{$data_ecomm[$i]->resi}}</td>
                                                         <td>{{$data_ecomm[$i]->warna}}</td>
                                                         <td>{{$data_ecomm[$i]->qty_order}}</td>
                                                         <td>{{$data_ecomm[$i]->nama_bahan_cetak}}</td>

@@ -111,6 +111,11 @@ Route::middleware('setting')->group(function(){
 Route::middleware('operator')->group(function(){
     Route::get('/dashboard_operator',[DashboardOperatorController::class,'index'])->name('dashboard_operator');
     Route::get('/scan_order_operator',[ScanOrderOperatorController::class,'index'])->name('scan_order_operator');
+
+    //ajax
+    Route::get('/get_order_ecomm_by_resi/{no_resi}',[ScanOrderOperatorController::class,'getDataEcommByResi'])->name('get_order_ecomm_by_resi');
+    //ajax
+    Route::get('/set_tuntas_ecomm/{no_resi}',[ScanOrderOperatorController::class,'setTuntas'])->name('set_tuntas_ecomm');
 });
 
 
