@@ -50,6 +50,7 @@ class PostInputEcomm extends Controller
         $admAppDistribusi = "-";
         $return_order = "-";
         $resi = $request->input('resi');
+        $no_sc = $request->input('no_sc');
 
 
         //  dd($timeStamps);
@@ -81,6 +82,7 @@ class PostInputEcomm extends Controller
                "id_ekspedisi" => $ekspedisi,
                "return_order" => $return_order,
                "resi" => $resi,
+               "no_sc" => $no_sc,
             ];
 
             $response = $client->post($url, [
@@ -100,7 +102,7 @@ class PostInputEcomm extends Controller
                                 $singleData[0]->nama_akun_order.'-'.$singleData[0]->nama_penerima.'-'.
                                 $singleData[0]->sku.'-'.
                                 $singleData[0]->warna.'-'.$singleData[0]->panjang_bahan.'-'.
-                                $singleData[0]->nama_ekspedisi.'-'.$singleData[0]->order_time;
+                                $singleData[0]->nama_ekspedisi.'-'.substr($singleData[0]->order_time,0,-6);
 
                 session()->flash('message', 'success');
                 session()->flash('copy',$textToCopy );
@@ -114,7 +116,10 @@ class PostInputEcomm extends Controller
 
             $response = $e->getResponse();
             $statusCode = $response->getStatusCode();
-            dd($response);
+            if($statusCode === 409){
+                session()->flash('message', 'duplicated');
+                return redirect()->route('input_ecomm_page');
+            }
             if ($statusCode === 401) {
                 return $e;
             } else {

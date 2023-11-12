@@ -62,6 +62,19 @@
             </div>
         </a>
 
+        <a href="{{route('data_ecomm_page')}}">
+            <div class="flex flex-row items-center justify-start relative cursor-pointer ">
+                @if($active=='Return')
+                <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
+            @else
+            @endif
+                <div class="w-full @if($active == 'Return') bg-slate-100 @endif hover:bg-slate-100  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
+                    <i class="bi bi-box-seam-fill"></i>
+                    <h1 class="text-sm font-semibold">Order Return</h1>
+                </div>
+            </div>
+        </a>
+
 
         {{-- <a href="input_ecommerce">
             <div class="flex  flex-row items-center justify-start relative cursor-pointer">

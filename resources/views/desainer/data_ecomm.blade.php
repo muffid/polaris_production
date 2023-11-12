@@ -86,7 +86,7 @@
                                         <table id="data_ecomm" class="cell-border w-full display nowrap text-left text-[0.8rem] py-4" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>Status Setting</th><th>No Urut</th><th>Tanggal Order</th><th>Tanggal Input</th>
+                                                        <th>Status Setting</th><th>No Urut</th><th>No SC</th><th>Tanggal Order</th><th>Tanggal Input</th>
                                                         <th>Akun</th><th>Pengorder</th><th>Penerima</th>
                                                         <th>No Order</th><th>SKU</th><th>Ekspedisi</th><th>No Resi</th><th>Warna</th><th>Jumlah</th><th>Bahan</th>
                                                         <th>Laminasi</th><th>Mesin</th><th>Dimensi</th>
@@ -102,6 +102,7 @@
                                                             </div>
                                                         </td>
                                                         <td>{{$data_ecomm[$i]->no_urut}}</td>
+                                                        <td>{{$data_ecomm[$i]->no_sc}}</td>
                                                         <td>{{$data_ecomm[$i]->tanggal_order_formatted}}</td>
                                                         <td>{{$data_ecomm[$i]->tanggal_input_formatted}}</td>
                                                         <td>{{$data_ecomm[$i]->nama_akun_ecom}}</td>
@@ -119,7 +120,7 @@
                                                         <td>{{$data_ecomm[$i]->lebar_bahan}} x {{$data_ecomm[$i]->panjang_bahan}}</td>
                                                     </tr>
                                                 @endfor
-                                                </tfoot>
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>

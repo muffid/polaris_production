@@ -37,6 +37,7 @@ use App\Http\Controllers\settingController\FinnishedSettingController;
 use App\Http\Controllers\operatorController\LoginOperatorController;
 use App\Http\Controllers\operatorController\DashboardOperatorController;
 use App\Http\Controllers\operatorController\ScanOrderOperatorController;
+use App\Http\Controllers\operatorController\CetakOrderOperatorController;
 
 
 Route::get('/', function () {return view('login');})->middleware('isLogin')->name('login');
@@ -98,8 +99,7 @@ Route::middleware('setting')->group(function(){
     Route::get('/get_ecomm_on_proses/{id_akun}',[DataEcommSettingController::class,'getEcommOnProses'])->name('get_ecomm_on_proses');
     //ajax
     Route::get('/cancel_setting/{id_ecomm}',[DataEcommSettingController::class,'cancelSetting'])->name('cancel_setting');
-    //ajax
-    Route::get('/finnish_order/{id_ecomm}',[DataEcommSettingController::class,'finnishSetting'])->name('finnish_order');
+
     //ajax
     Route::get('/get_finished_setting_today',[DataEcommSettingController::class,'getFinishedSettingToday'])->name('get_finished_setting_today');
     //ajax
@@ -111,11 +111,15 @@ Route::middleware('setting')->group(function(){
 Route::middleware('operator')->group(function(){
     Route::get('/dashboard_operator',[DashboardOperatorController::class,'index'])->name('dashboard_operator');
     Route::get('/scan_order_operator',[ScanOrderOperatorController::class,'index'])->name('scan_order_operator');
-
+    Route::get('/cetak_order_operator',[CetakOrderOperatorController::class,'index'])->name('cetak_order_operator');
+    //ajax
+    Route::get('/finnish_order/{id_ecomm}',[DataEcommSettingController::class,'finnishSetting'])->name('finnish_order');
     //ajax
     Route::get('/get_order_ecomm_by_resi/{no_resi}',[ScanOrderOperatorController::class,'getDataEcommByResi'])->name('get_order_ecomm_by_resi');
     //ajax
     Route::get('/set_tuntas_ecomm/{no_resi}',[ScanOrderOperatorController::class,'setTuntas'])->name('set_tuntas_ecomm');
+    //ajax
+    Route::get('/get_allsetting_onproses',[CetakOrderOperatorController::class,'getEcommOnProses'])->name('get_allsetting_onproses');
 });
 
 

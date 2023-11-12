@@ -25,6 +25,7 @@ class EditEcommController extends Controller{
         $jumlah = $request->input('jumlah');
         $note = $request->input('note');
         $ekspedisi = $request->input('ekspedisi');
+        $no_sc = $request->input('no_sc')."-".substr(session('username'),0,3);
 
 
 
@@ -53,7 +54,7 @@ class EditEcommController extends Controller{
            "qty_order" => $jumlah,
            "note" => $note,
            "id_ekspedisi" => $ekspedisi,
-
+           "no_sc" => $no_sc,
         ];
 
 
@@ -76,7 +77,7 @@ class EditEcommController extends Controller{
                             $singleData[0]->nama_akun_order.'-'.$singleData[0]->nama_penerima.'-'.
                             $singleData[0]->sku.'-'.
                             $singleData[0]->warna.'-'.$singleData[0]->panjang_bahan.'-'.
-                            $singleData[0]->nama_ekspedisi.'-'.$singleData[0]->order_time;
+                            $singleData[0]->nama_ekspedisi.'-'.substr($singleData[0]->order_time,0,-6);
 
             session()->flash('message', 'success');
             session()->flash('copy',$textToCopy );

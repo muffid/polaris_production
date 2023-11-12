@@ -10,6 +10,14 @@ class prepareEditEcomController extends Controller
 {
 
 
+    private function convertNoSc($noSc){
+
+        $delimiter = "-";
+        $position = strpos($noSc, $delimiter);
+        $result = substr($noSc, 0, $position);
+        return $result;
+
+    }
 
     private function getMaster(){
         $client = new Client();
@@ -48,12 +56,15 @@ class prepareEditEcomController extends Controller
         $mesinCetak = $dataEcomm["mesin_cetak"];
         $bahanCetak = $dataEcomm["bahan_cetak"];
 
+        $dataOrder = json_decode($orderUnapprove);
+
 
         $data = [
+            'no_sc' => $this->convertNoSc($dataOrder[0]->no_sc),
             'ekspedisi' =>$ekspedisi,
             'laminasi' => $laminasi,
             'akun_ecom' => $akunEcom,
-            'order_unapprove' => json_decode($orderUnapprove),
+            'order_unapprove' => $dataOrder,
             'mesin_cetak' => $mesinCetak,
             'bahan_cetak' => $bahanCetak,
             'active' => 'Ecommerce',

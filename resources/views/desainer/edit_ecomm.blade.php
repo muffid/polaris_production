@@ -52,6 +52,11 @@
                                     @csrf
                                     <div class="grid grid-cols-2 p-8 text-sm gap-y-4 items-start w-full bg-white rounded-lg">
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
+                                            <label for="no_sc" class="text-left block text-sm w-1/3 font-medium text-gray-700">No SC</label>
+                                            <input class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="no_sc" type="number"  name="no_sc" required value="{{$no_sc}}">
+                                        </div>
+                                        <div></div>
+                                        <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="tanggal_order" class="text-left block text-sm w-1/3 font-medium text-gray-700">Tanggal Order</label>
                                             <input class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="tanggal_order" type="text"  name="tanggal_order" required value="{{$order_unapprove[0]->order_time}}">
                                         </div>

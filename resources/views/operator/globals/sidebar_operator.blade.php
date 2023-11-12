@@ -50,13 +50,25 @@
         </a>
         <a href="{{route('dashboard_operator')}}">
             <div class="flex flex-row items-center justify-start relative cursor-pointer">
-                    @if($active=='ScanReturn')
+                    @if($active=='Return')
                         <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
                     @else
                     @endif
-                    <div class="w-full @if($active == 'ScanReturn') bg-slate-100 @endif flex flex-row hover:bg-slate-100 items-center justify-start py-2 pl-6 lg:pl-14 gap-x-2">
-                        <i class="bi bi-qr-code-scan"></i>
-                        <h1 class="text-sm font-semibold">Scan Return</h1>
+                    <div class="w-full @if($active == 'Return') bg-slate-100 @endif flex flex-row hover:bg-slate-100 items-center justify-start py-2 pl-6 lg:pl-14 gap-x-2">
+                        <i class="bi bi-box-seam-fill"></i>
+                        <h1 class="text-sm font-semibold">Order Return</h1>
+                    </div>
+            </div>
+        </a>
+        <a href="{{route('cetak_order_operator')}}">
+            <div class="flex flex-row items-center justify-start relative cursor-pointer">
+                    @if($active=='Print')
+                        <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
+                    @else
+                    @endif
+                    <div class="w-full @if($active == 'Print') bg-slate-100 @endif flex flex-row hover:bg-slate-100 items-center justify-start py-2 pl-6 lg:pl-14 gap-x-2">
+                        <i class="bi bi-printer-fill"></i>
+                        <h1 class="text-sm font-semibold">Cetak Order</h1>
                     </div>
             </div>
         </a>

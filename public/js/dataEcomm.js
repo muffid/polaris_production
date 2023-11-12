@@ -36,7 +36,7 @@ function callAjaxDataEcomm(id_akun){
             var jsonData = JSON.parse(response);
             var classGiven = "";
             let iconGiven= "";
-            // console.log(jsonData);
+            console.log(jsonData);
             for (var i = 0; i < jsonData.length; i++) {
                 if(jsonData[i].status=='Belum Setting'){
                     classGiven = " text-orange-700";
@@ -53,6 +53,7 @@ function callAjaxDataEcomm(id_akun){
                 tableDataEcom.row.add([
                    '<h1 class="rounded-full py-1 px-2 '+classGiven+' text-center">'+iconGiven+' '+jsonData[i].status+'</h1>',
                     jsonData[i].no_urut,
+                    jsonData[i].no_sc,
                     jsonData[i].tanggal_order_formatted,
                     jsonData[i].tanggal_input_formatted,
                     jsonData[i].nama_akun_ecom,
@@ -61,6 +62,7 @@ function callAjaxDataEcomm(id_akun){
                     jsonData[i].nomor_order,
                     jsonData[i].sku,
                     jsonData[i].nama_ekspedisi,
+                    jsonData[i].resi,
                     jsonData[i].warna,
                     jsonData[i].qty_order,
                     jsonData[i].nama_bahan_cetak,

@@ -1,19 +1,19 @@
-var tableDataEcom = new DataTable('#table_task_ecomm',{
+var tableDataEcom = new DataTable('#table_to_cetak',{
     "pageLength":100,
 });
 
 setTimeout(function() {
-    callAjaxDataEcomm('{{session("id")}}');
+    callAjaxDataEcomm();
 }, 1000);
 
-function callAjaxDataEcomm(id_akun){
+function callAjaxDataEcomm(){
 
 var loader = $("#loader");
-var table = $("#table_data_ecomm");
+var table = $("#div_to_cetak");
 var fileName = '';
 
 $.ajax({
-    url:"get_ecomm_on_proses/"+id_akun,
+    url:"get_allsetting_onproses/",
     type: 'GET',
     dataType: 'json',
     success:function(response){
@@ -70,7 +70,7 @@ $.ajax({
                     '-'+jsonData[i]['nama_ekspedisi']+'-'+jsonData[i]['order_time'];
 
         tableDataEcom.row.add([
-            '<div class="container_'+ jsonData[i].id_order_ecom+' flex items-center  gap-x-2"><div class="'+ jsonData[i].id_order_ecom+' flex items-center justify-center gap-x-1  rounded-sm px-2 py-2 bg-orange-200 text-orange-700 text-sm cursor-pointer text-center" onclick=handleCancelSetting("'+ jsonData[i].id_order_ecom+'")>batalkan <i class="bi bi-arrow-return-right"></i></div></div>',
+            '<div class="container_'+ jsonData[i].id_order_ecom+' flex items-center  gap-x-2"><div class="'+ jsonData[i].id_order_ecom+' flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-blue-200 text-blue-700 text-sm cursor-pointer text-center" onclick=handleSelesaiSetting("'+ jsonData[i].id_order_ecom+'")>tandai selesai <i class="bi bi-check-all"></i></div></div>',
             jsonData[i].no_urut,
             jsonData[i].order_time,
             timeStamp,
@@ -92,12 +92,13 @@ function handleSelesaiSetting(id_ecomm){
     var container = $('.container_'+id_ecomm)
     container.append(divElement)
 
-
+    console.log(id_ecomm);
     $.ajax({
         url:'finnish_order/'+id_ecomm,
         type: 'GET',
         dataType: 'json',
         success:function(response){
+            console.log(response);
             if(response.message === "ok"){
                 updateTable(id_ecomm);
                 iziToast.success({
@@ -130,52 +131,6 @@ function handleSelesaiSetting(id_ecomm){
     });
 }
 
-function handleCancelSetting(id_ecomm){
-    var btn = $('.'+id_ecomm);
-    var divElement = $('<div>', {
-        class: 'spinner-4',
-    });
-    btn.remove()
-    var container = $('.container_'+id_ecomm)
-    container.append(divElement)
-
-
-    $.ajax({
-        url:'cancel_setting/'+id_ecomm,
-        type: 'GET',
-        dataType: 'json',
-        success:function(response){
-            if(response.message === "ok"){
-                updateTable(id_ecomm);
-                iziToast.success({
-                    title: 'Berhasil',
-                    message: 'order berhasil dibatalkan',
-                    position: 'topRight',
-                    theme: 'light',
-                    color: 'dark',
-                });
-            }else if(response.message === "booked"){
-                updateTable(id_ecomm);
-                iziToast.warning({
-                    title: 'Invalid',
-                    message: 'Tugas sudah disetting ',
-                    position: 'topRight',
-                    theme: 'light',
-                    color: 'dark',
-                });
-            }else{
-                iziToast.error({
-                    title: 'Gagal',
-                    message: 'Terjadi Kesalahan',
-                    position: 'topRight',
-                    theme: 'light',
-                    color: 'dark',
-                });
-            }
-
-        }
-    });
-}
 
 
 function updateTable(className){

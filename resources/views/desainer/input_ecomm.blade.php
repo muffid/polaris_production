@@ -48,10 +48,16 @@
                         });
                     }
                 })
-            }else{
+            }else if(message == 'fail'){
                 iziToast.error({
                     title: 'Failed',
                     message: 'Data gagal disimpan',
+                    position: 'topRight',
+                });
+            }else if(message == 'duplicated'){
+                iziToast.warning({
+                    title: 'Duplicated',
+                    message: 'Data Sudah Diinput',
                     position: 'topRight',
                 });
             }
@@ -105,6 +111,14 @@
                                     <form action="save_ecomm" method="POST">
                                     @csrf
                                     <div class="grid grid-cols-1 lg:grid-cols-2 p-8 text-sm gap-y-4 items-start w-full bg-white rounded-lg">
+                                        <div class=" flex flex-row items-center justify-between gap-x-2 px-4 w-full">
+                                            <label for="no_sc" class="text-left block text-sm w-1/3 font-medium text-gray-700">Nomor SC</label>
+                                            <div class="relative w-full">
+
+                                                <input class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="no_sc" type="number"  name="no_sc" required>
+                                            </div>
+                                        </div>
+                                        <div></div>
                                         <div class=" flex flex-row items-center justify-between gap-x-2 px-4 w-full">
                                             <label for="tanggal_order" class="text-left block text-sm w-1/3 font-medium text-gray-700">Tanggal Order</label>
                                             <div class="relative w-full">
@@ -262,7 +276,7 @@
                                         <table id="example" class="cell-border w-full display nowrap text-left text-sm" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>Aksi</th><th>No Urut</th><th>Tanggal Order</th><th>Tanggal Input</th><th>Akun</th><th>Pengorder</th><th>Penerima</th>
+                                                        <th>Aksi</th><th>No</th><th>No SC</th><th>Tanggal Order</th><th>Tanggal Input</th><th>Akun</th><th>Pengorder</th><th>Penerima</th>
                                                         <th>No Order</th><th>SKU</th><th>Ekspedisi</th><th>Warna</th><th>Jumlah</th><th>Bahan</th>
                                                         <th>Laminasi</th><th>Mesin</th><th>No Resi</th><th>Dimensi</th>
                                                     </tr>
@@ -275,14 +289,15 @@
                                                                     <h1
                                                                         onclick="copyText(({{json_encode($order_unapprove[$i]->no_urut.'-'.$order_unapprove[$i]->nama_akun_ecom.'-'.
                                                                         $order_unapprove[$i]->nama_akun_order.'-'.$order_unapprove[$i]->nama_penerima.'-'.
-                                                                        $order_unapprove[$i]->sku.'-'.$order_unapprove[$i]->warna.$order_unapprove[$i]->panjang_bahan.'-'.$order_unapprove[$i]->nama_ekspedisi.'-'. $order_unapprove[$i]->order_time)}}))"
+                                                                        $order_unapprove[$i]->sku.'-'.$order_unapprove[$i]->warna.$order_unapprove[$i]->panjang_bahan.'-'.$order_unapprove[$i]->nama_ekspedisi.'-'. substr($order_unapprove[$i]->order_time,0,-6))}}))"
                                                                         class="cursor-pointer text-blue-700 hover:underline " title="klik untuk mengkopi text sebagai nama file"><i class="bi bi-clipboard"></i>
                                                                     </h1>
                                                                     <h1 onclick="window.location.href = '{{ route('edit_ecom', ['id_akun' => $order_unapprove[$i]->id_akun,'id_ecom' =>  $order_unapprove[$i]->id_order_ecom]) }}'" class="cursor-pointer text-green-700 hover:underline "><i class="bi bi-pencil-square"></i></h1>
                                                                     <h1 onclick="showDeleteDialog({{json_encode($order_unapprove[$i]->id_order_ecom)}},{{json_encode($order_unapprove[$i]->nomor_order)}},{{json_encode('tableRow'.$i)}})" class="cursor-pointer text-red-700 hover:underline"><i class="bi bi-trash"></i></h1>
                                                                 </div>
                                                             </td>
-                                                            <td>{{$order_unapprove[$i]->no_urut}}</td>
+                                                            <td>{{$i+1}}</td>
+                                                            <td>{{$order_unapprove[$i]->no_sc}}</td>
                                                             <td>{{$order_unapprove[$i]->tanggal_order_formatted}}</td>
                                                             <td>{{$order_unapprove[$i]->tanggal_input_formatted}}</td>
                                                             <td>{{$order_unapprove[$i]->nama_akun_ecom}}</td>
