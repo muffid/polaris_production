@@ -94,10 +94,10 @@
                             <div class="flex flex-col p-6 text-center w-full gap-y-4 mt-14">
                                 <div class="flex flex-col  text-center w-full gap-y-4">
                                     <div class="w-full my-4 flex flex-row items-center border-b text-sm">
-                                        <a href="#" class="px-4 py-3 border-b-2  border-blue-700 bg-white rounded-t-xl">
+                                        <a href="{{route('input_ecomm_page')}}" class="px-4 py-3 border-b-2  border-blue-700 bg-white rounded-t-xl">
                                             Ecommerce
                                         </a>
-                                        <a href="#" class="px-4 py-3 ">
+                                        <a href="{{route('input_nonecommerce')}}" class="px-4 py-3 ">
                                             Non Ecommerce
                                         </a>
                                    </div>
@@ -115,21 +115,23 @@
                                             <label for="no_sc" class="text-left block text-sm w-1/3 font-medium text-gray-700">Nomor SC</label>
                                             <div class="relative w-full">
 
-                                                <input class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="no_sc" type="number"  name="no_sc" required>
+                                                <input class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="no_sc" type="number"  name="no_sc">
                                             </div>
                                         </div>
                                         <div></div>
                                         <div class=" flex flex-row items-center justify-between gap-x-2 px-4 w-full">
                                             <label for="tanggal_order" class="text-left block text-sm w-1/3 font-medium text-gray-700">Tanggal Order</label>
                                             <div class="relative w-full">
-                                                <div class="absolute inset-y-0 right-4 pl-3 flex items-center pointer-events-none">
-                                                    <i class="bi bi-calendar3 text-slate-400"></i>
+                                                <div onclick="ubahFormatTanggal()" class="absolute inset-y-0 right-4 pl-3 flex items-center cursor-pointer">
+                                                    <i class="text-slate-400 text-lg bi bi-repeat"></i>
                                                 </div>
-                                                <div class="absolute inset-y-0 right-10 pl-3 flex items-center pointer-events-none">
+                                                {{-- <div class="absolute inset-y-0 right-10 pl-3 flex items-center pointer-events-none">
                                                     <i class="bi bi-caret-down-fill text-xs text-slate-400"></i>
-                                                </div>
-                                                <input placeholder="pilih waktu" class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="tanggal_order" type="text"  name="tanggal_order" required>
+                                                </div> --}}
+                                                {{-- <h1 onclick="ubahFormatTanggal()" class="absolute inset-y-1 right-1 cursor-pointer"><i class="bi bi-repeat"></i></h1> --}}
+                                                <input onblur="ubahFormatTanggal()" placeholder="pilih waktu" class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="tanggal_order" type="text"  name="tanggal_order" required>
                                             </div>
+
                                         </div>
                                         <div class=" flex flex-row items-center justify-between  text-sm  gap-x-2 px-4 w-full">
                                             <label for="akun" class="text-left block font-medium text-gray-700 w-1/3">Akun</label>
@@ -185,7 +187,7 @@
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="jumlah" class="w-1/3 text-left block text-sm font-medium text-gray-700">Jumlah</label>
-                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="jumlah" type="text"  name="jumlah" required>
+                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="jumlah" type="number"  name="jumlah" required>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="bahan" class="w-1/3 text-left block text-sm font-medium text-gray-700">Bahan</label>

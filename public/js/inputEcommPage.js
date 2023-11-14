@@ -12,12 +12,46 @@ $(window).on("load", function() {
         $("#lebar_bahan").val(nilaiLebar);
     }
 
-    flatpickr("#tanggal_order", {
-        // Opsi-opsi konfigurasi di sini
-        enableTime: true,
-        dateFormat: "Y-m-d H:i",
-        time_24hr: true,
-    });
+    // flatpickr("#tanggal_order", {
+    //     // Opsi-opsi konfigurasi di sini
+    //     enableTime: true,
+    //     dateFormat: "Y-m-d H:i",
+    //     time_24hr: true,
+    // });
+
+    function ubahFormatTanggal() {
+
+        let tanggalInput = $("#tanggal_order").val()
+        let tanggalObj;
+        const formatDMMYYYY = /^\d{2}\/\d{2}\/\d{4}$/;
+
+        if (formatDMMYYYY.test(tanggalInput)) {
+            const [tanggal, bulan, tahun] = tanggalInput.split('/');
+            tanggalObj = new Date(`${tahun}-${bulan}-${tanggal}`);
+        } else {
+            try {
+                tanggalObj = new Date(tanggalInput);
+            } catch (error) {
+                console.error("Format tanggal tidak dikenali.");
+                return null;
+            }
+        }
+
+
+        const tahun = tanggalObj.getFullYear();
+        const bulan = ('0' + (tanggalObj.getMonth() + 1)).slice(-2);
+        const tanggal = ('0' + tanggalObj.getDate()).slice(-2);
+
+
+        const jam = ('0' + tanggalObj.getHours()).slice(-2);
+        const menit = ('0' + tanggalObj.getMinutes()).slice(-2);
+
+
+        const hasilFormat = `${tahun}-${bulan}-${tanggal} ${jam}:${menit}`;
+        console.log(hasilFormat);
+        $("#tanggal_order").val(hasilFormat)
+
+    }
 
     function callAjax() {
         var myTable = $('#example').DataTable();

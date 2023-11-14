@@ -70,7 +70,7 @@ $.ajax({
                     '-'+jsonData[i]['nama_ekspedisi']+'-'+jsonData[i]['order_time'];
 
         tableDataEcom.row.add([
-            '<div class="container_'+ jsonData[i].id_order_ecom+' flex items-center  gap-x-2"><div class="'+ jsonData[i].id_order_ecom+' flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-blue-200 text-blue-700 text-sm cursor-pointer text-center" onclick=handleSelesaiSetting("'+ jsonData[i].id_order_ecom+'")>tandai selesai <i class="bi bi-check-all"></i></div></div>',
+            '<div class="container_'+ jsonData[i].id_order_ecom+' flex items-center  gap-x-2"><div class="'+ jsonData[i].id_order_ecom+' flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-blue-200 text-blue-700 text-sm cursor-pointer text-center" onclick=handleSelesaiSetting("'+ jsonData[i].id_order_ecom+'")>validasi <i class="bi bi-check-all"></i></div><div class="'+ jsonData[i].id_order_ecom+' flex items-center justify-center gap-x-1  rounded-sm px-2 py-2 bg-orange-200 text-orange-700 text-sm cursor-pointer text-center" onclick=handleCancelSetting("'+ jsonData[i].id_order_ecom+'")>batalkan <i class="bi bi-arrow-return-right"></i></div></div>',
             jsonData[i].no_urut,
             jsonData[i].order_time,
             timeStamp,
@@ -80,7 +80,7 @@ $.ajax({
     }
 });
 
-// <div class="'+ jsonData[i].id_order_ecom+' flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-blue-200 text-blue-700 text-sm cursor-pointer text-center" onclick=handleSelesaiSetting("'+ jsonData[i].id_order_ecom+'")>tandai selesai <i class="bi bi-check-all"></i></div>
+// <div class="'+ jsonData[i].id_order_ecom+' flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-blue-200 text-blue-700 text-sm cursor-pointer text-center" onclick=handleSelesaiSetting("'+ jsonData[i].id_order_ecom+'")>mulai cetak<i class="bi bi-printer-fill"></i></div>
 }
 
 function handleSelesaiSetting(id_ecomm){
@@ -103,9 +103,56 @@ function handleSelesaiSetting(id_ecomm){
                 updateTable(id_ecomm);
                 iziToast.success({
                     title: 'Berhasil',
-                    message: 'order berhasil diselesaikan',
+                    message: 'silahkan cetak order',
                     position: 'topRight',
                     theme: 'green',
+                    color: 'dark',
+                });
+            }else if(response.message === "booked"){
+                updateTable(id_ecomm);
+                iziToast.warning({
+                    title: 'Invalid',
+                    message: 'Tugas sudah disetting ',
+                    position: 'topRight',
+                    theme: 'light',
+                    color: 'dark',
+                });
+            }else{
+                iziToast.error({
+                    title: 'Gagal',
+                    message: 'Terjadi Kesalahan',
+                    position: 'topRight',
+                    theme: 'light',
+                    color: 'dark',
+                });
+            }
+
+        }
+    });
+}
+
+function handleCancelSetting(id_ecomm){
+    var btn = $('.'+id_ecomm);
+    var divElement = $('<div>', {
+        class: 'spinner-4',
+    });
+    btn.remove()
+    var container = $('.container_'+id_ecomm)
+    container.append(divElement)
+
+
+    $.ajax({
+        url:'cancel_setting/'+id_ecomm,
+        type: 'GET',
+        dataType: 'json',
+        success:function(response){
+            if(response.message === "ok"){
+                updateTable(id_ecomm);
+                iziToast.success({
+                    title: 'Berhasil',
+                    message: 'order berhasil dibatalkan',
+                    position: 'topRight',
+                    theme: 'light',
                     color: 'dark',
                 });
             }else if(response.message === "booked"){

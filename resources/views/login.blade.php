@@ -13,7 +13,7 @@
 <body class=" bg-[#E9E9E9] font-nunito">
     <div class="max-w-[1700px] mx-auto my-auto flex items-center justify-center h-screen ">
         <div class="bg-white rounded-xl p-10 flex flex-col items-center gap-y-6 mx-auto shadow-slate-300 shadow-lg">
-            <img src="{{ asset('img/logo.png') }}" alt="logo" class="w-60">
+            <img src="{{ asset('img/logo.png') }}" alt="logo" class="w-20">
             <div class="flex flex-col items-center gap-y-3 lg:gap-y-5 p-4">
 
                 <div onclick="window.location.href = '{{ route('login_admin_page') }}'" class="flex flex-row items-center justify-between bg-slate-50 rounded-full p-2 gap-x-3 w-[250px] lg:w-[300px] hover:text-blue-800 cursor-pointer hover:scale-105 transition-transform ease-out">

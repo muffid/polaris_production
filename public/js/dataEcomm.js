@@ -11,8 +11,7 @@ var tableDataEcom = new DataTable('#data_ecomm',{
 });
 
 function callAjaxDataEcomm(id_akun){
-    //tampilkan loader
-    console.log("this");
+
 
     var tanggal = $("#tanggal_order").val();
 

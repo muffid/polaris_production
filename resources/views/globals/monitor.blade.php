@@ -69,7 +69,7 @@
                             <table id="data_monitor" class="cell-border w-full nowrap text-left mt-4 " style="width:100%">
                                     <thead>
                                         <tr>
-                                            <th>No</th><th>Waktu Order</th><th>Nama File</th><th>Diinput Oleh</th><th>Status</th><th>Disetting Oleh</th>
+                                            <th>No</th><th>Waktu Order</th><th>Pengorder</th><th>Qty</th><th>Nama File</th><th>Diinput Oleh</th><th>Status</th><th>Disetting Oleh</th>
                                         </tr>
                                     </thead>
                                     <tbody>

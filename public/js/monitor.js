@@ -83,6 +83,8 @@ function callAjaxDataEcomm(){
             tableDataMonitor.row.add([
                 i+1,
                 '<h1 class="text-xs text-slate-700">'+countTimeElapsed(timeOrder)+'</h1>',
+                jsonData[i].nama_akun_order,
+                jsonData[i].qty_order+" pcs",
                 fileName,
                 DesainerColumn,
                 statusColumn,

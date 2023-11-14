@@ -24,6 +24,9 @@ use App\Http\Controllers\desainerController\prepareEditEcomController;
 use App\Http\Controllers\desainerController\EditEcommController;
 use App\Http\Controllers\desainerController\DeleteOrderEcomController;
 use App\Http\Controllers\desainerController\DataEcommController;
+use App\Http\Controllers\desainerController\InputOrderNonEcomController;
+use App\Http\Controllers\desainerController\OrderReturnController;
+
 
 // Setting Controller
 use App\Http\Controllers\settingController\LoginSettingController;
@@ -71,10 +74,17 @@ Route::middleware('desainer')->group(function(){
     Route::get('/input_ecommerce',[InputEcommController::class,'index'])->name('input_ecomm_page');
     Route::get('/data_ecomm_page',[DataEcommController::class,'index'])->name('data_ecomm_page');
     Route::get('/edit_ecom/{id_akun}/{id_ecom}',[prepareEditEcomController::class,'index'])->name('edit_ecom');
+    Route::get('/order_return',[OrderReturnController::class,'index'])->name('order_return');
+    //ajax
+    Route::get('/order_tuntas_bulan/{bulan}',[OrderReturnController::class,'getOrderByBulan'])->name('order_tuntas_bulan');
     //ajax
     Route::get('/delete_order_ecom/{id_ecomm}',[DeleteOrderEcomController::class,'deleteOrderEcom'])->name('delete_order_ecom');
     //ajax
     Route::get('/get_ecomm_by_date/{id_akun}/{date}',[DataEcommController::class,'getDataEcommByDate'])->name('get_ecomm_by_date');
+
+    //-------------- NON ECOMM ------------------------//
+    Route::get('/input_nonecommerce',[InputOrderNonEcomController::class,'index'])->name('input_nonecommerce');
+
 });
 
 Route::middleware('admin')->group(function(){
@@ -97,8 +107,7 @@ Route::middleware('setting')->group(function(){
     Route::get('/handle_setting/{id_ecomm}',[EcommHandleSetting::class,'handleSetting'])->name('handle_setting');
     //ajax
     Route::get('/get_ecomm_on_proses/{id_akun}',[DataEcommSettingController::class,'getEcommOnProses'])->name('get_ecomm_on_proses');
-    //ajax
-    Route::get('/cancel_setting/{id_ecomm}',[DataEcommSettingController::class,'cancelSetting'])->name('cancel_setting');
+
 
     //ajax
     Route::get('/get_finished_setting_today',[DataEcommSettingController::class,'getFinishedSettingToday'])->name('get_finished_setting_today');
@@ -120,6 +129,9 @@ Route::middleware('operator')->group(function(){
     Route::get('/set_tuntas_ecomm/{no_resi}',[ScanOrderOperatorController::class,'setTuntas'])->name('set_tuntas_ecomm');
     //ajax
     Route::get('/get_allsetting_onproses',[CetakOrderOperatorController::class,'getEcommOnProses'])->name('get_allsetting_onproses');
+
+     //ajax
+     Route::get('/cancel_setting/{id_ecomm}',[DataEcommSettingController::class,'cancelSetting'])->name('cancel_setting');
 });
 
 
