@@ -37,6 +37,7 @@ class CetakOrderOperatorController extends Controller
             $result = [
                 "data" => $res
             ];
+
             return response()->json($res);
         } catch (ClientException $e) {
             $response = $e->getResponse();

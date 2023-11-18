@@ -92,7 +92,7 @@
                         {{-- performa --}}
                         @include('template/header')
                             <div class="flex flex-col p-6 text-center w-full gap-y-4 mt-14">
-                                <div class="flex flex-col  text-center w-full gap-y-4">
+                                <div class="flex flex-col text-center w-full gap-y-4">
                                     <div class="w-full my-4 flex flex-row items-center border-b text-sm">
                                         <a href="{{route('input_ecomm_page')}}" class="px-4 py-3 border-b-2  border-blue-700 bg-white rounded-t-xl">
                                             Ecommerce
@@ -102,11 +102,15 @@
                                         </a>
                                    </div>
                                     <div class="flex flex-row items-center gap-x-4 mt-2">
+
                                         <img src="{{ asset('img/online-shop.png') }}" alt="logo" class=" w-8 ">
                                         <div class="flex flex-col p-2 items-start ">
                                             <h1 class="text-lg font-bold text-emerald-900">Input Order Ecommerce</h1>
                                             <p class="text-sm text-slate-400">Masukan Data Order </p>
                                         </div>
+                                    </div>
+                                    <div class="flex flex-row justify-end">
+                                        <h1 onclick="clearInput()" class="text-red-600 cursor-pointer px-2 py-1 bg-red-200 text-sm"><i class="bi bi-eraser"></i> Bersihkan Input</h1>
                                     </div>
                                     <form action="save_ecomm" method="POST">
                                     @csrf
@@ -114,8 +118,12 @@
                                         <div class=" flex flex-row items-center justify-between gap-x-2 px-4 w-full">
                                             <label for="no_sc" class="text-left block text-sm w-1/3 font-medium text-gray-700">Nomor SC</label>
                                             <div class="relative w-full">
+                                                @if(session()->has('no_sc'))
+                                                    <input class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="no_sc" type="number"  name="no_sc" value="{{session('no_sc')}}">
+                                                @else
+                                                    <input class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="no_sc" type="number"  name="no_sc" value="1">
+                                                @endif
 
-                                                <input class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="no_sc" type="number"  name="no_sc">
                                             </div>
                                         </div>
                                         <div></div>
@@ -125,14 +133,15 @@
                                                 <div onclick="ubahFormatTanggal()" class="absolute inset-y-0 right-4 pl-3 flex items-center cursor-pointer">
                                                     <i class="text-slate-400 text-lg bi bi-repeat"></i>
                                                 </div>
-                                                {{-- <div class="absolute inset-y-0 right-10 pl-3 flex items-center pointer-events-none">
-                                                    <i class="bi bi-caret-down-fill text-xs text-slate-400"></i>
-                                                </div> --}}
-                                                {{-- <h1 onclick="ubahFormatTanggal()" class="absolute inset-y-1 right-1 cursor-pointer"><i class="bi bi-repeat"></i></h1> --}}
+                                                @if(session()->has('data_repeat'))
+                                                    <input onblur="ubahFormatTanggal()" placeholder="pilih waktu" class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="tanggal_order" type="text"  name="tanggal_order" value="{{session('data_repeat')['tanggal_order']}}" required>
+                                                @else
                                                 <input onblur="ubahFormatTanggal()" placeholder="pilih waktu" class="appearance-none border w-full rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="tanggal_order" type="text"  name="tanggal_order" required>
+                                                @endif
                                             </div>
 
                                         </div>
+
                                         <div class=" flex flex-row items-center justify-between  text-sm  gap-x-2 px-4 w-full">
                                             <label for="akun" class="text-left block font-medium text-gray-700 w-1/3">Akun</label>
                                             <div class="relative w-full">
@@ -142,24 +151,44 @@
                                                 <div class="absolute inset-y-0 right-10 pl-3 flex items-center pointer-events-none">
                                                     <i class="bi bi-caret-down-fill text-xs text-slate-400"></i>
                                                 </div>
-                                            <select class=" w-full cursor-pointer appearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="akun" name="akun">
-                                                @for($i=0; $i<sizeof($akun_ecom); $i++)
-                                                    <option value="{{ $akun_ecom[$i]['id_akun_ecom'] }}" >{{  $akun_ecom[$i]['nama_akun_ecom'] }}</option>
-                                                 @endfor
-                                              </select>
+                                                @if(session()->has('data_repeat'))
+                                                    <select class=" w-full cursor-pointer appearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="akun" name="akun">
+                                                        @for($i=0; $i<sizeof($akun_ecom); $i++)
+                                                            <option value="{{ $akun_ecom[$i]['id_akun_ecom'] }}" @if($akun_ecom[$i]['nama_akun_ecom'] === session('data_repeat')['nama_akun_ecom'] ) selected @endif >{{  $akun_ecom[$i]['nama_akun_ecom'] }}</option>
+                                                        @endfor
+                                                    </select>
+                                                @else
+                                                    <select class=" w-full cursor-pointer appearance-none border text-sm rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="akun" name="akun">
+                                                        @for($i=0; $i<sizeof($akun_ecom); $i++)
+                                                            <option value="{{ $akun_ecom[$i]['id_akun_ecom'] }}" >{{  $akun_ecom[$i]['nama_akun_ecom'] }}</option>
+                                                        @endfor
+                                                    </select>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between  gap-x-2 px-4 w-full">
                                             <label for="akun_pengorder" class="text-left w-1/3 block text-sm font-medium text-gray-700">Akun Pengorder</label>
-                                            <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="akun_pengorder" type="text"  name="akun_pengorder" required>
+                                            @if(session()->has('data_repeat'))
+                                                <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="akun_pengorder" type="text"  name="akun_pengorder" required value="{{session('data_repeat')['akun_pengorder']}}">
+                                            @else
+                                                <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="akun_pengorder" type="text"  name="akun_pengorder" required>
+                                            @endif
                                         </div>
                                         <div class=" flex flex-row items-center justify-between  gap-x-2 px-4 w-full">
                                             <label for="nama_penerima" class="text-left w-1/3 block text-sm font-medium text-gray-700">Nama Penerima</label>
-                                            <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="nama_penerima" type="text"  name="nama_penerima" required>
+                                            @if(session()->has('data_repeat'))
+                                                <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="nama_penerima" type="text"  name="nama_penerima" required value="{{session('data_repeat')['nama_penerima']}}">
+                                            @else
+                                                <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="nama_penerima" type="text"  name="nama_penerima" required>
+                                            @endif
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="nomor_order" class="text-left w-1/3 block text-sm font-medium text-gray-700">Nomor Order</label>
-                                            <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="nomor_order" type="text"  name="nomor_order" required>
+                                            @if(session()->has('data_repeat'))
+                                                <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="nomor_order" type="text"  name="nomor_order" required value="{{session('data_repeat')['nomor_order']}}">
+                                            @else
+                                                <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="nomor_order" type="text"  name="nomor_order" required>
+                                            @endif
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="sku" class="w-1/3 text-left block text-sm font-medium text-gray-700">SKU</label>
@@ -187,7 +216,7 @@
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="jumlah" class="w-1/3 text-left block text-sm font-medium text-gray-700">Jumlah</label>
-                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="jumlah" type="number"  name="jumlah" required>
+                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="jumlah" type="number"  name="jumlah" required value="1">
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="bahan" class="w-1/3 text-left block text-sm font-medium text-gray-700">Bahan</label>
@@ -238,6 +267,10 @@
                                             </div>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
+                                            <label for="note" class="w-1/3 text-left block text-sm font-medium text-gray-700">Note</label>
+                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="note" type="text" value="-"  name="note">
+                                        </div>
+                                        <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="panjang" class="w-1/3 text-left block text-sm font-medium text-gray-700">Panjang (cm)</label>
                                             <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="panjang" type="number"  name="panjang" required>
                                         </div>
@@ -247,12 +280,13 @@
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="resi" class="w-1/3 text-left block text-sm font-medium text-gray-700">Resi</label>
-                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="resi" type="text"  name="resi" required>
+                                            @if(session()->has('data_repeat'))
+                                                <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="resi" type="text"  name="resi" required value="{{session('data_repeat')['no_resi']}}">
+                                            @else
+                                                <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="resi" type="text"  name="resi" required>
+                                            @endif
                                         </div>
-                                        <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
-                                            <label for="note" class="w-1/3 text-left block text-sm font-medium text-gray-700">Note</label>
-                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="note" type="text" value="-"  name="note">
-                                        </div>
+
                                     </div>
                                     <div class=" rounded p-4 flex flex-row justify-end items-center mt-4">
                                         <div class="flex items-center justify-between gap-x-3">
@@ -289,9 +323,9 @@
                                                             <td>
                                                                 <div class="flex flex-row items-center justify-between gap-x-3">
                                                                     <h1
-                                                                        onclick="copyText(({{json_encode($order_unapprove[$i]->no_urut.'-'.$order_unapprove[$i]->nama_akun_ecom.'-'.
-                                                                        $order_unapprove[$i]->nama_akun_order.'-'.$order_unapprove[$i]->nama_penerima.'-'.
-                                                                        $order_unapprove[$i]->sku.'-'.$order_unapprove[$i]->warna.$order_unapprove[$i]->panjang_bahan.'-'.$order_unapprove[$i]->nama_ekspedisi.'-'. substr($order_unapprove[$i]->order_time,0,-6))}}))"
+                                                                        onclick="copyText(({{json_encode($order_unapprove[$i]->no_sc.'-'.$order_unapprove[$i]->nama_akun_ecom.'-'.
+                                                                        $order_unapprove[$i]->nomor_order.'-'.$order_unapprove[$i]->nama_akun_order.'-'.$order_unapprove[$i]->nama_penerima.'-'.
+                                                                        $order_unapprove[$i]->sku.'-'.$order_unapprove[$i]->warna.'-'.substr($order_unapprove[$i]->tanggal_order_formatted,0,-6).'-'.$order_unapprove[$i]->panjang_bahan.'x'.$order_unapprove[$i]->lebar_bahan)}}))"
                                                                         class="cursor-pointer text-blue-700 hover:underline " title="klik untuk mengkopi text sebagai nama file"><i class="bi bi-clipboard"></i>
                                                                     </h1>
                                                                     <h1 onclick="window.location.href = '{{ route('edit_ecom', ['id_akun' => $order_unapprove[$i]->id_akun,'id_ecom' =>  $order_unapprove[$i]->id_order_ecom]) }}'" class="cursor-pointer text-green-700 hover:underline "><i class="bi bi-pencil-square"></i></h1>

@@ -73,13 +73,13 @@ function callAjaxDataEcomm(){
                         timeStamp = "lebih dari 3H yang lalu"
                 }
 
-                fileName = jsonData[i]['no_urut']+'-'+ jsonData[i]['nama_akun_ecom']+'-'+ jsonData[i]['nama_akun_order']+
-                            '-'+ jsonData[i]['nama_penerima']+'-'+ jsonData[i]['sku']+'-'+jsonData[i]['warna']+'-'+jsonData[i]['panjang_bahan']+
-                            '-'+jsonData[i]['nama_ekspedisi']+'-'+jsonData[i]['order_time'];
+                fileName = jsonData[i]['no_sc']+'-'+ jsonData[i]['nama_akun_ecom']+'-'+ jsonData[i]['nomor_order']+'-'+ jsonData[i]['nama_akun_order']+
+                        '-'+ jsonData[i]['nama_penerima']+'-'+ jsonData[i]['sku']+'-'+jsonData[i]['warna']+
+                       '-'+jsonData[i]['order_time'].substring(0,jsonData[i]['order_time'].length - 6)+'-'+jsonData[i]['panjang_bahan']+'x'+jsonData[i]['lebar_bahan']
 
                 tableDataEcom.row.add([
                    '<div  class="container_'+ jsonData[i].id_order_ecom+' flex items-center justify-center"><div class="'+ jsonData[i].id_order_ecom+' flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-green-200 text-green-700 text-sm cursor-pointer text-center" onclick=handleSetting("'+ jsonData[i].id_order_ecom+'")>Kerjakan <i class="bi bi-rocket-takeoff"></i></div></div>',
-                    jsonData[i].no_urut,
+
                     jsonData[i].order_time,
                     jsonData[i].nama_akun_order,
                     timeStamp,

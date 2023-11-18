@@ -58,7 +58,7 @@
                                 <table id="table_to_cetak" class="cell-border w-full display nowrap text-left " style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Aksi</th><th>No Urut</th><th>Tanggal Order</th><th>Keterangan Order</th>
+                                                <th>Aksi</th><th>Pembeli</th><th>Ekspedisi</th><th>Mesin</th><th>Bahan</th><th>Laminasi</th><th>Qty</th><th>Keterangan Order</th>
                                                 <th>Nama File</th>
                                             </tr>
                                         </thead>

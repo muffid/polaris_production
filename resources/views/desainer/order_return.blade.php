@@ -49,6 +49,14 @@
                                             <p class="text-sm text-slate-400">pilih order yang akan di return </p>
                                         </div>
                                     </div>
+                                    <div class="w-full my-4 flex flex-row items-center border-b text-sm">
+                                        <a href="{{route('order_return')}}" class="px-4 py-3 border-b-2  border-blue-700 bg-white rounded-t-xl">
+                                            Order Selesai
+                                        </a>
+                                        <a href="{{route('list_order_return')}}" class="px-4 py-3 ">
+                                            Barang Return
+                                        </a>
+                                   </div>
                                     <div class="grid grid-cols-1  p-8 text-sm gap-y-4 items-start w-full bg-white rounded-lg">
                                         <div class="flex flex-col text-sm gap-y-4 items-start w-full bg-white rounded-lg">
                                             <div class="flex flex-row gap-3 items-center">
@@ -79,7 +87,8 @@
 
                                                     <td>{{$i+1}}</td>
                                                     <td>
-                                                        <div  class="container_'+ jsonData[i].id_order_ecom+' flex items-center justify-center"><div class="'+ jsonData[i].id_order_ecom+' flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-yellow-200 text-yellow-700 text-sm cursor-pointer text-center" onclick=handleSetting()>Barang Return<i class="bi bi-box-seam"></i></div></div>
+                                                        <div  class="container_{{$order_tuntas[$i]["id_order_ecom"]}} flex items-center justify-center">
+                                                        <div class="{{$order_tuntas[$i]["id_order_ecom"]}} flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-yellow-200 text-yellow-700 text-sm cursor-pointer text-center" onclick="handleReturn('{{$order_tuntas[$i]['id_order_ecom']}}')">Jadikan Return<i class="bi bi-box-seam"></i></div></div>
                                                     </td>
                                                         {{-- <td>{{$order_tuntas[$i]["tanggal_order_formatted"]}}</td>
                                                     <td>{{$order_tuntas[$i]["tanggal_input_formatted"]}}</td> --}}

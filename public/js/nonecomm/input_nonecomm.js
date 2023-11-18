@@ -18,6 +18,7 @@ $(window).on("load", function() {
 
 var tableDataNew = new DataTable('#table_cust',{
     "select":true,
+
 });
 
 $('#table_cust tbody').on('click', 'tr', function () {

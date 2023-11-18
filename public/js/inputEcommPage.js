@@ -122,7 +122,8 @@ $(window).on("load", function() {
 
 
     function copyText(text) {
-        navigator.clipboard.writeText(text)
+
+        navigator.clipboard.writeText(text.replace(/\//g, '_'))
             .then(() => {
             console.log('Teks berhasil di-copy ke clipboard.');
             iziToast.info({
@@ -138,7 +139,7 @@ $(window).on("load", function() {
             });
     }
     function copyTextDirect(text) {
-        navigator.clipboard.writeText(text)
+        navigator.clipboard.writeText(text.replace(/\//g, '_'))
             .then(() => {
             console.log('Teks berhasil di-copy ke clipboard.');
             // iziToast.info({
@@ -156,4 +157,13 @@ $(window).on("load", function() {
 
     function updateTable(){
         tableDataNew.clear().draw();
+    }
+
+    function clearInput(){
+        $('#tanggal_order').val('')
+        $('#akun_pengorder').val('')
+        $('#nama_penerima').val('')
+        $('#nomor_order').val('')
+        $('#resi').val('')
+
     }

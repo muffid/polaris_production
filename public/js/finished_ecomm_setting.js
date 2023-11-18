@@ -76,9 +76,9 @@ $.ajax({
                 timeStamp = "lebih dari 3H yang lalu"
         }
 
-        fileName = jsonData[i]['no_urut']+'-'+ jsonData[i]['nama_akun_ecom']+'-'+ jsonData[i]['nama_akun_order']+
-                    '-'+ jsonData[i]['nama_penerima']+'-'+ jsonData[i]['sku']+'-'+jsonData[i]['warna']+'-'+jsonData[i]['panjang_bahan']+
-                    '-'+jsonData[i]['nama_ekspedisi']+'-'+jsonData[i]['order_time'];
+        fileName = jsonData[i]['no_sc']+'-'+ jsonData[i]['nama_akun_ecom']+'-'+ jsonData[i]['nomor_order']+'-'+ jsonData[i]['nama_akun_order']+
+        '-'+ jsonData[i]['nama_penerima']+'-'+ jsonData[i]['sku']+'-'+jsonData[i]['warna']+
+       '-'+jsonData[i]['order_time'].substring(0,jsonData[i]['order_time'].length - 6)+'-'+jsonData[i]['panjang_bahan']+'x'+jsonData[i]['lebar_bahan']
 
         tableDataEcom.row.add([
             '<h1 class="text-emerald-700 py-1 px-2 bg-emerald-200 text-center rounded-full">Setting Selesai</h1>',

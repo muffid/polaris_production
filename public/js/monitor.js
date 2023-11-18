@@ -44,9 +44,9 @@ function callAjaxDataEcomm(){
             timeMulaiSetting = "'"+jsonData[i].mulai_setting+"'"
             timeSelesaiSetting = "'"+jsonData[i].selesai_setting+"'"
             statusColumn = ''
-            fileName = jsonData[i]['no_urut']+'-'+ jsonData[i]['nama_akun_ecom']+'-'+ jsonData[i]['nama_akun_order']+
-                        '-'+ jsonData[i]['nama_penerima']+'-'+ jsonData[i]['sku']+'-'+jsonData[i]['warna']+'-'+jsonData[i]['panjang_bahan']+
-                        '-'+jsonData[i]['nama_ekspedisi']+'-'+jsonData[i]['order_time']
+            fileName = jsonData[i]['no_sc']+'-'+ jsonData[i]['nama_akun_ecom']+'-'+ jsonData[i]['nomor_order']+'-'+ jsonData[i]['nama_akun_order']+
+                        '-'+ jsonData[i]['nama_penerima']+'-'+ jsonData[i]['sku']+'-'+jsonData[i]['warna']+
+                       '-'+jsonData[i]['order_time'].substring(0,jsonData[i]['order_time'].length - 6)+'-'+jsonData[i]['panjang_bahan']+'x'+jsonData[i]['lebar_bahan']
 
             if(!(jsonData[i]['note'] == '-')){
                 fileName = fileName+(' ('+jsonData[i]['note']+')')
@@ -71,20 +71,20 @@ function callAjaxDataEcomm(){
             }
 
             if(jsonData[i].status == "Belum Setting"){
-                statusColumn = '<h1 class="text-red-700 py-1 px-2 bg-red-200 text-center rounded-full">Belum Setting</h1>'
+                statusColumn = '<div class="text-red-700 bg-red-200 text-center rounded-full p-2">BS</div>'
             }
             if(jsonData[i].status == "Proses Setting"){
-                statusColumn = '<h1 class="text-yellow-700 py-1 px-2 bg-yellow-200 text-center rounded-full">Proses Setting</h1>'
+                statusColumn = '<div class="text-yellow-700 bg-yellow-200 text-center rounded-full p-2">PS</div>'
             }
             if(jsonData[i].status == "Setting Selesai"){
-                statusColumn = '<h1 class="text-emerald-700 py-1 px-2 bg-emerald-200 text-center rounded-full">Setting Selesai</h1>'
+                statusColumn = '<div class="text-emerald-700 bg-emerald-200 text-center rounded-full p-2">SC</div>'
             }
 
             tableDataMonitor.row.add([
                 i+1,
                 '<h1 class="text-xs text-slate-700">'+countTimeElapsed(timeOrder)+'</h1>',
                 jsonData[i].nama_akun_order,
-                jsonData[i].qty_order+" pcs",
+                jsonData[i].qty_order,
                 fileName,
                 DesainerColumn,
                 statusColumn,

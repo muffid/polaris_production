@@ -65,6 +65,7 @@ class InputEcommController extends Controller
     //    dd($orderUnapprove);
         $data = [
 
+
             'ekspedisi' =>$ekspedisi,
             'laminasi' => $laminasi,
             'akun_ecom' => $akunEcom,
@@ -77,6 +78,7 @@ class InputEcommController extends Controller
                     'username' => session('username'),
             ]
         ];
+
 
         return view('desainer/input_ecomm',$data);
 

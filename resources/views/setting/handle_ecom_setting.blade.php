@@ -58,7 +58,7 @@
                                 <table id="data_ecomm" class="cell-border w-full display nowrap text-left " style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Aksi</th><th>No Urut</th><th>Tanggal Order</th><th>Pengorder</th><th>Keterangan Order</th>
+                                                <th>Aksi</th><th>Tanggal Order</th><th>Pengorder</th><th>Keterangan Order</th>
                                                 <th>Nama File</th>
                                             </tr>
                                         </thead>

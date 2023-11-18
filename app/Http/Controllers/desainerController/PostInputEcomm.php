@@ -98,14 +98,28 @@ class PostInputEcomm extends Controller
             if ($statusCode === 200) {
                 $singleData = json_decode($this->getDataEcomById($idEcomm));
 
-                $textToCopy = $singleData[0]->no_urut.'-'.$singleData[0]->nama_akun_ecom.'-'.
-                                $singleData[0]->nama_akun_order.'-'.$singleData[0]->nama_penerima.'-'.
+                $textToCopy = $singleData[0]->no_sc.'-'.
+                                $singleData[0]->nama_akun_ecom.'-'.
+                                $singleData[0]->nomor_order.'-'.
+                                $singleData[0]->nama_akun_order.'-'.
+                                $singleData[0]->nama_penerima.'-'.
                                 $singleData[0]->sku.'-'.
-                                $singleData[0]->warna.'-'.$singleData[0]->panjang_bahan.'-'.
-                                $singleData[0]->nama_ekspedisi.'-'.substr($singleData[0]->order_time,0,-6);
+                                $singleData[0]->warna.'-'.
+                                substr($singleData[0]->tanggal_order_formatted,0,-6).'-'.
+                                $singleData[0]->panjang_bahan.'x'. $singleData[0]->lebar_bahan;
 
                 session()->flash('message', 'success');
                 session()->flash('copy',$textToCopy );
+                session()->flash('data_repeat',[
+                    'nama_akun_ecom' => $singleData[0]->nama_akun_ecom,
+                    'akun_pengorder' => $singleData[0]->nama_akun_order,
+                    'nama_penerima' => $singleData[0]->nama_penerima,
+                    'nomor_order' => $singleData[0]->nomor_order,
+                    'tanggal_order' =>  $singleData[0]->order_time,
+                    'no_resi' => $singleData[0]->resi,
+                    ]
+                );
+                session(['no_sc' => intval($no_sc)+1]);
                 return redirect()->route('input_ecomm_page');
 
             } else {

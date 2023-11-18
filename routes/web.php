@@ -74,13 +74,18 @@ Route::middleware('desainer')->group(function(){
     Route::get('/input_ecommerce',[InputEcommController::class,'index'])->name('input_ecomm_page');
     Route::get('/data_ecomm_page',[DataEcommController::class,'index'])->name('data_ecomm_page');
     Route::get('/edit_ecom/{id_akun}/{id_ecom}',[prepareEditEcomController::class,'index'])->name('edit_ecom');
+    // Desainer & Operator
     Route::get('/order_return',[OrderReturnController::class,'index'])->name('order_return');
-    //ajax
+    //Desainer & Operator
+    Route::get('/list_order_return',[OrderReturnController::class,'listOrderReturnPage'])->name('list_order_return');
+    //ajax Desainer & Operator
     Route::get('/order_tuntas_bulan/{bulan}',[OrderReturnController::class,'getOrderByBulan'])->name('order_tuntas_bulan');
     //ajax
     Route::get('/delete_order_ecom/{id_ecomm}',[DeleteOrderEcomController::class,'deleteOrderEcom'])->name('delete_order_ecom');
     //ajax
     Route::get('/get_ecomm_by_date/{id_akun}/{date}',[DataEcommController::class,'getDataEcommByDate'])->name('get_ecomm_by_date');
+    //ajax Desainer & Operator
+    Route::get('/set_return/{id_order}',[OrderReturnController::class,'setReturn'])->name('set_return');
 
     //-------------- NON ECOMM ------------------------//
     Route::get('/input_nonecommerce',[InputOrderNonEcomController::class,'index'])->name('input_nonecommerce');

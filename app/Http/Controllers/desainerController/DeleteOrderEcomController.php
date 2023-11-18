@@ -23,6 +23,7 @@ class DeleteOrderEcomController extends Controller{
             $statusCode = $response->getStatusCode();
 
             if ($statusCode === 200) {
+
                 $response = ['message' => 'ok'];
                 return response()->json($response);
 
