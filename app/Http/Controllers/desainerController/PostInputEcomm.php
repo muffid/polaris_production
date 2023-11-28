@@ -23,12 +23,15 @@ class PostInputEcomm extends Controller
     }
 
     public function store(Request $request){
+
+        $pattern = '/[^a-zA-Z0-9]/';
+
         $idEcomm = $this->generateUniqueRandomString();
         $idAkun = session('id');
         $orderTime = $request->input('tanggal_order');
         $akunEcomm = $request->input('akun');
-        $namaAkunOrder = $request->input('akun_pengorder');
-        $namaPenerima = $request->input('nama_penerima');
+        $namaAkunOrder = preg_replace($pattern, '_', $request->input('akun_pengorder'));
+        $namaPenerima = preg_replace($pattern,'_',$request->input('nama_penerima'));
         $nomorOrder = $request->input('nomor_order');
         $sku = $request->input('sku');
         $warna = $request->input('warna');

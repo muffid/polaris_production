@@ -27,7 +27,31 @@
 
 </head>
 
-<body class=" bg-slate-100 relative font-nunito min-h-screen">
+<body class=" bg-slate-100 relative font-nunito min-h-screen parent relative">
+    <div class="hidden fixed w-full h-full bg-slate-500/20 z-50 backdrop-blur" id="pop_up_alert">
+        <div class="flex flex-col rounded-lg bg-white w-2/4  mx-auto mt-32 shadow-xl relative">
+            {{-- <div class="w-full p-1 bg-emerald-400"></div> --}}
+            <div class="flex flex-row items-center gap-x-4  px-10 bg-slate-100">
+
+                <img src="{{ asset('img/online-shop.png') }}" alt="logo" class=" w-8 ">
+                <div class="flex flex-col p-2 items-start ">
+                    <h1 class="text-lg font-bold text-emerald-900">Barang Return Ditemukan</h1>
+                    <p class="text-sm text-slate-400">Gunkanan Barang return lama atau buat baru</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 p-8 text-sm gap-y-1 items-start w-full bg-white rounded-lg">
+                <img src="{{ asset('img/accept.png') }}" alt="logo" class=" w-12 col-span-2 mx-auto ">
+                <h1 class="col-span-2 text-center font-semibold my-4">Sistem Menemukan SKU dan Warna Yang Anda Input Cocok Dengan Stok Yang Ada Di Daftar Barang Return</h1>
+                <h1 id="sku_alert" class="col-span-2 text-center font-semibold text-xs text-blue-500">SKU : DECAL MOTOR VARIASI </h1>
+                <h1 id="warna_alert" class="col-span-2 text-center font-semibold text-xs text-blue-500">WARNA : MERAH</h1>
+                <div class="col-span-2 flex flex-row items-center justify-center gap-x-2 mt-6">
+                    <h1 onclick="goToRecycle()" class="px-3 py-2 bg-green-500 text-white">Recycle Barang</h1>
+                    <h1 onclick="abaikan()" class="px-3 py-2 bg-red-500 text-white">Abaikan </h1>
+                </div>
+            </div>
+        </div>
+    </div>
     @if(session('message'))
         <script>
             var message =@json(session('message'));
@@ -91,9 +115,9 @@
                     <div class="flex flex-col items-start justify-start">
                         {{-- performa --}}
                         @include('template/header')
-                            <div class="flex flex-col p-6 text-center w-full gap-y-4 mt-14">
-                                <div class="flex flex-col text-center w-full gap-y-4">
-                                    <div class="w-full my-4 flex flex-row items-center border-b text-sm">
+                            <div class="flex flex-col p-6 text-center w-full gap-y-4 mt-16">
+                                <div class="flex flex-col text-center w-full gap-y-1">
+                                    <div class="w-full  flex flex-row items-center border-b text-sm">
                                         <a href="{{route('input_ecomm_page')}}" class="px-4 py-3 border-b-2  border-blue-700 bg-white rounded-t-xl">
                                             Ecommerce
                                         </a>
@@ -192,7 +216,7 @@
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="sku" class="w-1/3 text-left block text-sm font-medium text-gray-700">SKU</label>
-                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="sku" type="text"  name="sku" required>
+                                            <input onblur="doCheckReturn()" class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="sku" type="text"  name="sku" required>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="ekspedisi" class="w-1/3 text-left block text-sm font-medium text-gray-700">Ekspedisi</label>
@@ -212,7 +236,7 @@
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="warna" class="w-1/3 text-left block text-sm font-medium text-gray-700">Warna</label>
-                                            <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="warna" type="text"  name="warna" required>
+                                            <input onblur="doCheckReturn()" class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="warna" type="text"  name="warna" required>
                                         </div>
                                         <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                                             <label for="jumlah" class="w-1/3 text-left block text-sm font-medium text-gray-700">Jumlah</label>

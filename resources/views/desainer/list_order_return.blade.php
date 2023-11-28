@@ -32,13 +32,16 @@
 
 <body class=" bg-slate-100 relative font-nunito min-h-screen relative parent">
     <div class="hidden absolute w-full h-full bg-slate-500/20 z-50 backdrop-blur" id="pop_up_edit">
+        <form action={{route('recycle_return')}} method="POST">
+            @method('PUT')
+        @csrf
         <div class="flex flex-col rounded-lg bg-white w-3/4  mx-auto mt-24 shadow-xl relative">
             {{-- <div class="w-full p-1 bg-emerald-400"></div> --}}
             <div class="flex flex-row items-center gap-x-4  px-10 bg-slate-100">
 
                 <img src="{{ asset('img/online-shop.png') }}" alt="logo" class=" w-8 ">
                 <div class="flex flex-col p-2 items-start ">
-                    <h1 class="text-lg font-bold text-emerald-900">Recycle Barang Return</h1>
+                    <h1 class="text-lg font-bold text-emerald-900">Recycle Barang Return | <span id="sku_warna" class="text-emerald-500"></span> </h1>
                     <p class="text-sm text-slate-400">Kirim Ke Pelanggan Baru </p>
                 </div>
             </div>
@@ -119,18 +122,27 @@
                         <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="resi" type="text"  name="resi" required>
                     @endif
                 </div>
+                <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
+                    <label for="resi" class="w-1/3 text-left block text-sm font-medium text-gray-700">ID</label>
+
+                    <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-400 leading-tight focus:outline-blue-400 focus:shadow-outline" id="ID" type="text"  name="ID" required readonly>
+
+                </div>
+
+
 
             </div>
             <div class="w-full flex flex-row items-center justify-center gap-x-4 mb-6">
-                <div class="flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-green-200 text-green-700 text-sm cursor-pointer text-center">
+                <button type="submit" class="flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-green-200 text-green-700 text-sm cursor-pointer text-center">
                     Recycle <i class="bi bi-recycle"></i>
                 </div>
-                <div class="flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-red-200 text-red-700 text-sm cursor-pointer text-center">
+                <div  onclick="handleClosePopUp()" class="flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-red-200 text-red-700 text-sm cursor-pointer text-center">
                     Batalkan <i class="bi bi-x-circle font-bold"></i>
                 </div>
             </div>
 
         </div>
+    </form>
     </div>
     @include('desainer.globals.sidebar_desainer')
         <main id="main" class=" w-full relative">
@@ -190,7 +202,7 @@
                                                     <td>
                                                         <div  class="container_{{$order_tuntas[$i]["id_order_ecom"]}} flex items-center justify-center">
                                                             <div class="{{$order_tuntas[$i]["id_order_ecom"]}} flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-green-200 text-green-700 text-sm cursor-pointer text-center"
-                                                                        onclick="handleRecycle('{{$order_tuntas[$i]['id_order_ecom']}}')">Recycle <i class="bi bi-recycle"></i>
+                                                                        onclick="handleRecycle('{{$order_tuntas[$i]['id_order_ecom']}}','{{$order_tuntas[$i]['sku']}}','{{$order_tuntas[$i]['warna']}}')">Recycle <i class="bi bi-recycle"></i>
                                                             </div>
                                                         </div>
                                                     </td>

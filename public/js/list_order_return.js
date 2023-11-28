@@ -76,8 +76,11 @@ function callAjaxDataEcomm(){
     });
 }
 
-function handleRecycle(text){
+function handleRecycle(id,sku,warna){
     $('#pop_up_edit').removeClass('hidden')
+    $("#ID").val(id)
+    $("#sku_warna").text(sku+" / "+warna)
+
 }
 
 function handleClosePopUp(){

@@ -1,15 +1,55 @@
 
 $(window).on("load", function() {
-    var pilihanTerpilih = $("#bahan_cetak option:selected");
-    var nilaiLebar = pilihanTerpilih.data("lebar");
-    $("#lebar_bahan").val(nilaiLebar);
-
+    var pilihanTerpilih = $("#bahan_cetak option:selected")
+    var nilaiLebar = pilihanTerpilih.data("lebar")
+    $("#lebar_bahan").val(nilaiLebar)
 });
+
+
+
+    var dataReturn = []
+    function fetchDataReturn(){
+        $.ajax({
+            url:'list_order_return_ajax',
+            type: 'GET',
+            dataType: 'json',
+            success:function(response){
+                dataReturn = JSON.parse(response);
+                console.log(dataReturn);
+            }
+        })
+    }
+
 
     function onChangeBahanCetak(){
         var pilihanTerpilih = $("#bahan_cetak option:selected");
         var nilaiLebar = pilihanTerpilih.data("lebar");
         $("#lebar_bahan").val(nilaiLebar);
+    }
+
+    function doCheckReturn(){
+        const sku =  $("#sku").val()
+        const warna =  $("#warna").val()
+        const isMatch = dataReturn.some(item => item.sku == sku && item.warna == warna)
+
+        if(isMatch){
+            $("#pop_up_alert").removeClass("hidden")
+            $("#sku_alert").text(sku)
+            $("#warna_alert").text(warna)
+        }
+    }
+
+    function abaikan(){
+        $("#pop_up_alert").addClass("hidden")
+    }
+
+    function goToRecycle(){
+        const sku =  $("#sku").val()
+        const warna =  $("#warna").val()
+        var redirectUrl = 'list_order_return/:param1/:param2'
+                        .replace(':param1', sku)
+                        .replace(':param2', warna);
+    window.location.href = redirectUrl;
     }
 
     // flatpickr("#tanggal_order", {
@@ -20,6 +60,8 @@ $(window).on("load", function() {
     // });
 
     function ubahFormatTanggal() {
+
+        fetchDataReturn()
 
         let tanggalInput = $("#tanggal_order").val()
         let tanggalObj;
