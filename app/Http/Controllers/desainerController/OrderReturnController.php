@@ -15,7 +15,7 @@ class OrderReturnController extends Controller
 
 
         try {
-         $url = env('BASE_URL_API')."ecommerce/returnOrderAktif/".$req->input("ID");
+         $url = env('BASE_URL_API')."ecommerce/recycle/".$req->input("ID")."/".session('id');
          $data = [
             "id_order_ecom" =>$req->input("ID"),
             "order_time" => $req->input("tanggal_order"),
@@ -28,6 +28,8 @@ class OrderReturnController extends Controller
             "id_ekspedisi" => $req->input("ekspedisi"),
             "return_order" => "-",
             "resi" => $req->input("resi"),
+            "inputQty" => $req->input("jumlah"),
+            "no_sc" => $req->input("no_sc")
 
          ];
 
@@ -43,7 +45,9 @@ class OrderReturnController extends Controller
          if ($statusCode === 200) {
 
             session()->flash('message', 'success');
-
+            return redirect()->route('list_order_return');
+        }else if($statusCode === 404){
+            session()->flash('message', 'booked');
             return redirect()->route('list_order_return');
         }
     }catch (ClientException $e) {

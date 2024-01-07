@@ -4,21 +4,32 @@ namespace App\Http\Controllers\adminController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
-class MasterBahanController extends Controller
+class MasterLaminasiController extends Controller
 {
+    public function index(){
+
+        $data = [
+            'data_laminasi' => json_decode($this->getDataLaminasi()),
+            'active' => 'MasterBahan',
+            'session' => [
+                'status' => session('role'),
+                'username' => session('username'),
+        ],
+
+        ];
+        return view('admin/masterLaminasi',$data);
+    }
+
 
     public function store(Request $request){
-        $idBahan = $this->generateUniqueRandomString();
-        $namaBahan =  $request->input('nama_bahan');
-        $lebarBahan = $request->input('lebar_bahan');
+        $idLaminasi = $this->generateUniqueRandomString();
+        $namaLaminasi =  $request->input('nama_laminasi');
         $client = new Client();
         try {
-            $url = env('BASE_URL_API')."masterData/newBahanCetak";
+            $url = env('BASE_URL_API')."masterData/newLaminasi";
             $data = [
-               "id_bahan_cetak" => $idBahan,
-               "nama_bahan_cetak" => $namaBahan,
-               "lebar_bahan" => $lebarBahan,
-
+               "id_laminasi" => $idLaminasi,
+               "nama_laminasi" => $namaLaminasi,
             ];
 
             $response = $client->post($url, [
@@ -27,26 +38,20 @@ class MasterBahanController extends Controller
                     'auth-token' => session('token'),
                 ],
             ]);
-            $statusCode = $response->getStatusCode();
-            if ($statusCode === 200) {
-                return redirect()->route('master_bahan');
-            } else {
-                session()->flash('message', 'fail');
-                return redirect()->route('master_bahan');
-            }
-        } catch (ClientException $e) {
 
+            return redirect()->route('master_laminasi');
+
+        } catch (ClientException $e) {
+            return redirect()->route('master_laminasi');
         }
     }
 
     public function edit(Request $req){
         $client = new Client();
         try {
-            $url = env('BASE_URL_API')."masterData/editBahanCetak/".$req->input("id_bahan");
+            $url = env('BASE_URL_API')."masterData/editLaminasi/".$req->input("id_laminasi");
          $data = [
-            "nama_bahan_cetak" => $req->input("nama_bahan"),
-            "lebar_bahan" => $req->input("lebar_bahan"),
-
+            "nama_laminasi" => $req->input("nama_laminasi"),
          ];
          $response = $client->put($url, [
              'json' => $data,
@@ -56,33 +61,19 @@ class MasterBahanController extends Controller
          ]);
 
          $statusCode = $response->getStatusCode();
-         if($statusCode == 200){
-            return redirect()->route('master_bahan');
-         }
-        } catch (ClientException $e) {
 
+            return redirect()->route('master_laminasi');
+
+        } catch (ClientException $e) {
+            return redirect()->route('master_laminasi');
         }
 
     }
 
-    public function index(){
-        // dd($this->getDataBahan());
-        $data = [
-            'data_bahan' => json_decode($this->getDataBahan()),
-            'active' => 'MasterBahan',
-            'session' => [
-                'status' => session('role'),
-                'username' => session('username'),
-        ],
-
-        ];
-        return view('admin/masterBahan',$data);
-    }
-
-    private function getDataBahan(){
+    private function getDataLaminasi(){
         $client = new Client();
         try{
-            $url = env('BASE_URL_API')."masterData/bahancetak";
+            $url = env('BASE_URL_API')."masterData/laminasi";
             $response = $client->get($url, [
                 'headers' => [
                     'auth-token' => session('token'),
@@ -118,4 +109,7 @@ class MasterBahanController extends Controller
         }
         return $randomString;
     }
+
+
+
 }

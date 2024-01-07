@@ -66,6 +66,7 @@
 
                                         </tbody>
                                 </table>
+                               <button onclick="processAll()" class="rounded px-3 py-1 bg-blue-500 text-white">Proses Semua</button>
                             </div>
                         </div>
                     </div>

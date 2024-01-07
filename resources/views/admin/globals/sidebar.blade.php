@@ -36,13 +36,13 @@
                     </div>
             </div>
         </a>
-       <div class="flex flex-row items-center justify-start relative ">
-            <div class="w-full  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
-                <i class="bi bi-bar-chart-fill"></i>
-                <h1 class="text-sm font-semibold">Rekap Data</h1>
+        <div class="flex flex-row items-center justify-start relative cursor-pointer ">
+            <div class="w-full hover:bg-emerald-50  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
+                <i class="bi bi-person-circle"></i>
+                <a href="ecommerce_admin" class="text-sm font-semibold">Master Data</a>
             </div>
         </div>
-        <a href="ecommerce_admin">
+        {{-- <a href="ecommerce_admin">
             <div class="flex  flex-row items-center justify-start relative cursor-pointer">
                 @if($active=='Ecommerce')
                     <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
@@ -72,7 +72,7 @@
                     <h1 class=" text-xs">Bahan & Laminasi</h1>
                 </div>
             </div>
-        </a>
+        </a> --}}
         <a href="performa">
             <div class="flex flex-row items-center justify-start relative cursor-pointer">
                 @if($active=='Performa')
@@ -97,14 +97,13 @@
                 </div>
             </div>
         </a>
-        <div class="flex flex-row items-center justify-start relative ">
-
-            <div class="w-full  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
-                <i class="bi bi-clipboard-data-fill"></i>
-                <h1 class="text-sm font-semibold">Master Data</h1>
+        <div class="flex flex-row items-center justify-start relative cursor-pointer ">
+            <div class="w-full hover:bg-emerald-50  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
+                <i class="bi bi-person-circle"></i>
+                <a href="master_bahan" class="text-sm font-semibold">Master Data</a>
             </div>
         </div>
-        <a href="master_bahan">
+        {{-- <a href="master_bahan">
             <div class="flex flex-row items-center justify-start relative cursor-pointer">
                 @if($active=='MasterBahan')
                     <div class="w-2 h-full bg-emerald-800 absolute left-0"></div>
@@ -133,12 +132,12 @@
             <div class="w-full hover:bg-emerald-50 flex py-2 pl-12 lg:pl-[74px]">
                 <h1 class=" text-xs">Ekspedisi</h1>
             </div>
-        </div>
-        <div class="flex flex-row items-center justify-start relative cursor-pointer">
+        </div> --}}
+        {{-- <div class="flex flex-row items-center justify-start relative cursor-pointer">
             <div class="w-full hover:bg-emerald-50 flex py-2 pl-12 lg:pl-[74px]">
                 <h1 class=" text-xs">User</h1>
             </div>
-        </div>
+        </div> --}}
         <div class="flex flex-row items-center justify-start relative cursor-pointer ">
             <div class="w-full hover:bg-emerald-50  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
                 <i class="bi bi-person-circle"></i>

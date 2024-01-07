@@ -17,7 +17,6 @@ $(document).ready(function() {
 
 var tableDataEcom = new DataTable('#order_tuntas',{
     "pageLength":50,
-
 });
 
 
@@ -26,7 +25,6 @@ var tableDataEcom = new DataTable('#order_tuntas',{
 function callAjaxDataEcomm(){
 
     var tanggal = $("#tanggal_order").val();
-
     var loader = $("#loader");
     var table = $("#container_order");
 
@@ -76,10 +74,32 @@ function callAjaxDataEcomm(){
     });
 }
 
-function handleRecycle(id,sku,warna){
+function handleRecycle(id,sku,warna,qty_max){
+
     $('#pop_up_edit').removeClass('hidden')
     $("#ID").val(id)
-    $("#sku_warna").text(sku+" / "+warna)
+    $("#sku_warna").text(sku+" / "+warna+". Qty Tersedia : "+qty_max)
+    const input = document.getElementById('jumlah');
+
+    // Menambahkan event listener untuk 'input'
+    input.addEventListener('input', function() {
+        // Mengambil nilai dari input
+        let inputValue = this.value;
+
+        // Memastikan nilai yang dimasukkan adalah angka
+        if (!isNaN(inputValue)) {
+            // Jika nilai lebih dari 5, atur nilainya menjadi 5
+            if (parseInt(inputValue) > Number(qty_max)) {
+                this.value = qty_max;
+            }
+            if (parseInt(inputValue) < 1) {
+                this.value = 1;
+            }
+        } else {
+            // Jika nilai bukan angka, atur nilai menjadi kosong
+            this.value = '';
+        }
+    });
 
 }
 

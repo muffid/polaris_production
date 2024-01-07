@@ -3,6 +3,8 @@ var tableDataEcom = new DataTable('#table_to_cetak',{
     "ordering" :false,
 });
 
+var jsonData
+
 setTimeout(function() {
     callAjaxDataEcomm();
 }, 1000);
@@ -23,7 +25,7 @@ $.ajax({
     loader.removeClass("flex");
     loader.addClass("hidden");
     table.removeClass("hidden");
-    var jsonData = JSON.parse(response);
+    jsonData = JSON.parse(response);
     console.log(jsonData);
     var timeStamp = "beberaapa saat yang lalu";
 
@@ -88,6 +90,64 @@ $.ajax({
 // <div class="'+ jsonData[i].id_order_ecom+' flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-blue-200 text-blue-700 text-sm cursor-pointer text-center" onclick=handleSelesaiSetting("'+ jsonData[i].id_order_ecom+'")>mulai cetak<i class="bi bi-printer-fill"></i></div>
 }
 
+function processAll(){
+    // console.log(jsonData);
+    for (let i = 0; i < jsonData.length; i++) {
+
+        let id_ecomm = (jsonData[i].id_order_ecom);
+        var btn = $('.'+id_ecomm);
+        var divElement = $('<div>', {
+            class: 'spinner-4',
+        });
+        btn.remove()
+        var container = $('.container_'+id_ecomm)
+        container.append(divElement)
+
+        console.log(id_ecomm);
+        $.ajax({
+            url:'finnish_order/'+id_ecomm,
+            type: 'GET',
+            dataType: 'json',
+            success:function(response){
+                console.log(response);
+                if(response.message === "ok"){
+                    updateTable(id_ecomm);
+                    iziToast.success({
+                        title: 'Berhasil',
+                        message: 'silahkan cetak order',
+                        position: 'topRight',
+                        theme: 'green',
+                        color: 'dark',
+                    });
+
+
+                }else if(response.message === "booked"){
+                    updateTable(id_ecomm);
+                    iziToast.warning({
+                        title: 'Invalid',
+                        message: 'Tugas sudah disetting ',
+                        position: 'topRight',
+                        theme: 'light',
+                        color: 'dark',
+                    });
+
+                }else{
+                    iziToast.error({
+                        title: 'Gagal',
+                        message: 'Terjadi Kesalahan',
+                        position: 'topRight',
+                        theme: 'light',
+                        color: 'dark',
+                    });
+
+                }
+
+            }
+        });
+      }
+
+}
+
 function handleSelesaiSetting(id_ecomm){
     var btn = $('.'+id_ecomm);
     var divElement = $('<div>', {
@@ -113,6 +173,7 @@ function handleSelesaiSetting(id_ecomm){
                     theme: 'green',
                     color: 'dark',
                 });
+
             }else if(response.message === "booked"){
                 updateTable(id_ecomm);
                 iziToast.warning({
@@ -122,6 +183,7 @@ function handleSelesaiSetting(id_ecomm){
                     theme: 'light',
                     color: 'dark',
                 });
+
             }else{
                 iziToast.error({
                     title: 'Gagal',
@@ -130,6 +192,7 @@ function handleSelesaiSetting(id_ecomm){
                     theme: 'light',
                     color: 'dark',
                 });
+
             }
 
         }

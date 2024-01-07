@@ -49,6 +49,10 @@
                         text-center flex items-center justify-center cursor-pointer" onclick="handleClosePopUp()"><i class="bi bi-x-circle font-bold"></i></div>
             <div></div>
             <div class="grid grid-cols-1 lg:grid-cols-2 p-8 text-sm gap-y-4 items-start w-full bg-white rounded-lg">
+                <div class=" flex flex-row items-center justify-between  gap-x-2 px-4 w-full">
+                    <label for="no_sc" class="text-left w-1/3 block text-sm font-medium text-gray-700">No SC</label>
+                    <input oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="no_sc" type="text"  name="no_sc" required value="">
+                </div>
                 <div class=" flex flex-row items-center justify-between gap-x-2 px-4 w-full">
                     <label for="tanggal_order" class="text-left block text-sm w-1/3 font-medium text-gray-700">Tanggal Order</label>
                     <div class="relative w-full">
@@ -104,7 +108,7 @@
                 </div>
                 <div class=" flex flex-row items-center justify-between   gap-x-2 px-4 w-full">
                     <label for="jumlah" class="w-1/3 text-left block text-sm font-medium text-gray-700">Jumlah</label>
-                    <input class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="jumlah" type="number"  name="jumlah" required value="1">
+                    <input oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full appearance-none border  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="jumlah" type="text"  name="jumlah" required value="1">
                 </div>
 
 
@@ -202,7 +206,7 @@
                                                     <td>
                                                         <div  class="container_{{$order_tuntas[$i]["id_order_ecom"]}} flex items-center justify-center">
                                                             <div class="{{$order_tuntas[$i]["id_order_ecom"]}} flex items-center gap-x-1 justify-center  rounded-sm px-2 py-2 bg-green-200 text-green-700 text-sm cursor-pointer text-center"
-                                                                        onclick="handleRecycle('{{$order_tuntas[$i]['id_order_ecom']}}','{{$order_tuntas[$i]['sku']}}','{{$order_tuntas[$i]['warna']}}')">Recycle <i class="bi bi-recycle"></i>
+                                                                        onclick="handleRecycle('{{$order_tuntas[$i]['id_order_ecom']}}','{{$order_tuntas[$i]['sku']}}','{{$order_tuntas[$i]['warna']}}','{{$order_tuntas[$i]['qty_return']}}')">Recycle <i class="bi bi-recycle"></i>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -218,7 +222,7 @@
                                                     <td>{{$order_tuntas[$i]["nama_ekspedisi"]}}</td>
                                                     <td>{{$order_tuntas[$i]["resi"]}}</td>
                                                     <td>{{$order_tuntas[$i]["warna"]}}</td>
-                                                    <td>{{$order_tuntas[$i]["qty_order"]}}</td>
+                                                    <td>{{$order_tuntas[$i]["qty_return"]}}</td>
                                                     <td>{{$order_tuntas[$i]["nama_bahan_cetak"]}}</td>
                                                     <td>{{$order_tuntas[$i]["nama_laminasi"]}}</td>
                                                     <td>{{$order_tuntas[$i]["nama_mesin_cetak"]}}</td>

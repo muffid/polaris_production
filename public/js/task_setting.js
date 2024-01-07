@@ -1,4 +1,5 @@
-var tableDataEcom = new DataTable('#table_task_ecomm',{
+var tableDataEcom = new DataTable('#table_task_ecomm',
+{
     "pageLength":100,
 });
 
@@ -70,6 +71,7 @@ $.ajax({
        '-'+jsonData[i]['order_time'].substring(0,jsonData[i]['order_time'].length - 6)+'-'+jsonData[i]['panjang_bahan']+'x'+jsonData[i]['lebar_bahan']
 
         tableDataEcom.row.add([
+            '<div class="flex items-center"><input id="myCheckbox" name="myCheckbox" type="checkbox" class="myCheckbox form-checkbox h-5 w-5 text-indigo-600"><label for="myCheckbox" class="ml-2 text-gray-700">Copy Text</label></div>',
            '<h1 class="text-blue-700 "> <i class="bi bi-hourglass-split"></i> <span> Proses Seting</span></h1>',
             jsonData[i].no_urut,
             jsonData[i].order_time,
@@ -125,7 +127,6 @@ function handleSelesaiSetting(id_ecomm){
                     color: 'dark',
                 });
             }
-
         }
     });
 }
@@ -145,3 +146,32 @@ function updateTable(className){
      tableDataEcom.draw();
 
 }
+
+$(document).ready(function () {
+    const dataTable = $('#table_task_ecomm').DataTable();
+
+    // Memantau perubahan pada checkbox
+    $('#table_task_ecomm').on('change', '.myCheckbox', function () {
+      let combinedText = '';
+
+      // Iterasi setiap checkbox untuk mengumpulkan teks
+      $('.myCheckbox').each(function () {
+        const row = dataTable.row($(this).closest('tr'));
+        console.log('ere');
+        if (this.checked) {
+          const data = row.data(); // Mendapatkan data dari baris
+          combinedText += data[5] + '\n'; // Mengambil data dari kolom ke-4
+        }
+      });
+
+      // Mengganti teks atau melakukan sesuatu dengan hasilnya
+      console.log('Teks Gabungan: ' + combinedText);
+      navigator.clipboard.writeText(combinedText)
+    });
+
+    // Tombol untuk menyalin teks yang dikumpulkan
+    $('#copyButton').on('click', function () {
+      // Logika untuk menyalin teks yang telah dikumpulkan
+      // Misalnya, menggunakan Clipboard API atau menampilkan dalam elemen HTML
+    });
+  });

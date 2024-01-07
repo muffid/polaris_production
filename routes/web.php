@@ -10,6 +10,7 @@ use App\Http\Controllers\adminController\BahanController;
 use App\Http\Controllers\adminController\MonitorController;
 use App\Http\Controllers\adminController\MasterBahanController;
 use App\Http\Controllers\adminController\MasterMesinController;
+use App\Http\Controllers\adminController\MasterLaminasiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\adminController\PerformaController;
@@ -27,7 +28,6 @@ use App\Http\Controllers\desainerController\DataEcommController;
 use App\Http\Controllers\desainerController\InputOrderNonEcomController;
 use App\Http\Controllers\desainerController\OrderReturnController;
 
-
 // Setting Controller
 use App\Http\Controllers\settingController\LoginSettingController;
 use App\Http\Controllers\settingController\DashboardSettingController;
@@ -41,7 +41,6 @@ use App\Http\Controllers\operatorController\LoginOperatorController;
 use App\Http\Controllers\operatorController\DashboardOperatorController;
 use App\Http\Controllers\operatorController\ScanOrderOperatorController;
 use App\Http\Controllers\operatorController\CetakOrderOperatorController;
-
 
 Route::get('/', function () {return view('login');})->middleware('isLogin')->name('login');
 Route::get('/logout',[LogoutController::class,'index'])->name('logout');
@@ -58,13 +57,31 @@ Route::POST('/login_desainer',[LoginDesainerController::class,'authenticate'])->
 Route::POST('/login_setting',[LoginSettingController::class,'authenticate'])->name('login_setting');
 Route::POST('/login_operator',[LoginOperatorController::class,'authenticate'])->name('login_operator');
 
-//form
+//form save bahan
+Route::POST('/save_bahan',[MasterBahanController::class,'store'])->name('save_bahan');
+
+//form save mesin
+Route::POST('/save_mesin',[MasterMesinController::class,'store'])->name('save_mesin');
+
+//form save laminasi
+Route::POST('/save_laminasi',[MasterLaminasiController::class,'store'])->name('save_laminasi');
+
+//form edit bahan
+Route::PUT('/edit_bahan_cetak',[MasterBahanController::class,'edit'])->name('edit_bahan_cetak');
+
+//form edit mesin
+Route::PUT('/edit_mesin_cetak',[MasterMesinController::class,'edit'])->name('edit_mesin_cetak');
+
+//form edit mesin
+Route::PUT('/edit_laminasi',[MasterLaminasiController::class,'edit'])->name('edit_laminasi');
+
+//form save order ecom
 Route::POST('/save_ecomm',[PostInputEcomm::class,'store'])->name('save_ecomm');
 
-//form
+//form edit order exom
 Route::PUT('/edit_ecomm/{id_akun}/{id_ecomm}',[EditEcommController::class,'store'])->name('edit_ecomm');
 
-//form
+//form edit recycle
 Route::PUT('/recycle_return',[OrderReturnController::class,'recycle'])->name('recycle_return');
 
 Route::get('/monitor',[MonitorController::class,'index'])->middleware('isAuthenticate')->name('monitor');
@@ -77,8 +94,6 @@ Route::middleware('desainer')->group(function(){
     Route::get('/input_ecommerce',[InputEcommController::class,'index'])->name('input_ecomm_page');
     Route::get('/data_ecomm_page',[DataEcommController::class,'index'])->name('data_ecomm_page');
     Route::get('/edit_ecom/{id_akun}/{id_ecom}',[prepareEditEcomController::class,'index'])->name('edit_ecom');
-
-
     // Desainer & Operator
     Route::get('/order_return',[OrderReturnController::class,'index'])->name('order_return');
     //Desainer & Operator
@@ -95,7 +110,6 @@ Route::middleware('desainer')->group(function(){
     Route::get('/get_ecomm_by_date/{id_akun}/{date}',[DataEcommController::class,'getDataEcommByDate'])->name('get_ecomm_by_date');
     //ajax Desainer & Operator
     Route::get('/set_return/{id_order}',[OrderReturnController::class,'setReturn'])->name('set_return');
-
     //-------------- NON ECOMM ------------------------//
     Route::get('/input_nonecommerce',[InputOrderNonEcomController::class,'index'])->name('input_nonecommerce');
 
@@ -109,20 +123,18 @@ Route::middleware('admin')->group(function(){
     Route::get('/bahan_admin',[BahanController::class,'index'])->name('bahan_admin');
     Route::get('/master_bahan',[MasterBahanController::class,'index'])->name('master_bahan');
     Route::get('/master_mesin',[MasterMesinController::class,'index'])->name('master_mesin');
+    Route::get('/master_laminasi',[MasterLaminasiController::class,'index'])->name('master_laminasi');
 });
 
 Route::middleware('setting')->group(function(){
     Route::get('/dashboard_setting',[DashboardSettingController::class,'index'])->name('dashboard_setting');
     Route::get('/handle_ecomm',[EcommHandleSetting::class,'index'])->name('handle_ecomm');
-
     //ajax
     Route::get('/get_ecomm_unapprove',[DataEcommSettingController::class,'getAllEcommUnapprove'])->name('get_ecomm_unapprove');
     //ajax
     Route::get('/handle_setting/{id_ecomm}',[EcommHandleSetting::class,'handleSetting'])->name('handle_setting');
     //ajax
     Route::get('/get_ecomm_on_proses/{id_akun}',[DataEcommSettingController::class,'getEcommOnProses'])->name('get_ecomm_on_proses');
-
-
     //ajax
     Route::get('/get_finished_setting_today',[DataEcommSettingController::class,'getFinishedSettingToday'])->name('get_finished_setting_today');
     //ajax
@@ -143,7 +155,6 @@ Route::middleware('operator')->group(function(){
     Route::get('/set_tuntas_ecomm/{no_resi}',[ScanOrderOperatorController::class,'setTuntas'])->name('set_tuntas_ecomm');
     //ajax
     Route::get('/get_allsetting_onproses',[CetakOrderOperatorController::class,'getEcommOnProses'])->name('get_allsetting_onproses');
-
      //ajax
      Route::get('/cancel_setting/{id_ecomm}',[DataEcommSettingController::class,'cancelSetting'])->name('cancel_setting');
 });

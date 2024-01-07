@@ -1,5 +1,6 @@
 
 $(window).on("load", function() {
+    console.log("fgf");
     var pilihanTerpilih = $("#bahan_cetak option:selected")
     var nilaiLebar = pilihanTerpilih.data("lebar")
     $("#lebar_bahan").val(nilaiLebar)
@@ -15,7 +16,7 @@ $(window).on("load", function() {
             dataType: 'json',
             success:function(response){
                 dataReturn = JSON.parse(response);
-                console.log(dataReturn);
+                console.log("data return : ");
             }
         })
     }
