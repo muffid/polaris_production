@@ -75,10 +75,10 @@
                     <a href="master_laminasi" class="px-4 py-3  hover:scale-105 transition-ransform ease-out hover:text-blue-500">
                         <i class="ri-file-paper-2-line"></i> Laminasi
                     </a>
-                    <a href="#" class="px-4 py-3  hover:scale-105 transition-ransform ease-out hover:text-blue-500">
+                    <a href="master_ekspedisi" class="px-4 py-3  hover:scale-105 transition-ransform ease-out hover:text-blue-500">
                         <i class="ri-truck-line"></i> Ekspedisi
                     </a>
-                    <a href="#" class="px-4 py-3  hover:scale-105 transition-ransform ease-out hover:text-blue-500">
+                    <a href="master_toko" class="px-4 py-3  hover:scale-105 transition-ransform ease-out hover:text-blue-500">
                         <i class="ri-store-2-line"></i> Akun Toko
                     </a>
                     <a href="#" class="px-4 py-3  hover:scale-105 transition-ransform ease-out hover:text-blue-500">

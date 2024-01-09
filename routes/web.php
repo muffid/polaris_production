@@ -11,6 +11,8 @@ use App\Http\Controllers\adminController\MonitorController;
 use App\Http\Controllers\adminController\MasterBahanController;
 use App\Http\Controllers\adminController\MasterMesinController;
 use App\Http\Controllers\adminController\MasterLaminasiController;
+use App\Http\Controllers\adminController\MasterEkspedisiController;
+use App\Http\Controllers\adminController\MasterTokoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\adminController\PerformaController;
@@ -57,23 +59,7 @@ Route::POST('/login_desainer',[LoginDesainerController::class,'authenticate'])->
 Route::POST('/login_setting',[LoginSettingController::class,'authenticate'])->name('login_setting');
 Route::POST('/login_operator',[LoginOperatorController::class,'authenticate'])->name('login_operator');
 
-//form save bahan
-Route::POST('/save_bahan',[MasterBahanController::class,'store'])->name('save_bahan');
 
-//form save mesin
-Route::POST('/save_mesin',[MasterMesinController::class,'store'])->name('save_mesin');
-
-//form save laminasi
-Route::POST('/save_laminasi',[MasterLaminasiController::class,'store'])->name('save_laminasi');
-
-//form edit bahan
-Route::PUT('/edit_bahan_cetak',[MasterBahanController::class,'edit'])->name('edit_bahan_cetak');
-
-//form edit mesin
-Route::PUT('/edit_mesin_cetak',[MasterMesinController::class,'edit'])->name('edit_mesin_cetak');
-
-//form edit mesin
-Route::PUT('/edit_laminasi',[MasterLaminasiController::class,'edit'])->name('edit_laminasi');
 
 //form save order ecom
 Route::POST('/save_ecomm',[PostInputEcomm::class,'store'])->name('save_ecomm');
@@ -124,6 +110,38 @@ Route::middleware('admin')->group(function(){
     Route::get('/master_bahan',[MasterBahanController::class,'index'])->name('master_bahan');
     Route::get('/master_mesin',[MasterMesinController::class,'index'])->name('master_mesin');
     Route::get('/master_laminasi',[MasterLaminasiController::class,'index'])->name('master_laminasi');
+    Route::get('/master_ekspedisi',[MasterEkspedisiController::class,'index'])->name('master_ekspedisi');
+    Route::get('/master_toko',[MasterTokoController::class,'index'])->name('master_toko');
+
+    //form save bahan
+    Route::POST('/save_bahan',[MasterBahanController::class,'store'])->name('save_bahan');
+
+    //form save mesin
+    Route::POST('/save_mesin',[MasterMesinController::class,'store'])->name('save_mesin');
+
+    //form save laminasi
+    Route::POST('/save_laminasi',[MasterLaminasiController::class,'store'])->name('save_laminasi');
+
+    //form save ekspedisi
+    Route::POST('/save_ekspedisi',[MasterEkspedisiController::class,'store'])->name('save_ekspedisi');
+
+    //form save akun_ecom
+    Route::POST('/save_toko',[MasterTokoController::class,'store'])->name('save_toko');
+
+    //form edit bahan
+    Route::PUT('/edit_bahan_cetak',[MasterBahanController::class,'edit'])->name('edit_bahan_cetak');
+
+    //form edit mesin
+    Route::PUT('/edit_mesin_cetak',[MasterMesinController::class,'edit'])->name('edit_mesin_cetak');
+
+    //form edit laminasi
+    Route::PUT('/edit_laminasi',[MasterLaminasiController::class,'edit'])->name('edit_laminasi');
+
+    //form edit ekspedisi
+    Route::PUT('/edit_ekspedisi',[MasterEkspedisiController::class,'edit'])->name('edit_ekspedisi');
+
+    //form edit akun_ecom
+    Route::PUT('/edit_toko',[MasterTokoController::class,'edit'])->name('edit_toko');
 });
 
 Route::middleware('setting')->group(function(){

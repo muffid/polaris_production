@@ -24,25 +24,25 @@
             <div class="flex flex-row items-center gap-x-4  px-10 bg-slate-100 rounded-t-lg">
                 <i class="ri-file-paper-line text-2xl"></i>
                 <div class="flex flex-col p-2 items-start ">
-                    <h1 class="text-lg font-bold text-emerald-900">Edit Bahan Laminasi </h1>
+                    <h1 class="text-lg font-bold text-emerald-900">Edit Nama Toko </h1>
                     <p class="text-sm text-slate-400">Pastikan Data Valid</p>
                 </div>
             </div>
             <div class="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-white text-red-700 font-bold
                         text-center flex items-center justify-center cursor-pointer" onclick="handleClosePopUp()"><i class="bi bi-x-circle font-bold"></i></div>
             <div></div>
-            <form action="edit_laminasi" method="POST">
+            <form action="edit_toko" method="POST">
                 @method('PUT')
                 @csrf
                 <div class="w-full flex flex-row items-center justify-center gap-x-4 mb-6">
                     <div class="flex flex-col  p-8 text-sm gap-y-4 items-center w-full  bg-white rounded-lg">
                         <div class=" flex flex-row items-center justify-between  gap-x-2 px-4 w-full">
-                            <label for="nama_laminasi" class="text-left w-1/3 block text-sm font-medium text-gray-700">Nama Laminasi</label>
-                            <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="nama_laminasi" type="text"  name="nama_laminasi" required>
+                            <label for="nama_toko" class="text-left w-1/3 block text-sm font-medium text-gray-700">Nama Toko</label>
+                            <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="nama_toko" type="text"  name="nama_toko" required>
                         </div>
                         <div class=" hidden flex flex-row items-center justify-between  gap-x-2 px-4 w-full">
-                            <label for="id_laminasi" class="text-left w-1/3 block text-sm font-medium text-gray-700">Nama Bahan</label>
-                            <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="id_laminasi" type="text"  name="id_laminasi" required>
+                            <label for="id_toko" class="text-left w-1/3 block text-sm font-medium text-gray-700">Nama Bahan</label>
+                            <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="id_toko" type="text"  name="id_toko" required>
                         </div>
 
                         <button class="bg-blue-700 rounded hover:bg-blue-800 text-white  py-2 px-4 text-sm focus:outline-none focus:shadow-outline" type="submit">
@@ -70,14 +70,14 @@
                                         <a href="master_mesin" class="px-4 py-3 hover:scale-105 transition-ransform ease-out hover:text-blue-500">
                                             <i class="ri-printer-line"></i> Mesin Cetak
                                         </a>
-                                        <a href="master_laminasi" class="px-4 py-3   border-b-2  border-blue-700 bg-white rounded-t-xl">
+                                        <a href="master_laminasi" class="px-4 py-3  hover:scale-105 transition-ransform ease-out hover:text-blue-500">
                                             <i class="ri-file-paper-2-line"></i> Laminasi
                                         </a>
                                         <a href="master_ekspedisi" class="px-4 py-3  hover:scale-105 transition-ransform ease-out hover:text-blue-500">
                                             <i class="ri-truck-line"></i> Ekspedisi
                                         </a>
-                                        <a href="master_toko" class="px-4 py-3  hover:scale-105 transition-ransform ease-out hover:text-blue-500">
-                                            <i class="ri-store-2-line"></i> Akun Toko
+                                        <a href="master_toko" class="px-4 py-3 border-b-2  border-blue-700 bg-white rounded-t-xl">
+                                            <i class="ri-store-2-line"></i> Akun Ecom
                                         </a>
                                         <a href="#" class="px-4 py-3  hover:scale-105 transition-ransform ease-out hover:text-blue-500">
                                             <i class="ri-user-add-line"></i> User
@@ -86,17 +86,17 @@
                                     <div class="flex flex-row items-center gap-x-4 mt-2">
                                         <img src="{{ asset('img/online-shop.png') }}" alt="logo" class=" w-8 ">
                                         <div class="flex flex-col p-2 items-start ">
-                                            <h1 class="text-lg font-bold text-emerald-900">Master Laminasi</h1>
+                                            <h1 class="text-lg font-bold text-emerald-900">Master Akun Ecom</h1>
                                             <p class="text-sm text-slate-400">Masukan Data</p>
                                         </div>
                                     </div>
-                                    <form action="save_laminasi" method="POST">
+                                    <form action="save_toko" method="POST">
                                     @csrf
                                     <div class="flex flex-col lg:flex-row w-full">
                                         <div class="flex flex-col  p-8 text-sm gap-y-4 items-start w-full lg:w-2/5 2xl:w-1/3 bg-white rounded-lg">
                                             <div class=" flex flex-row items-center justify-between  gap-x-2 px-4 w-full">
-                                                <label for="nama_laminasi" class="text-left w-1/3 block text-sm font-medium text-gray-700">Nama Laminasi</label>
-                                                <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="nama_laminasi" type="text"  name="nama_laminasi" required>
+                                                <label for="nama_toko" class="text-left w-1/3 block text-sm font-medium text-gray-700">Nama akun</label>
+                                                <input class="appearance-none border w-full  rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-blue-400 focus:shadow-outline" id="nama_toko" type="text"  name="nama_toko" required>
                                             </div>
                                             <div></div>
                                             <div class="flex justify-end px-4">
@@ -109,18 +109,18 @@
                                     </div>
                                     <div class="bg-white rounded-lg p-8 text-sm w-full lg:w-3/5 2xl:w-2/3">
                                         <div class=" overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400 py-4">
-                                        <table id="data_master_laminasi" class="cell-border w-full display nowrap text-left text-sm" style="width:100%">
+                                        <table id="data_master_toko" class="cell-border w-full display nowrap text-left text-sm" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>No</th><th>Nama Laminasi</th><th>Aksi</th>
+                                                        <th>No</th><th>Nama akun</th><th>Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @for($i=0; $i<sizeof($data_laminasi); $i++)
+                                                    @for($i=0; $i<sizeof($data_toko); $i++)
                                                         <tr>
                                                             <td>{{$i+1}}</td>
-                                                            <td>{{$data_laminasi[$i]->nama_laminasi}}</td>
-                                                            <td><button type="button" onclick="handleEdit('{{$data_laminasi[$i]->nama_laminasi}}','{{$data_laminasi[$i]->id_laminasi}}')" class="px-4 py-1 rounded-full bg-emerald-200 text-emerald-700"><i class="ri-file-edit-line"></i> edit laminasi</button></td>
+                                                            <td>{{$data_toko[$i]->nama_akun_ecom}}</td>
+                                                            <td><button type="button" onclick="handleEdit('{{$data_toko[$i]->nama_akun_ecom}}','{{$data_toko[$i]->id_akun_ecom}}')" class="px-4 py-1 rounded-full bg-emerald-200 text-emerald-700"><i class="ri-file-edit-line"></i> edit toko</button></td>
                                                         </tr>
                                                     @endfor
                                                 </tbody>
@@ -138,11 +138,11 @@
 
 <script src="{{ asset('js/header.js') }}"></script>
 <script>
-    var tableDataEcom = new DataTable('#data_master_laminasi',{"pageLength":50,});
-    function handleEdit(nama_laminasi, id_laminasi){
+    var tableDataEcom = new DataTable('#data_master_toko',{"pageLength":50,});
+    function handleEdit(nama_toko, id_toko){
     $('#pop_up_edit').removeClass('hidden')
-    $('#nama_laminasi').val(nama_laminasi)
-    $('#id_laminasi').val(id_laminasi)
+    $('#nama_toko').val(nama_toko)
+    $('#id_toko').val(id_toko)
 }
 
 function handleClosePopUp(){
