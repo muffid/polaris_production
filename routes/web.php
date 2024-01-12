@@ -13,6 +13,7 @@ use App\Http\Controllers\adminController\MasterMesinController;
 use App\Http\Controllers\adminController\MasterLaminasiController;
 use App\Http\Controllers\adminController\MasterEkspedisiController;
 use App\Http\Controllers\adminController\MasterTokoController;
+use App\Http\Controllers\adminController\MasterUserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\adminController\PerformaController;
@@ -112,6 +113,7 @@ Route::middleware('admin')->group(function(){
     Route::get('/master_laminasi',[MasterLaminasiController::class,'index'])->name('master_laminasi');
     Route::get('/master_ekspedisi',[MasterEkspedisiController::class,'index'])->name('master_ekspedisi');
     Route::get('/master_toko',[MasterTokoController::class,'index'])->name('master_toko');
+    Route::get('/master_user',[MasterUserController::class,'index'])->name('master_user');
 
     //form save bahan
     Route::POST('/save_bahan',[MasterBahanController::class,'store'])->name('save_bahan');
@@ -127,6 +129,9 @@ Route::middleware('admin')->group(function(){
 
     //form save akun_ecom
     Route::POST('/save_toko',[MasterTokoController::class,'store'])->name('save_toko');
+
+    //form save user
+    Route::POST('/save_user',[MasterUserController::class,'store'])->name('save_user');
 
     //form edit bahan
     Route::PUT('/edit_bahan_cetak',[MasterBahanController::class,'edit'])->name('edit_bahan_cetak');

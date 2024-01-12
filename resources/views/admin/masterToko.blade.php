@@ -79,7 +79,7 @@
                                         <a href="master_toko" class="px-4 py-3 border-b-2  border-blue-700 bg-white rounded-t-xl">
                                             <i class="ri-store-2-line"></i> Akun Ecom
                                         </a>
-                                        <a href="#" class="px-4 py-3  hover:scale-105 transition-ransform ease-out hover:text-blue-500">
+                                        <a href="master_user" class="px-4 py-3  hover:scale-105 transition-ransform ease-out hover:text-blue-500">
                                             <i class="ri-user-add-line"></i> User
                                         </a>
                                    </div>

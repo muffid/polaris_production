@@ -12,6 +12,7 @@ class DataEcommSettingController extends Controller
             'session' => [
                     'status' => session('role'),
                     'username' => session('username'),
+                    'img_profil' => session('img'),
             ]
         ];
         return view('setting/handle_ecom_setting',$data);

@@ -7,7 +7,7 @@
     <div class="flex flex-col items-center justify-center gap-y-3">
         <div class=" rounded-full flex flex-col items-center justify-center p-1">
             <div class="w-16 h-16 relative">
-                <img src="{{ asset('img/man.png') }}" alt="logo" class="w-full h-full object-cover rounded-full">
+                <img src="{{$session['img_profil'] }}" alt="logo" class="w-full h-full object-cover rounded-full">
                 <div class="absolute bg-white p-2 flex flex-col items-center justify-center rounded-full right-0 -bottom-4 cursor-pointer hover:scale-105 shadow-lg hover:text-orange-500 text-xs text-emerald-700">
                     <i class="bi bi-pencil-fill"></i>
                 </div>

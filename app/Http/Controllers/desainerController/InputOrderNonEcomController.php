@@ -28,6 +28,7 @@ class InputOrderNonEcomController extends Controller{
             'session' => [
                     'status' => session('role'),
                     'username' => session('username'),
+                    'img_profil' => session('img'),
                 ]
         ];
     return view('desainer/input_nonecomm',$data);

@@ -75,6 +75,7 @@ class OrderReturnController extends Controller
             'session' => [
                     'status' => session('role'),
                     'username' => session('username'),
+                    'img_profil' => session('img'),
             ]
 
         ];

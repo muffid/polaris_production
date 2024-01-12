@@ -1,4 +1,4 @@
-<aside id="menu" class="w-72 -ml-72 h-screen overflow-y-scroll overflow-x-auto scrollbar-thin scrollbar-thumb-slate-50  flex flex-col bg-white duration-200  fixed top-0 left-0 gap-y-4 shadow-lg z-20 ">
+<aside id="menu" class="w-72 -ml-72 h-screen overflow-y-scroll overflow-x-auto scrollbar-thin scrollbar-thumb-slate-50  flex flex-col bg-white/80 backdrop-blur duration-200  fixed top-0 left-0 gap-y-4 shadow-lg z-20 ">
     <div onclick="togleMenu()" class=" cursor-pointer w-full flex flex-row justify-end px-4 text-xl gap-x-2 items-center pt-2  text-slate-500 "><i class="bi bi-list"></i></div>
     {{-- <div class="flex flex-col items-center justify-center  p-4 md:p-8 ">
          <img src="{{ asset('img/logo.png') }}" alt="logo" class="w-56">
@@ -7,7 +7,7 @@
     <div class="flex flex-col items-center justify-center gap-y-3">
         <div class=" rounded-full flex flex-col items-center justify-center p-1">
             <div class="w-16 h-16 relative">
-                <img src="{{ asset('img/man.png') }}" alt="logo" class="w-full h-full object-cover rounded-full">
+                <img src="{{ $session['img_profil'] }}" alt="logo" class="w-full h-full object-cover rounded-full">
                 <div class="absolute bg-white p-2 flex flex-col items-center justify-center rounded-full right-0 -bottom-4 cursor-pointer hover:scale-105 shadow-lg hover:text-orange-500 text-xs text-emerald-700">
                     <i class="bi bi-pencil-fill"></i>
                 </div>

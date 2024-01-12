@@ -37,6 +37,8 @@ class LoginOperatorController extends Controller
                 $request->session()->put('role',$data->status);
                 $request->session()->put('id',$data->id);
                 $request->session()->put('username',$data->username);
+                $request->session()->put('img',$data->foto);
+
 
                 return redirect()->route('dashboard_operator');
                 // return "granted";

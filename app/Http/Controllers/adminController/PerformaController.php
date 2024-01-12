@@ -14,10 +14,11 @@ class PerformaController extends Controller
             'session' => [
                 'status' => session('role'),
                 'username' => session('username'),
+                'img_profil' => session('img'),
         ],
             'key' => '897878',
         ];
         return view('admin/performa',$data);
-    
+
     }
 }

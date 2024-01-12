@@ -21,6 +21,7 @@ class MasterMesinController extends Controller
                "nama_mesin_cetak" => $namaMesin,
 
 
+
             ];
 
             $response = $client->post($url, [
@@ -75,6 +76,7 @@ class MasterMesinController extends Controller
             'session' => [
                 'status' => session('role'),
                 'username' => session('username'),
+                'img_profil' => session('img'),
         ],
             'key' => '897878',
         ];
