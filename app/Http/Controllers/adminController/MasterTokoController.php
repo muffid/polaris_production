@@ -77,7 +77,7 @@ class MasterTokoController extends Controller
         ],
 
         ];
-        return view('admin/mastertoko',$data);
+        return view('admin/masterToko',$data);
     }
 
     private function getDataToko(){

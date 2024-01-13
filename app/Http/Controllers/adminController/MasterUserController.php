@@ -89,7 +89,7 @@ class MasterUserController extends Controller
 
         //jika tidak menyertakan file
         }else{
-
+            $client = new Client();
             $id_akun = $this->generateUniqueRandomString(5);
             $nama_akun = $request->input('nama_lengkap');
             $username_akun = $request->input('nama_user');
