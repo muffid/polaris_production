@@ -22,7 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
-    <title>Polaris Adv - Dashboard</title>
+    <title>{{$session['username']}} - Input Data Order Ecommerce</title>
 
 
 </head>

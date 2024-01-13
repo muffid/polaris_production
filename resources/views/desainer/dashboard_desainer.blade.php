@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
-    <title>Polaris Adv - Dashboard</title>
+    <title>{{$session['username']}} - Dashboard</title>
 </head>
 
 <body class=" bg-slate-100 relative font-nunito ">

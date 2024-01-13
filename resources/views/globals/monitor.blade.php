@@ -20,7 +20,7 @@
         }
 
     </style>
-    <title>Polaris Adv - Dashboard</title>
+    <title>{{$session['username']}} - Monitor Order </title>
 </head>
 
 <body class=" bg-slate-50 flex flex-row">

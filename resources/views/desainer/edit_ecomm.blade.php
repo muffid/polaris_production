@@ -19,7 +19,7 @@
 
 
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
-    <title>Polaris Adv - Dashboard</title>
+    <title>{{$session['username']}} - Edit Data</title>
 </head>
 
 <body class=" bg-slate-100 relative font-nunito ">

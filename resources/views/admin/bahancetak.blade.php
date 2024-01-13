@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-   
+
     {{-- DATATABLE --}}
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
@@ -34,14 +34,14 @@
             visibility: hidden;
         }
     </style>
-        
+
 
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
-    <title>Polaris Adv - Dashboard</title>
+    <title>Polaris Adv - Rekap Bahan Cetak</title>
 </head>
 
 <body class=" bg-slate-50 flex flex-row font-nunito  ">
-   
+
     @include('admin/globals/sidebar')
         <main id="main" class=" w-full">
           <div class="flex flex-col gap-y-2">
@@ -50,8 +50,8 @@
                 {{-- performa --}}
                 <div class="flex flex-col items-start gap-y-2 w-full">
                 @include('template.header')
-                
-                    
+
+
                 <div class="flex flex-row items-center gap-x-4 px-6 mt-24 ">
                   <img src="{{ asset('img/paper.png') }}" alt="logo" class=" w-8 ">
                   <div class="flex flex-col items-start p-2 ">
@@ -60,19 +60,19 @@
                   </div>
               </div>
                 </div>
-    
+
                 <div class="flex flex-col gap-y-1 w-full">
                     <div class="flex flex-col items-start gap-y-2 md:px-6 py-2 w-full">
                         <div class="flex flex-col items-center lg:items-start justify-start gap-y-2 md:px-6 py-2 bg-white border md:rounded-xl w-full overflow-x-scroll scrollbar-thin ">
                           <div class="flex flex-row gap-x-4 font-nunito text-sm pr-4 items-end mt-4">
-                                 
+
                             <div class="relative inline-block ">
                                 <select class=" cursor-pointer block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:border-indigo-500">
                                   <option disabled selected>Pilih Bahan</option>
                                   <option >China</option>
                                   <option>Orajet</option>
                                   <option>Maxdecal</option>
-                                 
+
                                 </select>
                                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                                   <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +87,7 @@
                                   <option >Januari</option>
                                   <option>Februari</option>
                                   <option>Maret</option>
-                                 
+
                                 </select>
                                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                                   <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -102,7 +102,7 @@
                                   <option >2023</option>
                                   <option>2024</option>
                                   <option>2025</option>
-                                 
+
                                 </select>
                                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                                   <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -110,7 +110,7 @@
                                   </svg>
                                 </div>
                               </div>
- 
+
                               <div class="bg-emerald-800 rounded px-4 py-2 text-white cursor-pointer">Terapkan</div>
                         </div>
                           <div class="flex flex-col relative gap-y-4">
@@ -120,19 +120,19 @@
                         </div>
                     </div>
 
-               
+
 
                     <div class="flex flex-col items-start gap-y-2 md:px-6 py-2 w-full ">
                         <div class="flex flex-col gap-y-4 items-center lg:items-end p-4 bg-white border w-full overflow-x-scroll scrollbar-thin md:rounded-xl ">
                           <div class="flex flex-row gap-x-4 font-nunito text-sm pr-4 items-end">
-                                 
+
                             <div class="relative inline-block ">
                                 <select class=" cursor-pointer block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:border-indigo-500">
                                   <option disabled selected>Pilih Bulan</option>
                                   <option >Januari</option>
                                   <option>Februari</option>
                                   <option>Maret</option>
-                                 
+
                                 </select>
                                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                                   <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +147,7 @@
                                   <option >Januari</option>
                                   <option>Februari</option>
                                   <option>Maret</option>
-                                 
+
                                 </select>
                                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                                   <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -155,7 +155,7 @@
                                   </svg>
                                 </div>
                               </div>
- 
+
                               <div class="bg-emerald-800 rounded px-4 py-2 text-white cursor-pointer">Terapkan</div>
                         </div>
                             <div id="tableCom" class="display nowrap" style="width:100%">
@@ -166,7 +166,7 @@
                                                     <th>Nama Bahan</th>
                                                     <th>Total Penggunaan</th>
                                                     <th>Jumlah Pembeli</th>
-                                                  
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -204,7 +204,7 @@
                                         </table>
                             </div>
                         </div>
-                    </div>              
+                    </div>
             </div>
           </div>
         </main>
@@ -249,7 +249,7 @@ function drawChartRank() {
       text: 'Panjang (Meter)'
     }
   },
-  
+
 
   series: [{
     name: 'China',

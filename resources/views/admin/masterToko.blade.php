@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{asset('css/iziToast.min.css')}}">
     <script src="{{asset('js/iziToast.min.js')}}" type="text/javascript"></script>
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
-    <title>Polaris Adv - Dashboard</title>
+    <title>Polaris Adv - Master Akun Ecom</title>
 </head>
 
 <body class=" bg-slate-100 relative font-nunito min-h-screen parent">

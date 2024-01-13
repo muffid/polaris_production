@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-   
+
     {{-- DATATABLE --}}
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
@@ -37,14 +37,14 @@
         margin: 0 auto;
     }
 </style>
-    
+
 
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
-    <title>Polaris Adv - Dashboard</title>
+    <title>Polaris Adv - Data Order Ecommerce</title>
 </head>
 
 <body class=" bg-slate-50 flex flex-row font-nunito  ">
-   
+
     @include('admin/globals/sidebar')
         <main id="main" class=" w-full">
           <div class="flex flex-col gap-y-2">
@@ -53,7 +53,7 @@
                 {{-- performa --}}
                 <div class="flex flex-col items-start gap-y-2 w-full">
                 @include('template.header')
-                    
+
                 <div class="flex flex-row items-center gap-x-4 px-6 mt-24 ">
                   <img src="{{ asset('img/online-shop.png') }}" alt="logo" class=" w-8 ">
                   <div class="flex flex-col items-start p-2 ">
@@ -62,11 +62,11 @@
                   </div>
               </div>
                 </div>
-    
+
                 <div class="flex flex-col gap-y-1 w-full">
                     <div class="flex flex-col items-start gap-y-2 md:px-6 py-2 ">
                         <div class="flex flex-col p-4 bg-white w-full border md:rounded-lg overflow-x-scroll scrollbar-thin scrollbar-thumb-slate-400">
-                            
+
                             <div id="tableCom" class="display nowrap" style="width:100%">
                               <table id="example" class=" display nowrap text-xs" style="width:100%">
                                           <thead>
@@ -87,7 +87,7 @@
                                               <th>Distribusi</th>
                                               <th>Return</th>
                                           </tr>
-                                     
+
                                       </thead>
                                       <tbody>
                                         <tr>
@@ -107,7 +107,7 @@
                                           <td>Terdistribusi</td>
                                           <td>No</td>
                                         </tr>
-              
+
                                           </tbody>
                                       </table>
                           </div>
@@ -115,8 +115,8 @@
                     </div>
 
                     <div class="flex flex-col items-start gap-y-4 md:px-6 py-2 w-full">
-                        
-      
+
+
                       <div class="grid grid-cols-1 w-full md:w-full md:grid-cols-3 gap-4 bg-white border py-8 px-10 md:rounded-lg relative ">
                           <i id="toggleButton" class="bi bi-three-dots-vertical absolute top-2 right-2 text-lg cursor-pointer"></i>
                           <div id="toggleMenu" class="absolute  w-28 hidden flex-col items-start justify-center bg-white rounded z-10 px-4 py-3 text-sm gap-y-2 right-5 top-5 border">
@@ -130,7 +130,7 @@
                               <img src="{{ asset('img/shopping-bag.png') }}" alt="logo" class=" ml-2 w-8">
                               <h1 class="text-lg font-bold ">Total Order</h1>
                             </div>
-                            
+
                             <div class="flex flex-col items-start">
                               <h1 class="text-xl font-bold  ">67</h1>
                             </div>
@@ -142,7 +142,7 @@
                               <img src="{{ asset('img/paper.png') }}" alt="logo" class=" ml-2 w-8">
                               <h1 class="text-lg font-bold">Total Bahan</h1>
                             </div>
-                            
+
                             <div class="flex flex-col items-start">
                               <h1 class="text-xl font-bold">126 m</h1>
                             </div>
@@ -155,16 +155,16 @@
                               <img src="{{ asset('img/box.png') }}" alt="logo" class=" ml-2 w-8">
                               <h1 class="text-lg font-bold ">Total SKU</h1>
                             </div>
-                            
+
                             <div class="flex flex-col items-start">
                               <h1 class="text-xl font-bold">85</h1>
                             </div>
                           </div>
 
-                      
+
                       </div>
-              
-                   
+
+
                     <div class="flex flex-col items-start justify-start gap-y-2 md:px-6 py-2 bg-white border md:rounded-lg w-full overflow-x-scroll scrollbar-thin ">
                         <div class="flex flex-col items-end justify-start   p-6 relative gap-y-4">
                             <div class="flex flex-row gap-x-4 font-nunito text-sm pr-4">
@@ -181,7 +181,7 @@
                                       </svg>
                                     </div>
                                   </div>
-                                  
+
 
                                   <div class="relative inline-block ">
                                     <select class=" cursor-pointer block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-md leading-tight focus:outline-none focus:border-indigo-500">
@@ -202,12 +202,12 @@
                                   <div class="bg-emerald-800 rounded px-4 py-2 text-white cursor-pointer">Terapkan</div>
                             </div>
                             <div id="chartContainer">
-                               
+
                             </div>
                         </div>
                     </div>
                 </div>
-               
+
             </div>
           </div>
         </main>
@@ -242,7 +242,7 @@ document.addEventListener('click',(event)=>{
 $(document).ready(function() {
   var initialCategoryData = ['1','2','3','4','5','6','7','8','9','10','11','12'];
   var initialSeriesData1 = [63, 38, 30,45,34,69,52,61,45,48,23];
- 
+
   drawChart(initialCategoryData, initialSeriesData1);
 });
 

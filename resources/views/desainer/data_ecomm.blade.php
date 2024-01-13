@@ -18,7 +18,7 @@
     <script src="{{asset('js/iziToast.min.js')}}" type="text/javascript"></script>
 
     <link rel="icon" href="{{ asset('img/ico.png') }}" type="image/x-icon">
-    <title>Polaris Adv - Dashboard</title>
+    <title>{{$session['username']}} - Data Order Ecommerce</title>
     <style>
         .spinner-3 {
         width: 50px;

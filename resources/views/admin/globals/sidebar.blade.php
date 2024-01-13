@@ -38,8 +38,8 @@
         </a>
         <div class="flex flex-row items-center justify-start relative cursor-pointer ">
             <div class="w-full hover:bg-emerald-50  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
-                <i class="bi bi-person-circle"></i>
-                <a href="ecommerce_admin" class="text-sm font-semibold">Master Data</a>
+                <i class="bi bi-file-text-fill"></i>
+                <a href="ecommerce_admin" class="text-sm font-semibold">Data Rekap</a>
             </div>
         </div>
         {{-- <a href="ecommerce_admin">
@@ -97,12 +97,14 @@
                 </div>
             </div>
         </a>
-        <div class="flex flex-row items-center justify-start relative cursor-pointer ">
-            <div class="w-full hover:bg-emerald-50  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
-                <i class="bi bi-person-circle"></i>
-                <a href="master_bahan" class="text-sm font-semibold">Master Data</a>
+        <a href="master_bahan">
+            <div class="flex flex-row items-center justify-start relative cursor-pointer ">
+                <div class="w-full hover:bg-emerald-50  flex py-2 pl-6 lg:pl-14 flex-row items-center justify-start gap-x-2">
+                    <i class="bi bi-database-lock"></i>
+                    <h1 class="text-sm font-semibold">Master Data</h1>
+                </div>
             </div>
-        </div>
+        </a>
         {{-- <a href="master_bahan">
             <div class="flex flex-row items-center justify-start relative cursor-pointer">
                 @if($active=='MasterBahan')
